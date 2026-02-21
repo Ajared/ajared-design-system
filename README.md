@@ -325,7 +325,7 @@ import '@ajared/design-system/dist/ajared.css';
 
 ```bash
 # Clone the repository
-git clone https://github.com/chunnodu/ajared-design-system.git
+git clone https://github.com/Ajared/ajared-design-system.git
 cd ajared-design-system
 
 # Install dependencies
@@ -572,8 +572,8 @@ This design system is proprietary to the ajaRed brand.
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/chunnodu/ajared-design-system/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/chunnodu/ajared-design-system/discussions)
+- **Issues**: [GitHub Issues](https://github.com/Ajared/ajared-design-system/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/Ajared/ajared-design-system/discussions)
 - **Email**: support@ajared.com
 
 ---
