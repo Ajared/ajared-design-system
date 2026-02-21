@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 
 export default defineConfig({
+  base: process.env.NODE_ENV === 'production' ? '/ajared-design-system/' : '/',
   root: './',
   build: {
     outDir: 'dist',
@@ -10,10 +11,7 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         'getting-started': resolve(__dirname, 'pages/getting-started.html'),
         tokens: resolve(__dirname, 'pages/tokens.html'),
-        button: resolve(__dirname, 'pages/components/button.html'),
-        input: resolve(__dirname, 'pages/components/input.html'),
-        card: resolve(__dirname, 'pages/components/card.html'),
-        alert: resolve(__dirname, 'pages/components/alert.html'),
+        components: resolve(__dirname, 'pages/components.html'),
       },
     },
   },
