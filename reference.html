@@ -1,0 +1,933 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Design Reference — ajaRed Design System</title>
+  <link rel="icon" href="assets/favicon.png">
+  <link rel="stylesheet" href="colors_and_type.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--color-bg);
+      color: var(--color-ink-darkest);
+      font-family: var(--font-primary);
+      cursor: crosshair;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { cursor: crosshair; color: inherit; }
+
+    /* ── RULER ── */
+    .ruler {
+      position: sticky; top: 0; z-index: 100;
+      height: 20px;
+      border-bottom: var(--grid-line);
+      display: flex; align-items: stretch;
+      background: var(--color-bg);
+      overflow: hidden;
+    }
+    .ruler-col { width: 80px; flex-shrink: 0; border-right: var(--grid-line); }
+    .ruler-track { flex: 1; display: flex; align-items: center; }
+    .ruler-ticks {
+      width: 100%; height: 100%;
+      background-image:
+        repeating-linear-gradient(to right, var(--color-ink-light) 0, var(--color-ink-light) 1px, transparent 1px, transparent 20px),
+        repeating-linear-gradient(to right, var(--color-ink) 0, var(--color-ink) 1px, transparent 1px, transparent 100px);
+      background-size: 20px 8px, 100px 12px;
+      background-repeat: repeat-x;
+      background-position: 0 bottom, 0 bottom;
+    }
+
+    /* ── HEADER ── */
+    header {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      border-bottom: var(--grid-line);
+      max-width: 1600px;
+    }
+    .header-rule {
+      border-right: var(--grid-line);
+      padding: 2rem 1.25rem;
+      display: flex; flex-direction: column; justify-content: flex-end; gap: 0.25rem;
+    }
+    .coord {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      color: var(--color-ink);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+    .header-body {
+      padding: 2rem 2.5rem 1.75rem;
+      display: flex; flex-direction: column; gap: 0.75rem;
+    }
+    .wordmark { display: flex; align-items: center; gap: 0.75rem; }
+    .wordmark img { height: 28px; width: auto; }
+    .wordmark span {
+      font-family: var(--font-primary);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--color-ink-darkest);
+    }
+    header h1 {
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 0.9;
+      color: var(--color-ink-darkest);
+    }
+    header h1 span { color: var(--color-terra); }
+    .header-meta {
+      display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;
+      margin-top: 0.25rem;
+    }
+    .meta-item { display: flex; flex-direction: column; gap: 0.15rem; }
+    .meta-label {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-ink);
+    }
+    .meta-value { font-size: 0.82rem; font-weight: 700; color: var(--color-ink-darkest); }
+
+    /* ── MAIN GRID ── */
+    main {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      max-width: 1600px;
+    }
+    .side-rule { border-right: var(--grid-line); position: relative; }
+    .tick-labels { position: absolute; top: 0; right: 0; display: flex; flex-direction: column; }
+    .tick {
+      height: 100px;
+      display: flex; align-items: flex-start; justify-content: flex-end;
+      padding-right: 6px; padding-top: 2px;
+      border-bottom: 1px solid var(--color-ink-light);
+    }
+    .tick span { font-family: var(--font-mono); font-size: 0.5rem; color: var(--color-ink-light); letter-spacing: 0.04em; }
+    .tick.major span { color: var(--color-terra); }
+    .content { padding: 2.5rem; }
+
+    /* ── SECTION ── */
+    .section { margin-bottom: 3.5rem; }
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-ink);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: var(--grid-line);
+    }
+    .subsection { margin-bottom: 2rem; }
+    .sub-label {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-ink-light);
+      margin-bottom: 0.75rem;
+    }
+
+    /* ── COLOR SWATCHES ── */
+    .swatch-row { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .swatch { display: flex; flex-direction: column; gap: 0.35rem; }
+    .swatch-dot {
+      width: 48px; height: 48px;
+      border-radius: 4px;
+      border: var(--grid-line);
+    }
+    .swatch-name {
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-ink-dark);
+    }
+    .swatch-hex {
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      color: var(--color-ink-light);
+    }
+
+    /* ── TOKEN TABLE ── */
+    .token-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
+    .token-table th {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-ink);
+      padding: 0.4rem 0.75rem;
+      text-align: left;
+      border-bottom: var(--grid-line);
+    }
+    .token-table td {
+      padding: 0.45rem 0.75rem;
+      border-bottom: 1px solid var(--color-ink-lightest);
+      vertical-align: middle;
+    }
+    .token-table tr:last-child td { border-bottom: none; }
+    .token-name { font-family: var(--font-mono); font-size: 0.68rem; color: var(--color-ink); }
+    .token-val { font-family: var(--font-mono); font-size: 0.68rem; color: var(--color-ink-dark); }
+    .token-dot {
+      width: 16px; height: 16px;
+      border-radius: 3px;
+      border: 1px solid var(--color-ink-lightest);
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .sp-bar { height: 5px; background: var(--color-ink); border-radius: 1px; display: inline-block; vertical-align: middle; }
+    .radius-preview {
+      width: 32px; height: 20px;
+      border: 1.5px solid var(--color-ink);
+      display: inline-block;
+    }
+
+    /* ── TWO-COL / THREE-COL ── */
+    .col2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .col3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; }
+    @media (max-width: 900px) { .col2, .col3 { grid-template-columns: 1fr; } }
+
+    /* ── TYPE SPECIMENS ── */
+    .type-row {
+      display: flex; align-items: baseline; gap: 1.25rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--color-ink-lightest);
+    }
+    .type-row:last-child { border-bottom: none; }
+    .type-meta {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-ink);
+      min-width: 160px;
+      flex-shrink: 0;
+    }
+
+    /* ── MOTION ROWS ── */
+    .motion-row {
+      display: grid;
+      grid-template-columns: 120px 1fr 160px;
+      gap: 1rem;
+      align-items: center;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--color-ink-lightest);
+      font-size: 0.75rem;
+    }
+    .motion-row:last-child { border-bottom: none; }
+    .motion-bar { height: 3px; background: var(--color-ink); border-radius: 1px; }
+    .motion-label { font-weight: 700; font-size: 0.78rem; }
+    .motion-duration { font-family: var(--font-mono); font-size: 0.65rem; color: var(--color-ink-dark); }
+
+    /* ── COMPONENT DEMOS ── */
+    .demo-area {
+      border: var(--grid-line);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+    .ajr-btn {
+      font-family: var(--font-primary);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.55rem 1.1rem;
+      border: var(--grid-line);
+      border-radius: 2px;
+      cursor: crosshair;
+      transition: background 0.18s ease, color 0.18s ease;
+    }
+    .ajr-btn-primary { background: var(--color-ink); color: #fff; border-color: var(--color-ink); }
+    .ajr-btn-primary:hover { background: var(--color-ink-darkest); border-color: var(--color-ink-darkest); }
+    .ajr-btn-secondary { background: transparent; color: var(--color-ink); border-color: var(--color-ink); }
+    .ajr-btn-secondary:hover { background: var(--color-ink); color: #fff; }
+    .ajr-btn-ghost { background: transparent; color: var(--color-ink-darkest); border-color: var(--color-ink-lightest); }
+    .ajr-btn-ghost:hover { border-color: var(--color-ink); }
+    .ajr-btn-danger { background: var(--color-error); color: #fff; border-color: var(--color-error); }
+    .ajr-btn-sm { font-size: 0.62rem; padding: 0.35rem 0.75rem; }
+    .ajr-btn-lg { font-size: 0.82rem; padding: 0.7rem 1.4rem; }
+
+    .alert {
+      padding: 0.65rem 1rem;
+      border-left: 3px solid;
+      margin-bottom: 0.5rem;
+      font-size: 0.78rem;
+    }
+    .alert strong { font-weight: 700; }
+    .alert-success { background: var(--color-success-light); border-color: var(--color-success); color: var(--color-ink-darkest); }
+    .alert-warning { background: var(--color-warning-light); border-color: var(--color-warning); color: var(--color-ink-darkest); }
+    .alert-error { background: var(--color-error-light); border-color: var(--color-error); color: var(--color-ink-darkest); }
+    .alert-info { background: var(--color-info-light); border-color: var(--color-info); color: var(--color-ink-darkest); }
+
+    .badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      border: 1px solid;
+      margin: 0.2rem;
+    }
+    .badge-primary { background: var(--color-ink-lightest); color: var(--color-ink-dark); border-color: var(--color-ink-light); }
+    .badge-success { background: var(--color-success-light); color: #138C05; border-color: var(--color-success); }
+    .badge-warning { background: var(--color-warning-light); color: #935D56; border-color: var(--color-warning); }
+    .badge-error { background: var(--color-error-light); color: var(--color-error); border-color: var(--color-error); }
+    .badge-info { background: var(--color-info-light); color: var(--color-ink-dark); border-color: var(--color-info); }
+    .badge-outline { background: transparent; color: var(--color-ink); border-color: var(--color-ink); }
+
+    .input-group { margin-bottom: 0.75rem; }
+    .input-label { display: block; font-size: 0.72rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .input-help { font-size: 0.65rem; color: var(--color-ink-dark); margin-top: 0.25rem; }
+    .input-error-msg { font-size: 0.65rem; color: var(--color-error); margin-top: 0.25rem; }
+    .ajr-input {
+      width: 100%;
+      font-family: var(--font-primary);
+      font-size: 0.78rem;
+      padding: 0.5rem 0.75rem;
+      border: var(--grid-line);
+      background: var(--color-bg);
+      color: var(--color-ink-darkest);
+      border-radius: 4px;
+      outline: none;
+    }
+    .ajr-input:focus { border-color: var(--color-ink); }
+    .ajr-input.error { border-color: var(--color-error); }
+
+    .offer-card {
+      border: var(--grid-line);
+      padding: 1.25rem 1.5rem;
+      max-width: 360px;
+    }
+    .offer-num {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-ink);
+      margin-bottom: 0.35rem;
+    }
+    .offer-headline {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    .offer-body {
+      font-size: 0.75rem;
+      color: var(--color-ink-dark);
+      line-height: 1.5;
+    }
+
+    /* ── CSS VAR TABLE ── */
+    .var-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+    .var-row {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.35rem 0;
+      border-bottom: 1px solid var(--color-ink-lightest);
+      font-size: 0.7rem;
+    }
+    .var-row:last-child { border-bottom: none; }
+    .var-n { font-family: var(--font-mono); font-size: 0.65rem; color: var(--color-ink); flex: 1; }
+    .var-v { font-family: var(--font-mono); font-size: 0.65rem; color: var(--color-ink-dark); }
+
+    /* ── SPEC TABLE ── */
+    .spec-row {
+      display: flex; gap: 1rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--color-ink-lightest);
+      font-size: 0.78rem;
+    }
+    .spec-row:last-child { border-bottom: none; }
+    .spec-k { font-weight: 700; min-width: 160px; }
+    .spec-v { color: var(--color-ink-dark); }
+
+    /* ── NOTE BOX ── */
+    .note {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--color-ink-dark);
+      border-left: 3px solid var(--color-ink-lightest);
+      padding: 0.5rem 0.75rem;
+      margin-top: 0.75rem;
+      line-height: 1.6;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 2px solid var(--color-terra);
+      padding: 1.5rem 2.5rem 1.5rem calc(80px + 2.5rem);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+      max-width: 1600px;
+    }
+    footer a {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-ink);
+      text-decoration: none;
+    }
+    footer a:hover { color: var(--color-terra); }
+    footer span {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--color-ink-light);
+      letter-spacing: 0.06em;
+    }
+  </style>
+</head>
+<body>
+
+<div class="ruler">
+  <div class="ruler-col"></div>
+  <div class="ruler-track"><div class="ruler-ticks"></div></div>
+</div>
+
+<header>
+  <div class="header-rule">
+    <span class="coord">43.6°N</span>
+    <span class="coord">79.4°W</span>
+  </div>
+  <div class="header-body">
+    <div class="wordmark">
+      <img src="assets/logo.png" alt="Ajared Research Inc.">
+      <span>Ajared Research Inc.</span>
+    </div>
+    <h1>Design <span>Reference.</span></h1>
+    <div class="header-meta">
+      <div class="meta-item">
+        <span class="meta-label">Version</span>
+        <span class="meta-value">1.0</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Scope</span>
+        <span class="meta-value">All tokens, all components</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Prefix</span>
+        <span class="meta-value">ajr-</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Source</span>
+        <span class="meta-value">packages/core/tokens.css</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="side-rule">
+    <div class="tick-labels">
+      <div class="tick"><span>0</span></div>
+      <div class="tick"><span>100</span></div>
+      <div class="tick"><span>200</span></div>
+      <div class="tick"><span>300</span></div>
+      <div class="tick"><span>400</span></div>
+      <div class="tick major"><span>500</span></div>
+      <div class="tick"><span>600</span></div>
+      <div class="tick"><span>700</span></div>
+      <div class="tick"><span>800</span></div>
+      <div class="tick"><span>900</span></div>
+      <div class="tick major"><span>1000</span></div>
+      <div class="tick"><span>1100</span></div>
+      <div class="tick"><span>1200</span></div>
+      <div class="tick"><span>1300</span></div>
+      <div class="tick"><span>1400</span></div>
+      <div class="tick major"><span>1500</span></div>
+      <div class="tick"><span>1600</span></div>
+      <div class="tick"><span>1700</span></div>
+      <div class="tick"><span>1800</span></div>
+      <div class="tick"><span>1900</span></div>
+      <div class="tick major"><span>2000</span></div>
+      <div class="tick"><span>2100</span></div>
+      <div class="tick"><span>2200</span></div>
+      <div class="tick"><span>2300</span></div>
+      <div class="tick"><span>2400</span></div>
+      <div class="tick major"><span>2500</span></div>
+      <div class="tick"><span>2600</span></div>
+      <div class="tick"><span>2700</span></div>
+      <div class="tick"><span>2800</span></div>
+      <div class="tick"><span>2900</span></div>
+      <div class="tick major"><span>3000</span></div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- 01 COLOR -->
+    <div class="section">
+      <div class="section-label">01 — Color</div>
+
+      <div class="subsection">
+        <div class="sub-label">Primary — Teal</div>
+        <div class="swatch-row">
+          <div class="swatch"><div class="swatch-dot" style="background:#023b3b"></div><div class="swatch-name">Ink Darkest</div><div class="swatch-hex">#023B3B</div></div>
+          <div class="swatch"><div class="swatch-dot" style="background:#046363"></div><div class="swatch-name">Ink Dark</div><div class="swatch-hex">#046363</div></div>
+          <div class="swatch"><div class="swatch-dot" style="background:#058c8c"></div><div class="swatch-name">Primary</div><div class="swatch-hex">#058C8C</div></div>
+          <div class="swatch"><div class="swatch-dot" style="background:#8ccaca"></div><div class="swatch-name">Light</div><div class="swatch-hex">#8CCACA</div></div>
+          <div class="swatch"><div class="swatch-dot" style="background:#b2dbdb"></div><div class="swatch-name">Lighter</div><div class="swatch-hex">#B2DBDB</div></div>
+          <div class="swatch"><div class="swatch-dot" style="background:#e6f4f4"></div><div class="swatch-name">Lightest</div><div class="swatch-hex">#E6F4F4</div></div>
+        </div>
+      </div>
+
+      <div class="col2">
+        <div class="subsection">
+          <div class="sub-label">Accents</div>
+          <div class="swatch-row">
+            <div class="swatch"><div class="swatch-dot" style="background:#a1665e"></div><div class="swatch-name">Terracotta</div><div class="swatch-hex">#A1665E</div></div>
+            <div class="swatch"><div class="swatch-dot" style="background:#935d56"></div><div class="swatch-name">Terra Dark</div><div class="swatch-hex">#935D56</div></div>
+            <div class="swatch"><div class="swatch-dot" style="background:#d4b9b5"></div><div class="swatch-name">Terra Light</div><div class="swatch-hex">#D4B9B5</div></div>
+            <div class="swatch"><div class="swatch-dot" style="background:#d09958"></div><div class="swatch-name">Gold</div><div class="swatch-hex">#D09958</div></div>
+            <div class="swatch"><div class="swatch-dot" style="background:#ec9a29"></div><div class="swatch-name">Orange</div><div class="swatch-hex">#EC9A29</div></div>
+            <div class="swatch"><div class="swatch-dot" style="background:#9747ff"></div><div class="swatch-name">Purple</div><div class="swatch-hex">#9747FF</div></div>
+            <div class="swatch"><div class="swatch-dot" style="background:#138c05"></div><div class="swatch-name">Green</div><div class="swatch-hex">#138C05</div></div>
+          </div>
+        </div>
+        <div class="subsection">
+          <div class="sub-label">Semantic</div>
+          <div class="swatch-row">
+            <div class="swatch"><div class="swatch-dot" style="background:#61b258"></div><div class="swatch-name">Success</div><div class="swatch-hex">#61B258</div></div>
+            <div class="swatch"><div class="swatch-dot" style="background:#e7f3f4"></div><div class="swatch-name">Success Lt</div><div class="swatch-hex">#E7F3F4</div></div>
+            <div class="swatch"><div class="swatch-dot" style="background:#d6b739"></div><div class="swatch-name">Warning</div><div class="swatch-hex">#D6B739</div></div>
+            <div class="swatch"><div class="swatch-dot" style="background:#f7ebc6"></div><div class="swatch-name">Warning Lt</div><div class="swatch-hex">#F7EBC6</div></div>
+            <div class="swatch"><div class="swatch-dot" style="background:#8c1305"></div><div class="swatch-name">Error</div><div class="swatch-hex">#8C1305</div></div>
+            <div class="swatch"><div class="swatch-dot" style="background:#ffa18a"></div><div class="swatch-name">Error Lt</div><div class="swatch-hex">#FFA18A</div></div>
+            <div class="swatch"><div class="swatch-dot" style="background:#71c5e6"></div><div class="swatch-name">Info</div><div class="swatch-hex">#71C5E6</div></div>
+            <div class="swatch"><div class="swatch-dot" style="background:#eaf6fb"></div><div class="swatch-name">Info Lt</div><div class="swatch-hex">#EAF6FB</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="sub-label">Neutrals</div>
+        <div class="swatch-row">
+          <div class="swatch"><div class="swatch-dot" style="background:#000000"></div><div class="swatch-name">Black</div><div class="swatch-hex">#000</div></div>
+          <div class="swatch"><div class="swatch-dot" style="background:#141414"></div><div class="swatch-name">900</div><div class="swatch-hex">#141414</div></div>
+          <div class="swatch"><div class="swatch-dot" style="background:#323232"></div><div class="swatch-name">800</div><div class="swatch-hex">#323232</div></div>
+          <div class="swatch"><div class="swatch-dot" style="background:#434343"></div><div class="swatch-name">700</div><div class="swatch-hex">#434343</div></div>
+          <div class="swatch"><div class="swatch-dot" style="background:#626262"></div><div class="swatch-name">600</div><div class="swatch-hex">#626262</div></div>
+          <div class="swatch"><div class="swatch-dot" style="background:#717171"></div><div class="swatch-name">500</div><div class="swatch-hex">#717171</div></div>
+          <div class="swatch"><div class="swatch-dot" style="background:#939393"></div><div class="swatch-name">400</div><div class="swatch-hex">#939393</div></div>
+          <div class="swatch"><div class="swatch-dot" style="background:#b6b6b6"></div><div class="swatch-name">300</div><div class="swatch-hex">#B6B6B6</div></div>
+          <div class="swatch"><div class="swatch-dot" style="background:#d9d9d9"></div><div class="swatch-name">200</div><div class="swatch-hex">#D9D9D9</div></div>
+          <div class="swatch"><div class="swatch-dot" style="background:#eeeeee"></div><div class="swatch-name">100</div><div class="swatch-hex">#EEEEEE</div></div>
+          <div class="swatch"><div class="swatch-dot" style="background:#f5f5f5"></div><div class="swatch-name">50</div><div class="swatch-hex">#F5F5F5</div></div>
+          <div class="swatch"><div class="swatch-dot" style="background:#ffffff"></div><div class="swatch-name">White</div><div class="swatch-hex">#FFF</div></div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <div class="sub-label">Data Visualization</div>
+        <div style="margin-bottom:1rem">
+          <div class="sub-label" style="margin-bottom:0.5rem">Categorical series</div>
+          <div class="swatch-row">
+            <div class="swatch"><div class="swatch-dot" style="background:#058c8c"></div><div class="swatch-hex">#058C8C</div></div>
+            <div class="swatch"><div class="swatch-dot" style="background:#a1665e"></div><div class="swatch-hex">#A1665E</div></div>
+            <div class="swatch"><div class="swatch-dot" style="background:#d09958"></div><div class="swatch-hex">#D09958</div></div>
+            <div class="swatch"><div class="swatch-dot" style="background:#9747ff"></div><div class="swatch-hex">#9747FF</div></div>
+            <div class="swatch"><div class="swatch-dot" style="background:#138c05"></div><div class="swatch-hex">#138C05</div></div>
+            <div class="swatch"><div class="swatch-dot" style="background:#023b3b"></div><div class="swatch-hex">#023B3B</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="sub-label" style="margin-bottom:0.5rem">Sentiment</div>
+          <div class="swatch-row">
+            <div class="swatch"><div class="swatch-dot" style="background:#61b258"></div><div class="swatch-name">Positive</div><div class="swatch-hex">#61B258</div></div>
+            <div class="swatch"><div class="swatch-dot" style="background:#939393"></div><div class="swatch-name">Neutral</div><div class="swatch-hex">#939393</div></div>
+            <div class="swatch"><div class="swatch-dot" style="background:#ec9a29"></div><div class="swatch-name">Negative</div><div class="swatch-hex">#EC9A29</div></div>
+          </div>
+        </div>
+        <div class="note">Sequential: teal ramp — used in hour×day heatmaps. &nbsp;·&nbsp; Diverging: terra/teal — used for over/under axes (rare).</div>
+      </div>
+    </div>
+
+    <!-- 02 DESIGN TOKENS -->
+    <div class="section">
+      <div class="section-label">02 — Design Tokens (packages/core/tokens.css)</div>
+      <div class="col2">
+        <div class="subsection">
+          <div class="sub-label">Color variables</div>
+          <div class="var-row"><div class="token-dot" style="background:#058c8c"></div><span class="var-n">--color-primary</span><span class="var-v">#058c8c</span></div>
+          <div class="var-row"><div class="token-dot" style="background:#046363"></div><span class="var-n">--color-primary-dark</span><span class="var-v">#046363</span></div>
+          <div class="var-row"><div class="token-dot" style="background:#023b3b"></div><span class="var-n">--color-primary-darker</span><span class="var-v">#023b3b</span></div>
+          <div class="var-row"><div class="token-dot" style="background:#8ccaca"></div><span class="var-n">--color-primary-light</span><span class="var-v">#8ccaca</span></div>
+          <div class="var-row"><div class="token-dot" style="background:#e6f4f4"></div><span class="var-n">--color-primary-lightest</span><span class="var-v">#e6f4f4</span></div>
+          <div class="var-row"><div class="token-dot" style="background:#a1665e"></div><span class="var-n">--color-accent-terracotta</span><span class="var-v">#a1665e</span></div>
+          <div class="var-row"><div class="token-dot" style="background:#935d56"></div><span class="var-n">--color-accent-terracotta-dark</span><span class="var-v">#935d56</span></div>
+          <div class="var-row"><div class="token-dot" style="background:#d09958"></div><span class="var-n">--color-accent-gold</span><span class="var-v">#d09958</span></div>
+          <div class="var-row"><div class="token-dot" style="background:#ec9a29"></div><span class="var-n">--color-accent-orange</span><span class="var-v">#ec9a29</span></div>
+          <div class="var-row"><div class="token-dot" style="background:#9747ff"></div><span class="var-n">--color-accent-purple</span><span class="var-v">#9747ff</span></div>
+          <div class="var-row"><div class="token-dot" style="background:#138c05"></div><span class="var-n">--color-accent-green</span><span class="var-v">#138c05</span></div>
+          <div class="var-row"><div class="token-dot" style="background:#ffffff;border:1px solid #e2e2e2"></div><span class="var-n">--color-bg-primary</span><span class="var-v">#ffffff</span></div>
+          <div class="var-row"><div class="token-dot" style="background:#f7f8f7"></div><span class="var-n">--color-bg-secondary</span><span class="var-v">#f7f8f7</span></div>
+          <div class="var-row"><div class="token-dot" style="background:#141414"></div><span class="var-n">--color-bg-dark</span><span class="var-v">#141414</span></div>
+          <div class="var-row"><div class="token-dot" style="background:#323232"></div><span class="var-n">--color-text-primary</span><span class="var-v">#323232</span></div>
+          <div class="var-row"><div class="token-dot" style="background:#626262"></div><span class="var-n">--color-text-secondary</span><span class="var-v">#626262</span></div>
+          <div class="var-row"><div class="token-dot" style="background:#939393"></div><span class="var-n">--color-text-tertiary</span><span class="var-v">#939393</span></div>
+          <div class="var-row"><div class="token-dot" style="background:#e2e2e2"></div><span class="var-n">--color-border-light</span><span class="var-v">#e2e2e2</span></div>
+          <div class="var-row"><div class="token-dot" style="background:#b6b6b6"></div><span class="var-n">--color-border-dark</span><span class="var-v">#b6b6b6</span></div>
+          <div class="var-row"><div class="token-dot" style="background:#61b258"></div><span class="var-n">--color-success</span><span class="var-v">#61b258</span></div>
+          <div class="var-row"><div class="token-dot" style="background:#d6b739"></div><span class="var-n">--color-warning</span><span class="var-v">#d6b739</span></div>
+          <div class="var-row"><div class="token-dot" style="background:#8c1305"></div><span class="var-n">--color-error</span><span class="var-v">#8c1305</span></div>
+          <div class="var-row"><div class="token-dot" style="background:#71c5e6"></div><span class="var-n">--color-info</span><span class="var-v">#71c5e6</span></div>
+        </div>
+        <div>
+          <div class="subsection">
+            <div class="sub-label">Typography variables</div>
+            <div class="var-row"><span class="var-n">--font-primary</span><span class="var-v">iA Writer Quattro S</span></div>
+            <div class="var-row"><span class="var-n">--font-secondary</span><span class="var-v">Inter</span></div>
+            <div class="var-row"><span class="var-n">--font-mono</span><span class="var-v">iA Writer Mono S</span></div>
+            <div class="var-row"><span class="var-n">--font-size-xs</span><span class="var-v">0.5rem (8px)</span></div>
+            <div class="var-row"><span class="var-n">--font-size-sm</span><span class="var-v">0.75rem (12px)</span></div>
+            <div class="var-row"><span class="var-n">--font-size-base</span><span class="var-v">1rem (16px)</span></div>
+            <div class="var-row"><span class="var-n">--font-size-md</span><span class="var-v">1.125rem (18px)</span></div>
+            <div class="var-row"><span class="var-n">--font-size-lg</span><span class="var-v">1.25rem (20px)</span></div>
+            <div class="var-row"><span class="var-n">--font-size-xl</span><span class="var-v">1.5rem (24px)</span></div>
+            <div class="var-row"><span class="var-n">--font-size-2xl</span><span class="var-v">2rem (32px)</span></div>
+            <div class="var-row"><span class="var-n">--font-size-3xl</span><span class="var-v">2.25rem (36px)</span></div>
+            <div class="var-row"><span class="var-n">--font-size-4xl</span><span class="var-v">3rem (48px)</span></div>
+            <div class="var-row"><span class="var-n">--font-size-5xl</span><span class="var-v">4rem (64px)</span></div>
+            <div class="var-row"><span class="var-n">--font-weight-normal</span><span class="var-v">400</span></div>
+            <div class="var-row"><span class="var-n">--font-weight-medium</span><span class="var-v">500</span></div>
+            <div class="var-row"><span class="var-n">--font-weight-semibold</span><span class="var-v">600</span></div>
+            <div class="var-row"><span class="var-n">--font-weight-bold</span><span class="var-v">700</span></div>
+            <div class="var-row"><span class="var-n">--line-height-tight</span><span class="var-v">1.25</span></div>
+            <div class="var-row"><span class="var-n">--line-height-normal</span><span class="var-v">1.5</span></div>
+            <div class="var-row"><span class="var-n">--line-height-relaxed</span><span class="var-v">1.75</span></div>
+          </div>
+          <div class="subsection">
+            <div class="sub-label">Transition variables</div>
+            <div class="var-row"><span class="var-n">--transition-fast</span><span class="var-v">150ms ease</span></div>
+            <div class="var-row"><span class="var-n">--transition-base</span><span class="var-v">250ms ease</span></div>
+            <div class="var-row"><span class="var-n">--transition-slow</span><span class="var-v">350ms ease</span></div>
+          </div>
+          <div class="subsection">
+            <div class="sub-label">Z-index variables</div>
+            <div class="var-row"><span class="var-n">--z-dropdown</span><span class="var-v">1000</span></div>
+            <div class="var-row"><span class="var-n">--z-sticky</span><span class="var-v">1020</span></div>
+            <div class="var-row"><span class="var-n">--z-modal-backdrop</span><span class="var-v">1040</span></div>
+            <div class="var-row"><span class="var-n">--z-modal</span><span class="var-v">1050</span></div>
+            <div class="var-row"><span class="var-n">--z-tooltip</span><span class="var-v">1070</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col2" style="margin-top:1.5rem">
+        <div class="subsection">
+          <div class="sub-label">Spacing variables (--space-N)</div>
+          <table class="token-table">
+            <thead><tr><th>Token</th><th>rem</th><th>px</th><th>Visual</th></tr></thead>
+            <tbody>
+              <tr><td class="token-name">--space-1</td><td class="token-val">0.25rem</td><td class="token-val">4px</td><td><span class="sp-bar" style="width:4px"></span></td></tr>
+              <tr><td class="token-name">--space-2</td><td class="token-val">0.5rem</td><td class="token-val">8px</td><td><span class="sp-bar" style="width:8px"></span></td></tr>
+              <tr><td class="token-name">--space-3</td><td class="token-val">0.75rem</td><td class="token-val">12px</td><td><span class="sp-bar" style="width:12px"></span></td></tr>
+              <tr><td class="token-name">--space-4</td><td class="token-val">1rem</td><td class="token-val">16px</td><td><span class="sp-bar" style="width:16px"></span></td></tr>
+              <tr><td class="token-name">--space-5</td><td class="token-val">1.25rem</td><td class="token-val">20px</td><td><span class="sp-bar" style="width:20px"></span></td></tr>
+              <tr><td class="token-name">--space-6</td><td class="token-val">1.5rem</td><td class="token-val">24px</td><td><span class="sp-bar" style="width:24px"></span></td></tr>
+              <tr><td class="token-name">--space-8</td><td class="token-val">2rem</td><td class="token-val">32px</td><td><span class="sp-bar" style="width:32px"></span></td></tr>
+              <tr><td class="token-name">--space-10</td><td class="token-val">2.5rem</td><td class="token-val">40px</td><td><span class="sp-bar" style="width:40px"></span></td></tr>
+              <tr><td class="token-name">--space-12</td><td class="token-val">3rem</td><td class="token-val">48px</td><td><span class="sp-bar" style="width:48px"></span></td></tr>
+              <tr><td class="token-name">--space-16</td><td class="token-val">4rem</td><td class="token-val">64px</td><td><span class="sp-bar" style="width:64px"></span></td></tr>
+              <tr><td class="token-name">--space-20</td><td class="token-val">5rem</td><td class="token-val">80px</td><td><span class="sp-bar" style="width:80px"></span></td></tr>
+              <tr><td class="token-name">--space-24</td><td class="token-val">6rem</td><td class="token-val">96px</td><td><span class="sp-bar" style="width:96px"></span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div class="subsection">
+            <div class="sub-label">Border radius variables</div>
+            <table class="token-table">
+              <thead><tr><th>Token</th><th>Value</th><th>Preview</th></tr></thead>
+              <tbody>
+                <tr><td class="token-name">--radius-none</td><td class="token-val">0</td><td><span class="radius-preview" style="border-radius:0"></span></td></tr>
+                <tr><td class="token-name">--radius-sm</td><td class="token-val">2px</td><td><span class="radius-preview" style="border-radius:2px"></span></td></tr>
+                <tr><td class="token-name">--radius-base</td><td class="token-val">4px</td><td><span class="radius-preview" style="border-radius:4px"></span></td></tr>
+                <tr><td class="token-name">--radius-md</td><td class="token-val">6px</td><td><span class="radius-preview" style="border-radius:6px"></span></td></tr>
+                <tr><td class="token-name">--radius-lg</td><td class="token-val">8px</td><td><span class="radius-preview" style="border-radius:8px"></span></td></tr>
+                <tr><td class="token-name">--radius-xl</td><td class="token-val">12px</td><td><span class="radius-preview" style="border-radius:12px"></span></td></tr>
+                <tr><td class="token-name">--radius-2xl</td><td class="token-val">16px</td><td><span class="radius-preview" style="border-radius:16px"></span></td></tr>
+                <tr><td class="token-name">--radius-3xl</td><td class="token-val">24px</td><td><span class="radius-preview" style="border-radius:24px"></span></td></tr>
+                <tr><td class="token-name">--radius-full</td><td class="token-val">9999px</td><td><span class="radius-preview" style="border-radius:9999px"></span></td></tr>
+              </tbody>
+            </table>
+            <div class="note">Marketing default: --radius-sm (2px). App UI: 8–16px. Mobile CTAs: --radius-full.</div>
+          </div>
+          <div class="subsection">
+            <div class="sub-label">Shadow variables</div>
+            <div class="var-row"><span class="var-n">--shadow-sm</span><span class="var-v">0 1px 2px 0 rgb(0 0 0 / 0.05)</span></div>
+            <div class="var-row"><span class="var-n">--shadow-base</span><span class="var-v">0 1px 3px 0 / 0.1, 0 1px 2px -1px / 0.1</span></div>
+            <div class="var-row"><span class="var-n">--shadow-md</span><span class="var-v">0 4px 6px -1px / 0.1, 0 2px 4px -2px / 0.1</span></div>
+            <div class="var-row"><span class="var-n">--shadow-lg</span><span class="var-v">0 10px 15px -3px / 0.1, 0 4px 6px -4px / 0.1</span></div>
+            <div class="var-row"><span class="var-n">--shadow-xl</span><span class="var-v">0 20px 25px -5px / 0.1, 0 8px 10px -6px / 0.1</span></div>
+            <div class="var-row"><span class="var-n">--shadow-2xl</span><span class="var-v">0 25px 50px -12px rgb(0 0 0 / 0.25)</span></div>
+            <div class="note">Philosophy: "Most surfaces are flat; shadow is editorial." Use sparingly for hierarchy only.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 TYPOGRAPHY -->
+    <div class="section">
+      <div class="section-label">03 — Typography</div>
+      <div class="type-row">
+        <span class="type-meta">Display / Hero<br>Bold 700 · -0.04em · lh 0.9</span>
+        <span style="font-size:clamp(1.8rem,4vw,3.5rem);font-weight:700;letter-spacing:-0.04em;line-height:0.9">Get AI working today</span>
+      </div>
+      <div class="type-row">
+        <span class="type-meta">H1 · 48px / 57px · Bold</span>
+        <span style="font-size:clamp(1.5rem,3vw,3rem);font-weight:700;letter-spacing:-0.04em;line-height:1.1">Heading one</span>
+      </div>
+      <div class="type-row">
+        <span class="type-meta">H2 · 36px / 43px · Bold</span>
+        <span style="font-size:clamp(1.2rem,2.5vw,2.25rem);font-weight:700;letter-spacing:-0.03em">Heading two</span>
+      </div>
+      <div class="type-row">
+        <span class="type-meta">H3 · 30px / 36px · Bold</span>
+        <span style="font-size:1.5rem;font-weight:700;letter-spacing:-0.02em">Heading three</span>
+      </div>
+      <div class="type-row">
+        <span class="type-meta">H4 · 24px / 28px · Bold</span>
+        <span style="font-size:1.2rem;font-weight:700;letter-spacing:-0.01em">Heading four</span>
+      </div>
+      <div class="type-row">
+        <span class="type-meta">H5 · 20px / 24px · Bold</span>
+        <span style="font-size:1rem;font-weight:700">Heading five</span>
+      </div>
+      <div class="type-row">
+        <span class="type-meta">Body 2 · 16px / 24px · Regular</span>
+        <span style="font-size:1rem;font-weight:400;line-height:1.5;color:var(--color-ink-dark)">Regular body text for primary content areas and reading.</span>
+      </div>
+      <div class="type-row">
+        <span class="type-meta">Body 3 · 14px / 21px · Regular</span>
+        <span style="font-size:0.875rem;font-weight:400;line-height:1.5;color:var(--color-ink-dark)">Smaller body text for secondary content and supporting detail.</span>
+      </div>
+      <div class="type-row">
+        <span class="type-meta">Body 4 · 12px / 18px · Regular</span>
+        <span style="font-size:0.75rem;font-weight:400;line-height:1.5;color:var(--color-ink-dark)">Fine print, captions, form helper text, metadata.</span>
+      </div>
+      <div class="type-row">
+        <span class="type-meta">Mono · Labels / Coords<br>ls 0.05–0.08em · all caps</span>
+        <span style="font-family:var(--font-mono);font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase">43.6°N 79.4°W · COORDINATES · ADVISORY · LABEL · TRACK NUMBER</span>
+      </div>
+      <div class="note">Voice: direct, quietly confident. British-leaning spelling. Em dashes. No emoji. Short declaratives — one impactful closer. "Early failure is cheap. Late failure is not."</div>
+    </div>
+
+    <!-- 04 MOTION -->
+    <div class="section">
+      <div class="section-label">04 — Motion</div>
+      <div class="motion-row">
+        <span class="motion-label">Snap</span>
+        <div><div class="motion-bar" style="width:90px;opacity:1"></div><div style="font-family:var(--font-mono);font-size:0.55rem;color:var(--color-ink-light);margin-top:0.25rem">cubic-bezier(0.4, 0, 0.2, 1)</div></div>
+        <span class="motion-duration">180ms · direct manipulation</span>
+      </div>
+      <div class="motion-row">
+        <span class="motion-label">Standard</span>
+        <div><div class="motion-bar" style="width:150px;opacity:0.85"></div><div style="font-family:var(--font-mono);font-size:0.55rem;color:var(--color-ink-light);margin-top:0.25rem">cubic-bezier(0.2, 0, 0, 1)</div></div>
+        <span class="motion-duration">900ms · navigation</span>
+      </div>
+      <div class="motion-row">
+        <span class="motion-label">Spring</span>
+        <div><div class="motion-bar" style="width:200px;opacity:0.7"></div><div style="font-family:var(--font-mono);font-size:0.55rem;color:var(--color-ink-light);margin-top:0.25rem">cubic-bezier(0.34, 1.56, 0.64, 1)</div></div>
+        <span class="motion-duration">1200ms · welcome only</span>
+      </div>
+      <div class="motion-row">
+        <span class="motion-label">Fade Ambient</span>
+        <div><div class="motion-bar" style="width:240px;opacity:0.55"></div><div style="font-family:var(--font-mono);font-size:0.55rem;color:var(--color-ink-light);margin-top:0.25rem">ease-in-out · continuous loop</div></div>
+        <span class="motion-duration">1400ms · ambient</span>
+      </div>
+      <div class="motion-row">
+        <span class="motion-label">Moiré Drift</span>
+        <div><div class="motion-bar" style="width:320px;opacity:0.35"></div><div style="font-family:var(--font-mono);font-size:0.55rem;color:var(--color-ink-light);margin-top:0.25rem">linear · infinite · backgrounds only</div></div>
+        <span class="motion-duration">8s · infinite</span>
+      </div>
+      <div class="note">Reduced motion: substitute all with 200ms opacity cross-fade. Honor prefers-reduced-motion. Principle: restrained — "page-turning" sensation, no exaggerated effects.</div>
+    </div>
+
+    <!-- 05 COMPONENTS -->
+    <div class="section">
+      <div class="section-label">05 — Components</div>
+
+      <div class="col2">
+        <div class="subsection">
+          <div class="sub-label">Buttons — Marketing (ajr-button)</div>
+          <div class="demo-area">
+            <div class="btn-row">
+              <button class="ajr-btn ajr-btn-primary">Primary</button>
+              <button class="ajr-btn ajr-btn-secondary">Secondary</button>
+              <button class="ajr-btn ajr-btn-ghost">Ghost</button>
+              <button class="ajr-btn ajr-btn-danger">Danger</button>
+            </div>
+            <div class="btn-row" style="margin-top:0.75rem">
+              <button class="ajr-btn ajr-btn-primary ajr-btn-sm">Small</button>
+              <button class="ajr-btn ajr-btn-primary">Medium</button>
+              <button class="ajr-btn ajr-btn-primary ajr-btn-lg">Large</button>
+              <button class="ajr-btn ajr-btn-primary" disabled style="opacity:0.4;cursor:not-allowed">Disabled</button>
+            </div>
+          </div>
+          <div class="note">2px border-radius · ALL-CAPS · Ink color scheme. Variants: Primary, Secondary, Tertiary, Ghost, Danger, Success. App buttons use rounded 8–16px corners.</div>
+        </div>
+
+        <div class="subsection">
+          <div class="sub-label">Alerts (ajr-alert)</div>
+          <div class="alert alert-success"><strong>Success</strong> — Your changes have been saved.</div>
+          <div class="alert alert-warning"><strong>Heads up</strong> — Double-check this before shipping.</div>
+          <div class="alert alert-error"><strong>Error</strong> — Please check your input and try again.</div>
+          <div class="alert alert-info"><strong>Info</strong> — This action may take a few minutes.</div>
+          <div class="note">Types: Success, Warning, Error, Info. Variants: Standard, Filled, Dismissible.</div>
+        </div>
+      </div>
+
+      <div class="col2">
+        <div class="subsection">
+          <div class="sub-label">Badges (ajr-badge)</div>
+          <div class="demo-area">
+            <span class="badge badge-primary">Primary</span>
+            <span class="badge badge-success">Success</span>
+            <span class="badge badge-warning">Warning</span>
+            <span class="badge badge-error">Error</span>
+            <span class="badge badge-info">Info</span>
+            <span class="badge badge-outline">Outlined</span>
+          </div>
+          <div class="note">Sizes: SM, MD, LG. Options: Outlined, Dot style.</div>
+        </div>
+
+        <div class="subsection">
+          <div class="sub-label">Form Inputs (ajr-input)</div>
+          <div class="demo-area">
+            <div class="input-group">
+              <label class="input-label">Email address</label>
+              <input class="ajr-input" type="email" placeholder="name@example.com">
+              <div class="input-help">We'll never share your email.</div>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Username</label>
+              <input class="ajr-input error" type="text" placeholder="@handle">
+              <div class="input-error-msg">At least 3 characters required.</div>
+            </div>
+          </div>
+          <div class="note">Types: Text, Textarea, Select, Checkbox, Radio. States: Default, Focus, Error, Success, Disabled.</div>
+        </div>
+      </div>
+
+      <div class="col2">
+        <div class="subsection">
+          <div class="sub-label">Offer Card</div>
+          <div class="offer-card">
+            <div class="offer-num">01 · Advisory</div>
+            <div class="offer-headline">Talk to a Human about AI</div>
+            <div class="offer-body">A 30-minute conversation with someone who has done this before. Not a chatbot. Not a vendor sales pitch.</div>
+          </div>
+          <div class="note">Structure: number + category label (mono, all-caps) → bold headline → body text.</div>
+        </div>
+
+        <div class="subsection">
+          <div class="sub-label">Cards (ajr-card)</div>
+          <div style="display:flex;flex-direction:column;gap:0.75rem">
+            <div style="border:var(--grid-line);border-radius:4px;padding:1rem 1.25rem;box-shadow:0 1px 3px 0 rgb(0 0 0 / 0.1)">
+              <div style="font-size:0.82rem;font-weight:700;margin-bottom:0.35rem">Default card</div>
+              <div style="font-size:0.72rem;color:var(--color-ink-dark)">Standard shadow elevation for primary content.</div>
+            </div>
+            <div style="border:var(--grid-line);border-radius:4px;padding:1rem 1.25rem">
+              <div style="font-size:0.82rem;font-weight:700;margin-bottom:0.35rem">Flat card</div>
+              <div style="font-size:0.72rem;color:var(--color-ink-dark)">Bordered, no shadow — for secondary content.</div>
+            </div>
+          </div>
+          <div class="note">Variants: Default (shadow), Flat (bordered), Elevated. Sections: header, body, footer. Modal also available (JS-required).</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 06 CSS CLASSES -->
+    <div class="section">
+      <div class="section-label">06 — CSS Class Conventions</div>
+      <div class="col3">
+        <div class="subsection">
+          <div class="sub-label">Buttons</div>
+          <div style="font-family:var(--font-mono);font-size:0.65rem;line-height:2;color:var(--color-ink-dark)">
+            ajr-button<br>
+            ajr-button--primary<br>
+            ajr-button--secondary<br>
+            ajr-button--tertiary<br>
+            ajr-button--ghost<br>
+            ajr-button--danger<br>
+            ajr-button--success<br>
+            ajr-button--sm<br>
+            ajr-button--md<br>
+            ajr-button--lg
+          </div>
+        </div>
+        <div class="subsection">
+          <div class="sub-label">Inputs & Cards</div>
+          <div style="font-family:var(--font-mono);font-size:0.65rem;line-height:2;color:var(--color-ink-dark)">
+            ajr-input<br>
+            ajr-input-group<br>
+            ajr-input-label<br>
+            ajr-input--error<br>
+            ajr-card<br>
+            ajr-card-header<br>
+            ajr-card-body<br>
+            ajr-card-footer
+          </div>
+        </div>
+        <div class="subsection">
+          <div class="sub-label">Alerts & Type</div>
+          <div style="font-family:var(--font-mono);font-size:0.65rem;line-height:2;color:var(--color-ink-dark)">
+            ajr-alert<br>
+            ajr-alert--success<br>
+            ajr-alert--warning<br>
+            ajr-alert--error<br>
+            ajr-alert--info<br>
+            ajr-alert--outlined<br>
+            ajr-h1<br>
+            ajr-body
+          </div>
+        </div>
+      </div>
+      <div class="note">
+        CDN: &lt;link rel="stylesheet" href="https://unpkg.com/@ajared/design-system/dist/ajared.min.css"&gt;<br>
+        NPM: npm install @ajared/design-system &nbsp;·&nbsp; Works with React, Vue, Vanilla JS<br>
+        Latest 2 versions of Chrome, Firefox, Safari, Edge. IE not supported.
+      </div>
+    </div>
+
+    <!-- 07 TECH SPEC -->
+    <div class="section">
+      <div class="section-label">07 — Technical Specification (AJARED-DS Rev 1.0.0)</div>
+      <div class="spec-row"><span class="spec-k">Classification</span><span class="spec-v">Design Instruments · Modern Swiss style</span></div>
+      <div class="spec-row"><span class="spec-k">Grid foundation</span><span class="spec-v">20px baseline · 8pt system · base unit x = 4px · increments: 4, 8, 12, 16, 24, 32, 48, 64, 96</span></div>
+      <div class="spec-row"><span class="spec-k">Grid ruler</span><span class="spec-v">80px gutter · 20px minor / 100px major ticks · 500px marker = terracotta</span></div>
+      <div class="spec-row"><span class="spec-k">Accessibility</span><span class="spec-v">WCAG AA · 4.5:1 minimum contrast ratio</span></div>
+      <div class="spec-row"><span class="spec-k">Marketing rules</span><span class="spec-v">No gradients · no emoji · no drop-shadow pill buttons · 2px radius · ALL-CAPS buttons · CSS icon primitives + Unicode</span></div>
+      <div class="spec-row"><span class="spec-k">App rules</span><span class="spec-v">Rounded 8–16px corners · Material Symbols Outlined for icons</span></div>
+      <div class="spec-row"><span class="spec-k">Spec bg color</span><span class="spec-v">#F5F4EF</span></div>
+      <div class="spec-row"><span class="spec-k">Source files</span><span class="spec-v">colors_and_type.css · packages/core/tokens.css · packages/core/tokens.json · packages/core/tailwind.config.js</span></div>
+      <div class="spec-row"><span class="spec-k">UI kits</span><span class="spec-v">ui_kits/website/ (marketing) · ui_kits/app/ (Family Tree) · ui_kits/sos/ (Sense of Self)</span></div>
+      <div class="spec-row"><span class="spec-k">Built by</span><span class="spec-v">@chunnodu + claudecode</span></div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div style="display:flex;gap:2rem">
+    <a href="index.html">← Index</a>
+    <a href="https://ajared.ca">ajared.ca ↗</a>
+  </div>
+  <span>Ajared Research Inc. · Applied AI for Enterprises · Toronto 43.6332° N, 79.4141° W</span>
+</footer>
+
+</body>
+</html>
