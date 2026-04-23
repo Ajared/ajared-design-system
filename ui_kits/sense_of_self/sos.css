@@ -1,0 +1,412 @@
+/* Sense of Self — UI kit
+   Personal analytics layer for X, styled with the Ajared design system.
+   See /colors_and_type.css for tokens. */
+@import url('../../colors_and_type.css');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined');
+
+:root {
+  /* Sense of Self signature: a soft terracotta→teal tint laid over white.
+     Cards, auth backgrounds, and top banners all use variants of this. */
+  --sos-tint: linear-gradient(135deg, rgba(161,102,94,0.10) 0%, rgba(5,140,140,0.10) 100%), #fff;
+  --sos-tint-strong: linear-gradient(135deg, rgb(161,102,94) 0%, rgb(5,140,140) 100%);
+  --sos-aqua: linear-gradient(180deg, #b2dbdb 0%, #86dbdb 100%); /* icon caps on metric chips */
+  --sos-bg: #f7f8f7;
+  --sos-card: #fff;
+  --sos-ink: #141414;
+  --sos-ink-2: #323232;
+  --sos-ink-3: #626262;
+  --sos-ink-dim: #939393;
+  --sos-hairline: #e2e2e2;
+  --sos-teal: #058c8c;
+  --sos-teal-ink: #046363;
+  --sos-teal-dim: #b2dbdb;
+  --sos-terra: #a1665e;
+  --sos-terra-deep: #593834;
+  --sos-divider: #f0f0f0;
+  --sos-chart-pos: #61b258;
+  --sos-chart-neu: #939393;
+  --sos-chart-neg: #ec9a29;
+  --sos-chart-heat-1: #e6f4f4;
+  --sos-chart-heat-2: #b2dbdb;
+  --sos-chart-heat-3: #86dbdb;
+  --sos-chart-heat-4: #058c8c;
+  --sos-chart-heat-5: #023b3b;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; font-family: 'Inter', system-ui, sans-serif; color: var(--sos-ink); }
+
+/* ---------- Phone bezel (iPhone-ish) ---------- */
+.sos-phone { display: flex; justify-content: center; }
+.sos-phone__bezel {
+  width: 402px; height: 874px;
+  background: #fff; border-radius: 44px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.2), 0 0 0 10px #0a0a0a, 0 0 0 12px #2a2a2a;
+  position: relative; overflow: hidden;
+}
+.sos-phone__notch {
+  position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+  width: 120px; height: 28px; border-radius: 20px; background: #000; z-index: 10;
+}
+.sos-phone__statusbar {
+  position: absolute; top: 0; left: 0; right: 0; height: 44px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 28px 0; font-size: 14px; font-weight: 600;
+  color: var(--sos-ink); z-index: 5;
+}
+.sos-phone__screen {
+  position: absolute; top: 44px; left: 0; right: 0; bottom: 0; overflow-y: auto;
+}
+.sos-phone__home {
+  position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%);
+  width: 134px; height: 5px; border-radius: 3px; background: #000; z-index: 10;
+}
+
+/* ---------- Screens — base shell ---------- */
+.sos-screen { min-height: 100%; background: var(--sos-bg); padding-bottom: 80px; }
+.sos-screen--auth { background: var(--sos-tint); padding: 0 24px 40px; }
+.sos-screen--landing { background: #fdfdfd; }
+
+.sos-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 24px 0; height: 44px; gap: 8px;
+}
+.sos-header__back {
+  width: 24px; height: 24px; display: grid; place-items: center;
+  color: var(--sos-ink); cursor: pointer;
+  background: transparent; border: none;
+}
+.sos-header__back .material-symbols-outlined { font-size: 24px; }
+.sos-header__title {
+  font-family: var(--font-primary); font-weight: 700;
+  font-size: 20px; line-height: 28px; color: var(--sos-ink);
+  flex: 1; text-align: center;
+}
+.sos-header__action {
+  width: 24px; height: 24px; display: grid; place-items: center;
+  background: transparent; border: none; cursor: pointer; color: var(--sos-ink);
+}
+.sos-header__avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--sos-tint); border: 1px solid #000;
+  display: grid; place-items: center; color: var(--sos-ink);
+}
+.sos-header__avatar .material-symbols-outlined { font-size: 16px; }
+
+/* ---------- Time-range pill row ---------- */
+.sos-timerange {
+  display: flex; gap: 8px; align-items: center;
+  margin: 20px 24px 16px; justify-content: center;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.05));
+}
+.sos-timerange__pill {
+  min-width: 41px; height: 25px; padding: 0 12px;
+  background: #fff; border: 1px solid var(--sos-hairline);
+  border-radius: 100px;
+  font-size: 12px; font-weight: 500; color: var(--sos-ink-3);
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer;
+}
+.sos-timerange__pill.is-active {
+  background: var(--sos-tint-strong); color: #fff; border-color: transparent;
+}
+
+/* ---------- Tinted card — the signature surface ---------- */
+.sos-card {
+  margin: 0 24px 12px; padding: 12px;
+  border-radius: 8px;
+  background: var(--sos-tint);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+}
+.sos-card--flat { box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
+.sos-card--white { background: #fff; }
+.sos-card__title {
+  font-size: 12px; font-weight: 500; color: var(--sos-ink);
+  margin: 0 0 10px;
+}
+.sos-card__body  { font-size: 12px; line-height: 18px; color: var(--sos-ink-3); margin: 0; }
+.sos-card__seemore {
+  display: inline-block; margin-top: 8px;
+  font-size: 12px; font-weight: 500; color: var(--sos-terra);
+  cursor: pointer;
+}
+
+/* Section label above a card (e.g. "Overview", "Sentiment") */
+.sos-section-label {
+  font-size: 16px; font-weight: 500; color: var(--sos-ink);
+  margin: 16px 24px 8px;
+}
+.sos-section-label--sm { font-size: 12px; line-height: 18px; }
+
+/* ---------- Metric chip — the aqua-capped white tile ---------- */
+.sos-metric-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+}
+.sos-metric {
+  display: flex; align-items: stretch; background: #fff;
+  border-radius: 8px; overflow: hidden;
+  height: 56px;
+}
+.sos-metric__cap {
+  width: 36px; background: var(--sos-aqua);
+  display: grid; place-items: center;
+  color: var(--sos-ink);
+}
+.sos-metric__cap .material-symbols-outlined { font-size: 16px; }
+.sos-metric__body { padding: 9px 12px; display: flex; flex-direction: column; justify-content: center; }
+.sos-metric__value { font-size: 16px; font-weight: 500; color: var(--sos-ink); line-height: 24px; }
+.sos-metric__label { font-size: 10px; color: var(--sos-ink-3); line-height: 15px; }
+
+/* Sm variant for "How You Engaged" compact column */
+.sos-metric--sm { height: 24px; border-radius: 4px; }
+.sos-metric--sm .sos-metric__cap { width: 24px; }
+.sos-metric--sm .sos-metric__cap .material-symbols-outlined { font-size: 12px; }
+.sos-metric--sm .sos-metric__body {
+  flex: 1; flex-direction: row; justify-content: space-between; align-items: center;
+  padding: 0 8px;
+}
+.sos-metric--sm .sos-metric__value { font-size: 10px; line-height: 15px; }
+.sos-metric--sm .sos-metric__label { font-size: 10px; }
+
+/* ---------- Insight row (Habits list) ---------- */
+.sos-insight {
+  background: var(--sos-tint);
+  border-radius: 8px;
+  padding: 12px;
+  margin: 0 24px 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+.sos-insight__title {
+  font-size: 14px; font-weight: 600; color: var(--sos-ink);
+  margin: 0 0 4px;
+}
+.sos-insight__body { font-size: 12px; line-height: 18px; color: var(--sos-ink-3); margin: 0; }
+
+/* ---------- Content insight chip (3-across topic/word cards) ---------- */
+.sos-topic-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.sos-topic {
+  background: #fff; border-radius: 8px; padding: 10px 8px 8px;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  text-align: center;
+}
+.sos-topic__cap {
+  width: 28px; height: 28px; border-radius: 6px;
+  background: var(--sos-aqua); display: grid; place-items: center; color: var(--sos-ink);
+}
+.sos-topic__cap .material-symbols-outlined { font-size: 16px; }
+.sos-topic__label { font-size: 10px; color: var(--sos-ink-3); }
+.sos-topic__value { font-size: 13px; font-weight: 600; color: var(--sos-ink); }
+
+/* ---------- Sentiment bar ---------- */
+.sos-sentiment { display: flex; flex-direction: column; gap: 12px; }
+.sos-sentiment__row {
+  display: grid; grid-template-columns: 24px 60px 1fr 32px; gap: 8px;
+  align-items: center;
+}
+.sos-sentiment__icon {
+  width: 24px; height: 24px; border-radius: 6px;
+  display: grid; place-items: center; color: #fff;
+  font-size: 14px;
+}
+.sos-sentiment__label { font-size: 12px; color: var(--sos-ink-2); }
+.sos-sentiment__track {
+  height: 8px; background: #f0f0f0; border-radius: 100px; overflow: hidden;
+}
+.sos-sentiment__fill { height: 100%; border-radius: 100px; }
+.sos-sentiment__pct { font-size: 12px; font-weight: 600; text-align: right; color: var(--sos-ink); }
+
+/* ---------- Bar chart — simple vertical bars ---------- */
+.sos-barchart {
+  background: #fff; border-radius: 8px; padding: 16px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+.sos-barchart__title { font-size: 12px; font-weight: 500; color: var(--sos-ink); margin-bottom: 12px; }
+.sos-barchart__grid {
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px;
+  align-items: end; height: 120px;
+}
+.sos-barchart__col { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.sos-barchart__bar {
+  width: 100%; max-width: 24px;
+  background: var(--sos-tint-strong); border-radius: 4px 4px 0 0;
+  transition: height 0.3s ease;
+}
+.sos-barchart__bar--muted { background: var(--sos-teal-dim); }
+.sos-barchart__tick { font-size: 10px; color: var(--sos-ink-3); font-family: var(--font-mono); }
+
+/* ---------- Heatmap (24×7 grid) ---------- */
+.sos-heatmap {
+  background: #fff; border-radius: 8px; padding: 16px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+.sos-heatmap__grid { display: grid; grid-template-columns: 20px repeat(24, 1fr); gap: 2px; align-items: center; }
+.sos-heatmap__cell {
+  aspect-ratio: 1; border-radius: 2px; min-height: 14px;
+  background: var(--sos-chart-heat-1);
+}
+.sos-heatmap__row-label { font-size: 9px; color: var(--sos-ink-dim); font-family: var(--font-mono); }
+.sos-heatmap__col-labels {
+  display: grid; grid-template-columns: 20px repeat(24, 1fr); gap: 2px;
+  margin-top: 4px;
+}
+.sos-heatmap__col-label { font-size: 8px; color: var(--sos-ink-dim); font-family: var(--font-mono); text-align: center; }
+
+/* ---------- Donut chart ---------- */
+.sos-donut {
+  width: 140px; height: 140px; border-radius: 50%;
+  display: grid; place-items: center;
+  position: relative;
+}
+.sos-donut__hole {
+  width: 88px; height: 88px; border-radius: 50%;
+  background: #fff;
+  display: grid; place-items: center;
+  text-align: center;
+}
+.sos-donut__value { font-size: 20px; font-weight: 700; color: var(--sos-ink); line-height: 1; }
+.sos-donut__label { font-size: 10px; color: var(--sos-ink-3); margin-top: 2px; }
+
+/* ---------- Stats pair (date / weekday / hour cards) ---------- */
+.sos-stat {
+  background: #fff; border-radius: 8px; padding: 14px 12px;
+  height: 70px; display: flex; flex-direction: column; justify-content: center;
+}
+.sos-stat__value { font-size: 18px; font-weight: 700; color: var(--sos-ink); line-height: 1.2; }
+.sos-stat__label { font-size: 11px; color: var(--sos-ink-3); margin-top: 2px; }
+
+/* ---------- Engagement list (How Others — emoji reactions, big lists) ---------- */
+.sos-list { background: #fff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); margin: 0 24px 16px; overflow: hidden; }
+.sos-list__row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--sos-divider);
+}
+.sos-list__row:last-child { border-bottom: none; }
+.sos-list__avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--sos-teal-dim); color: var(--sos-teal-ink);
+  display: grid; place-items: center; font-size: 12px; font-weight: 600;
+}
+.sos-list__text { flex: 1; min-width: 0; }
+.sos-list__primary { font-size: 13px; color: var(--sos-ink); line-height: 18px; }
+.sos-list__secondary { font-size: 11px; color: var(--sos-ink-3); margin-top: 2px; }
+.sos-list__meta {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 12px; color: var(--sos-terra); font-weight: 600;
+}
+
+/* ---------- CTA banner (gradient, shown on landing page bottom) ---------- */
+.sos-cta {
+  margin: 24px; padding: 24px 20px;
+  border-radius: 8px;
+  background: var(--sos-tint-strong);
+  color: #fff; text-align: center;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+.sos-cta__title {
+  font-family: var(--font-primary); font-weight: 700;
+  font-size: 18px; line-height: 1.2; letter-spacing: -0.03em;
+  margin: 0 0 6px;
+  text-shadow: 0 2px 4px rgba(0,14,14,0.25);
+}
+.sos-cta__sub { font-size: 12px; color: rgba(255,255,255,0.95); margin: 0 0 16px; }
+
+/* ---------- Auth blocks ---------- */
+.sos-auth { padding-top: 48px; }
+.sos-auth__eyebrow {
+  font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700;
+  color: var(--sos-teal-ink); margin: 0 0 4px;
+}
+.sos-auth__title {
+  font-family: var(--font-primary); font-weight: 700;
+  font-size: 24px; line-height: 28px; letter-spacing: -0.02em;
+  color: var(--sos-ink); margin: 0 0 12px;
+}
+.sos-auth__body { font-size: 14px; line-height: 21px; color: var(--sos-ink-3); margin: 0 0 32px; }
+
+/* ---------- Primary button ---------- */
+.sos-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 48px; padding: 0 20px; border-radius: 8px;
+  background: var(--sos-ink); color: #fff;
+  font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600;
+  border: none; cursor: pointer; width: 100%;
+  transition: transform 0.1s ease;
+}
+.sos-btn:active { transform: scale(0.98); }
+.sos-btn--terra { background: var(--sos-terra); }
+.sos-btn--teal { background: var(--sos-teal); }
+.sos-btn--outline { background: transparent; color: var(--sos-ink); border: 1px solid var(--sos-hairline); }
+.sos-btn--sm { height: 40px; font-size: 14px; }
+
+.sos-spinner {
+  width: 16px; height: 16px; border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff;
+  animation: sos-spin 0.9s linear infinite;
+}
+@keyframes sos-spin { to { transform: rotate(360deg); } }
+
+/* ---------- Landing page (public / pre-auth) ---------- */
+.sos-landing__hero {
+  padding: 48px 24px 32px;
+  background: var(--sos-bg);
+}
+.sos-landing__eyebrow {
+  font-family: var(--font-primary); font-weight: 700;
+  font-size: 16px; letter-spacing: -0.02em;
+  text-decoration: underline; color: var(--sos-ink);
+  text-align: center; display: block; margin-bottom: 24px;
+}
+.sos-landing__headline {
+  font-family: var(--font-primary); font-weight: 700;
+  font-size: 32px; line-height: 0.95; letter-spacing: -0.04em;
+  color: var(--sos-ink-darkest, #023b3b);
+  text-align: center; margin: 0 0 16px;
+  text-wrap: balance;
+}
+.sos-landing__headline em { font-style: normal; color: var(--sos-terra); }
+.sos-landing__lede {
+  font-size: 14px; line-height: 1.5; color: var(--sos-ink-3);
+  text-align: center; max-width: 32ch; margin: 0 auto;
+}
+.sos-landing__feature-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  padding: 0 24px;
+}
+.sos-landing__feature {
+  background: var(--sos-tint); border-radius: 8px; padding: 16px 12px;
+}
+.sos-landing__feature-title { font-size: 13px; font-weight: 600; color: var(--sos-ink); margin-bottom: 4px; }
+.sos-landing__feature-body  { font-size: 11px; line-height: 16px; color: var(--sos-ink-3); }
+
+/* ---------- Tag banner (section dividers / onboarding labels) ---------- */
+.sos-tag {
+  background: var(--sos-tint-strong);
+  color: #fff;
+  padding: 18px 24px;
+  text-align: center;
+  font-family: var(--font-primary); font-weight: 700;
+  font-size: 18px; letter-spacing: -0.04em;
+  text-shadow: 0 2px 4px rgba(0,14,14,0.25);
+}
+
+/* ---------- Bottom tab nav ---------- */
+.sos-tabs {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 72px;
+  display: flex; background: #fff;
+  border-top: 1px solid var(--sos-hairline);
+  padding-bottom: 12px;
+}
+.sos-tab {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 4px; background: transparent; border: none; color: var(--sos-ink-3);
+  font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; cursor: pointer;
+  padding-top: 8px;
+}
+.sos-tab.is-active { color: var(--sos-terra); }
+.sos-tab.is-active .material-symbols-outlined { font-variation-settings: 'FILL' 1; }
+
+/* ---------- Misc ---------- */
+.sos-divider { height: 1px; background: var(--sos-divider); margin: 8px 24px; }
+.sos-hairline-bottom { border-bottom: 0.5px solid var(--sos-hairline); }

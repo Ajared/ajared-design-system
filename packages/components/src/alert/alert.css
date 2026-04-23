@@ -1,0 +1,149 @@
+/* Alert Component - ajaRed Design System */
+
+/* Base Alert */
+.ajr-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border-left: 4px solid;
+  position: relative;
+}
+
+.ajr-alert-icon {
+  flex-shrink: 0;
+  font-size: var(--font-size-xl);
+  line-height: 1;
+}
+
+.ajr-alert-content {
+  flex: 1;
+}
+
+.ajr-alert-title {
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-1);
+  font-size: var(--font-size-base);
+}
+
+.ajr-alert-message {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+}
+
+.ajr-alert-close {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  font-size: var(--font-size-xl);
+  cursor: pointer;
+  padding: 0;
+  color: inherit;
+  opacity: 0.6;
+  transition: opacity var(--transition-fast);
+}
+
+.ajr-alert-close:hover {
+  opacity: 1;
+}
+
+/* Success Variant */
+.ajr-alert--success {
+  background-color: var(--color-semantic-success-light);
+  border-left-color: var(--color-semantic-success-default);
+  color: var(--color-text-primary);
+}
+
+.ajr-alert--success .ajr-alert-icon {
+  color: var(--color-semantic-success-default);
+}
+
+/* Warning Variant */
+.ajr-alert--warning {
+  background-color: var(--color-semantic-warning-light);
+  border-left-color: var(--color-semantic-warning-default);
+  color: var(--color-text-primary);
+}
+
+.ajr-alert--warning .ajr-alert-icon {
+  color: var(--color-semantic-warning-default);
+}
+
+/* Error Variant */
+.ajr-alert--error {
+  background-color: var(--color-semantic-error-light);
+  border-left-color: var(--color-semantic-error-default);
+  color: var(--color-text-primary);
+}
+
+.ajr-alert--error .ajr-alert-icon {
+  color: var(--color-semantic-error-default);
+}
+
+/* Info Variant */
+.ajr-alert--info {
+  background-color: var(--color-semantic-info-light);
+  border-left-color: var(--color-semantic-info-default);
+  color: var(--color-text-primary);
+}
+
+.ajr-alert--info .ajr-alert-icon {
+  color: var(--color-semantic-info-default);
+}
+
+/* Filled Variant */
+.ajr-alert--filled.ajr-alert--success {
+  background-color: var(--color-semantic-success-default);
+  color: white;
+  border-left-color: transparent;
+}
+
+.ajr-alert--filled.ajr-alert--warning {
+  background-color: var(--color-semantic-warning-default);
+  color: var(--color-text-primary);
+  border-left-color: transparent;
+}
+
+.ajr-alert--filled.ajr-alert--error {
+  background-color: var(--color-semantic-error-default);
+  color: white;
+  border-left-color: transparent;
+}
+
+.ajr-alert--filled.ajr-alert--info {
+  background-color: var(--color-semantic-info-default);
+  color: white;
+  border-left-color: transparent;
+}
+
+.ajr-alert--filled .ajr-alert-icon {
+  color: inherit;
+}
+
+/* Outlined Variant */
+.ajr-alert--outlined {
+  background-color: transparent;
+  border: 2px solid;
+  border-left-width: 4px;
+}
+
+.ajr-alert--outlined.ajr-alert--success {
+  border-color: var(--color-semantic-success-default);
+  color: var(--color-semantic-success-default);
+}
+
+.ajr-alert--outlined.ajr-alert--warning {
+  border-color: var(--color-semantic-warning-default);
+  color: var(--color-semantic-warning-default);
+}
+
+.ajr-alert--outlined.ajr-alert--error {
+  border-color: var(--color-semantic-error-default);
+  color: var(--color-semantic-error-default);
+}
+
+.ajr-alert--outlined.ajr-alert--info {
+  border-color: var(--color-semantic-info-default);
+  color: var(--color-semantic-info-default);
+}

@@ -1,0 +1,272 @@
+/* ============================================================
+   ajaRed Design System — Colors & Typography
+   For Ajared Research Inc. — Applied AI for Enterprises
+   ============================================================ */
+
+/* -------- FONTS -------- */
+@font-face {
+  font-family: 'iA Writer Quattro S';
+  src: url('fonts/iAWriterQuattroS-Regular.woff2') format('woff2'),
+       url('fonts/iAWriterQuattroS-Regular.woff') format('woff');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'iA Writer Quattro S';
+  src: url('fonts/iAWriterQuattroS-Bold.woff2') format('woff2'),
+       url('fonts/iAWriterQuattroS-Bold.woff') format('woff');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'iA Writer Quattro S';
+  src: url('fonts/iAWriterQuattroS-Italic.woff2') format('woff2'),
+       url('fonts/iAWriterQuattroS-Italic.woff') format('woff');
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: 'iA Writer Quattro S';
+  src: url('fonts/iAWriterQuattroS-BoldItalic.woff2') format('woff2'),
+       url('fonts/iAWriterQuattroS-BoldItalic.woff') format('woff');
+  font-weight: 700; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: 'iA Writer Mono S';
+  src: url('fonts/iAWriterMonoS-Regular.woff2') format('woff2'),
+       url('fonts/iAWriterMonoS-Regular.woff') format('woff');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'iA Writer Mono S';
+  src: url('fonts/iAWriterMonoS-Bold.woff2') format('woff2'),
+       url('fonts/iAWriterMonoS-Bold.woff') format('woff');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+
+:root {
+  /* -------- BRAND / INK COLORS (used on the live site) -------- */
+  --color-bg:              #ffffff;
+  --color-ink:             #058c8c;  /* primary teal — brand signature */
+  --color-ink-dark:        #046363;
+  --color-ink-darkest:     #023b3b;
+  --color-ink-light:       #8ccaca;
+  --color-ink-lighter:     #b2dbdb;
+  --color-ink-lightest:    #e6f4f4;
+  --color-terra:           #a1665e;  /* terracotta — the "heat", used sparingly for emphasis, arrows, accents */
+  --color-terra-dark:      #935d56;
+  --color-terra-light:     #d4b9b5;
+
+  /* -------- EXTENDED ACCENTS (Figma palette) -------- */
+  --color-accent-gold:     #d09958;
+  --color-accent-orange:   #ec9a29;
+  --color-accent-purple:   #9747ff;
+  --color-accent-green:    #138c05;
+
+  /* -------- NEUTRALS -------- */
+  --color-neutral-black:   #000000;
+  --color-neutral-900:     #141414;
+  --color-neutral-800:     #323232;  /* primary text color on the app */
+  --color-neutral-700:     #434343;
+  --color-neutral-600:     #626262;
+  --color-neutral-500:     #717171;
+  --color-neutral-400:     #939393;
+  --color-neutral-300:     #b6b6b6;
+  --color-neutral-200:     #d9d9d9;
+  --color-neutral-100:     #eeeeee;
+  --color-neutral-50:      #f5f5f5;
+  --color-neutral-white:   #ffffff;
+
+  /* -------- SEMANTIC (UI feedback) -------- */
+  --color-success:         #61b258;
+  --color-success-light:   #e7f3f4;
+  --color-warning:         #d6b739;
+  --color-warning-light:   #f7ebc6;
+  --color-error:           #8c1305;
+  --color-error-light:     #ffa18a;
+  --color-info:            #71c5e6;
+  --color-info-light:      #eaf6fb;
+
+  /* -------- BACKGROUND / SURFACES -------- */
+  --color-bg-primary:      #ffffff;
+  --color-bg-secondary:    #f7f8f7;
+  --color-bg-tertiary:     #f6f6f6;
+  --color-bg-dark:         #141414;
+  --color-bg-teal:         #058c8c;
+  --color-bg-terracotta:   #a1665e;
+
+  /* -------- TEXT (semantic) -------- */
+  --color-text-primary:    #323232;
+  --color-text-secondary:  #626262;
+  --color-text-tertiary:   #939393;
+  --color-text-inverse:    #ffffff;
+  --color-text-dark:       #141414;
+  /* On brand / marketing contexts the "ink" teal is the headline color: */
+  --color-text-brand:      #023b3b;
+  --color-text-accent:     #a1665e;
+
+  /* -------- BORDERS -------- */
+  --color-border-light:    #e2e2e2;
+  --color-border-medium:   #d9d9d9;
+  --color-border-dark:     #b6b6b6;
+  --color-border-ink:      #058c8c;   /* hairline teal border — signature */
+  --grid-line:             1px solid #058c8c;
+
+  /* -------- TYPOGRAPHY — FAMILIES -------- */
+  /* iA Writer Quattro S is THE brand type. It is used for both display & body. */
+  --font-primary:   'iA Writer Quattro S', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  /* Inter is used inside the app (Family Tree, Sense of Self) for UI chrome */
+  --font-secondary: 'Inter', system-ui, -apple-system, sans-serif;
+  /* Mono companion for labels, coordinates, metadata, track numbers */
+  --font-mono:      'iA Writer Mono S', 'iA Writer Quattro S', 'Courier New', monospace;
+
+  /* -------- TYPOGRAPHY — SIZES (rem) -------- */
+  --font-size-xs:   0.5rem;    /*  8px */
+  --font-size-sm:   0.75rem;   /* 12px */
+  --font-size-base: 1rem;      /* 16px */
+  --font-size-md:   1.125rem;  /* 18px */
+  --font-size-lg:   1.25rem;   /* 20px */
+  --font-size-xl:   1.5rem;    /* 24px */
+  --font-size-2xl:  2rem;      /* 32px */
+  --font-size-3xl:  2.25rem;   /* 36px */
+  --font-size-4xl:  3rem;      /* 48px */
+  --font-size-5xl:  4rem;      /* 64px */
+
+  --font-weight-normal:   400;
+  --font-weight-medium:   500;
+  --font-weight-semibold: 600;
+  --font-weight-bold:     700;
+
+  --line-height-tight:   1.25;
+  --line-height-normal:  1.5;
+  --line-height-relaxed: 1.75;
+  --line-height-loose:   2;
+
+  /* -------- SPACING (8-pt scale) -------- */
+  --space-0:  0;
+  --space-1:  0.25rem;  /*  4 */
+  --space-2:  0.5rem;   /*  8 */
+  --space-3:  0.75rem;  /* 12 */
+  --space-4:  1rem;     /* 16 */
+  --space-5:  1.25rem;  /* 20 */
+  --space-6:  1.5rem;   /* 24 */
+  --space-8:  2rem;     /* 32 */
+  --space-10: 2.5rem;   /* 40 */
+  --space-12: 3rem;     /* 48 */
+  --space-16: 4rem;     /* 64 */
+  --space-20: 5rem;     /* 80 */
+  --space-24: 6rem;     /* 96 */
+
+  /* -------- RADII -------- */
+  --radius-none: 0;
+  --radius-sm:   0.125rem;    /* 2px — the house default on buttons, fields, cards */
+  --radius-base: 0.25rem;     /* 4px */
+  --radius-md:   0.375rem;    /* 6px */
+  --radius-lg:   0.5rem;      /* 8px */
+  --radius-xl:   0.75rem;     /* 12px */
+  --radius-2xl:  1rem;        /* 16px */
+  --radius-3xl:  1.5rem;      /* 24px */
+  --radius-full: 9999px;
+
+  /* -------- SHADOWS -------- */
+  --shadow-sm:  0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-base:0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md:  0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg:  0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl:  0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  /* Figma "signature" drop — appears under color swatches and cards */
+  --shadow-swatch: 0 10px 50px 0 rgb(0 0 0 / 0.15);
+
+  /* -------- MOTION -------- */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 350ms ease;
+}
+
+/* =========================================================
+   SEMANTIC TYPE TOKENS
+   These are "use-this" classes/rules. Prefer these over raw
+   --font-size tokens when writing marketing/brand surfaces.
+   ========================================================= */
+
+html, body {
+  font-family: var(--font-primary);
+  color: var(--color-ink-dark);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Display — used in heroes on the marketing site.
+   The "Get AI working for you today." treatment: huge, bold,
+   negative tracking, line-height 0.9, ink-darkest teal. */
+.ajr-display, h1 {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  color: var(--color-ink-darkest);
+  font-size: clamp(4rem, 10vw, 9rem);
+}
+
+/* H2 — section headers inside marketing pages */
+h2, .ajr-h2 {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  color: var(--color-ink-darkest);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+h3, .ajr-h3 {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--color-ink-darkest);
+  font-size: 1.5rem;
+}
+
+h4, .ajr-h4 { font-family: var(--font-primary); font-weight: 700; font-size: 1.25rem; color: var(--color-ink-darkest); }
+h5, .ajr-h5 { font-family: var(--font-primary); font-weight: 700; font-size: 1.125rem; color: var(--color-ink-darkest); }
+h6, .ajr-h6 { font-family: var(--font-primary); font-weight: 700; font-size: 1rem; color: var(--color-ink-darkest); }
+
+/* Body */
+p, .ajr-body {
+  font-family: var(--font-primary);
+  font-size: 1.1rem;
+  line-height: 1.4;
+  max-width: 36ch;
+  font-weight: 400;
+  color: var(--color-ink-dark);
+}
+
+/* Label — the all-caps metadata tag that sits above headlines.
+   Monospaced, teal, small, wide letterspacing. */
+.ajr-label, .label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-ink);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* Mono — coordinates, counters, IDs, ruler ticks */
+.ajr-mono, code, kbd, samp, pre {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  color: var(--color-ink);
+}
+
+/* Accent text — the one-word terracotta flourish
+   (as in "today." on the homepage hero) */
+.ajr-accent {
+  color: var(--color-terra);
+}
+
+/* Link */
+a { color: inherit; text-decoration: none; transition: color 150ms ease; }
+a.ajr-link:hover, a:hover { color: var(--color-terra); text-decoration: underline; }

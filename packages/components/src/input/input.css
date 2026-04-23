@@ -1,0 +1,301 @@
+/* Input Component - ajaRed Design System */
+
+/* Input Group Container */
+.ajr-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+/* Label */
+.ajr-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  display: block;
+}
+
+.ajr-label--required::after {
+  content: '*';
+  color: var(--color-semantic-error-default);
+  margin-left: var(--space-1);
+}
+
+/* Base Input Styles */
+.ajr-input,
+.ajr-textarea,
+.ajr-select {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-background-primary);
+  border: 2px solid var(--color-border-medium);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  width: 100%;
+  transition: all var(--transition-fast);
+  outline: none;
+}
+
+.ajr-input::placeholder,
+.ajr-textarea::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+/* Focus State */
+.ajr-input:focus,
+.ajr-textarea:focus,
+.ajr-select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-lightest);
+}
+
+/* Hover State */
+.ajr-input:hover:not(:disabled):not(:focus),
+.ajr-textarea:hover:not(:disabled):not(:focus),
+.ajr-select:hover:not(:disabled):not(:focus) {
+  border-color: var(--color-primary-light);
+}
+
+/* Disabled State */
+.ajr-input:disabled,
+.ajr-textarea:disabled,
+.ajr-select:disabled {
+  background-color: var(--color-neutral-50);
+  color: var(--color-text-tertiary);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Error State */
+.ajr-input--error,
+.ajr-textarea--error,
+.ajr-select--error {
+  border-color: var(--color-semantic-error-default);
+}
+
+.ajr-input--error:focus,
+.ajr-textarea--error:focus,
+.ajr-select--error:focus {
+  box-shadow: 0 0 0 3px var(--color-semantic-error-light);
+}
+
+/* Success State */
+.ajr-input--success,
+.ajr-textarea--success,
+.ajr-select--success {
+  border-color: var(--color-semantic-success-default);
+}
+
+.ajr-input--success:focus,
+.ajr-textarea--success:focus,
+.ajr-select--success:focus {
+  box-shadow: 0 0 0 3px var(--color-semantic-success-light);
+}
+
+/* Sizes */
+.ajr-input--sm,
+.ajr-select--sm {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+  min-height: 32px;
+}
+
+.ajr-input--md,
+.ajr-select--md {
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--font-size-base);
+  min-height: 40px;
+}
+
+.ajr-input--lg,
+.ajr-select--lg {
+  padding: var(--space-4) var(--space-5);
+  font-size: var(--font-size-md);
+  min-height: 48px;
+}
+
+/* Textarea Specific */
+.ajr-textarea {
+  min-height: 120px;
+  resize: vertical;
+  line-height: var(--line-height-relaxed);
+}
+
+.ajr-textarea--sm {
+  min-height: 80px;
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+}
+
+.ajr-textarea--lg {
+  min-height: 160px;
+  padding: var(--space-4) var(--space-5);
+  font-size: var(--font-size-md);
+}
+
+/* Select Specific */
+.ajr-select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23626262' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-4) center;
+  padding-right: var(--space-10);
+}
+
+.ajr-select:disabled {
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23939393' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* Helper Text */
+.ajr-helper-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-1);
+}
+
+.ajr-helper-text--error {
+  color: var(--color-semantic-error-default);
+}
+
+.ajr-helper-text--success {
+  color: var(--color-semantic-success-default);
+}
+
+/* Input with Icon */
+.ajr-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.ajr-input-wrapper .ajr-input {
+  padding-left: var(--space-10);
+}
+
+.ajr-input-wrapper .ajr-input-icon {
+  position: absolute;
+  left: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-tertiary);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+.ajr-input-wrapper .ajr-input:focus + .ajr-input-icon {
+  color: var(--color-primary);
+}
+
+/* Checkbox & Radio */
+.ajr-checkbox,
+.ajr-radio {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  gap: var(--space-2);
+}
+
+.ajr-checkbox input[type="checkbox"],
+.ajr-radio input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.ajr-checkbox-mark,
+.ajr-radio-mark {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-border-dark);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-background-primary);
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ajr-radio-mark {
+  border-radius: 50%;
+}
+
+.ajr-checkbox:hover .ajr-checkbox-mark,
+.ajr-radio:hover .ajr-radio-mark {
+  border-color: var(--color-primary);
+}
+
+.ajr-checkbox input:checked ~ .ajr-checkbox-mark,
+.ajr-radio input:checked ~ .ajr-radio-mark {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.ajr-checkbox input:checked ~ .ajr-checkbox-mark::after {
+  content: '';
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.ajr-radio input:checked ~ .ajr-radio-mark::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.ajr-checkbox input:focus ~ .ajr-checkbox-mark,
+.ajr-radio input:focus ~ .ajr-radio-mark {
+  box-shadow: 0 0 0 3px var(--color-primary-lightest);
+}
+
+.ajr-checkbox input:disabled ~ .ajr-checkbox-mark,
+.ajr-radio input:disabled ~ .ajr-radio-mark {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Input Group (for combining inputs with buttons/addons) */
+.ajr-input-addon-group {
+  display: flex;
+  align-items: stretch;
+}
+
+.ajr-input-addon-group .ajr-input {
+  border-radius: 0;
+  border-right: none;
+}
+
+.ajr-input-addon-group .ajr-input:first-child {
+  border-top-left-radius: var(--radius-md);
+  border-bottom-left-radius: var(--radius-md);
+}
+
+.ajr-input-addon-group .ajr-button:last-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.ajr-input-addon-group .ajr-input-addon {
+  display: flex;
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--color-neutral-50);
+  border: 2px solid var(--color-border-medium);
+  border-left: none;
+  border-top-right-radius: var(--radius-md);
+  border-bottom-right-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}

@@ -1,0 +1,241 @@
+/* Typography Component - ajaRed Design System */
+
+/* Base Typography Styles */
+.ajr-text {
+  font-family: var(--font-secondary);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-normal);
+}
+
+/* Headings */
+.ajr-heading {
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.ajr-h1 {
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.02em;
+}
+
+.ajr-h2 {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.01em;
+}
+
+.ajr-h3 {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+}
+
+.ajr-h4 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+}
+
+.ajr-h5 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
+}
+
+.ajr-h6 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
+}
+
+/* Display Text */
+.ajr-display {
+  font-family: var(--font-accent);
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.03em;
+  color: var(--color-text-primary);
+}
+
+.ajr-display--xl {
+  font-size: calc(var(--font-size-5xl) * 1.25);
+}
+
+/* Body Text Variants */
+.ajr-body-lg {
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-relaxed);
+}
+
+.ajr-body {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+}
+
+.ajr-body-sm {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+/* Label Text */
+.ajr-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Caption */
+.ajr-caption {
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-tertiary);
+}
+
+/* Code/Monospace */
+.ajr-code {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  background-color: var(--color-neutral-50);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-light);
+}
+
+.ajr-code-block {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+  background-color: var(--color-neutral-50);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-light);
+  overflow-x: auto;
+}
+
+/* Text Colors */
+.ajr-text--primary {
+  color: var(--color-text-primary);
+}
+
+.ajr-text--secondary {
+  color: var(--color-text-secondary);
+}
+
+.ajr-text--tertiary {
+  color: var(--color-text-tertiary);
+}
+
+.ajr-text--inverse {
+  color: var(--color-text-inverse);
+}
+
+.ajr-text--brand {
+  color: var(--color-primary);
+}
+
+.ajr-text--accent {
+  color: var(--color-accent-terracotta-default);
+}
+
+/* Text Alignment */
+.ajr-text--left {
+  text-align: left;
+}
+
+.ajr-text--center {
+  text-align: center;
+}
+
+.ajr-text--right {
+  text-align: right;
+}
+
+/* Font Weights */
+.ajr-text--normal {
+  font-weight: var(--font-weight-normal);
+}
+
+.ajr-text--medium {
+  font-weight: var(--font-weight-medium);
+}
+
+.ajr-text--semibold {
+  font-weight: var(--font-weight-semibold);
+}
+
+.ajr-text--bold {
+  font-weight: var(--font-weight-bold);
+}
+
+/* Font Styles */
+.ajr-text--italic {
+  font-style: italic;
+}
+
+.ajr-text--underline {
+  text-decoration: underline;
+}
+
+/* Line Height Utilities */
+.ajr-text--tight {
+  line-height: var(--line-height-tight);
+}
+
+.ajr-text--normal-height {
+  line-height: var(--line-height-normal);
+}
+
+.ajr-text--relaxed {
+  line-height: var(--line-height-relaxed);
+}
+
+.ajr-text--loose {
+  line-height: var(--line-height-loose);
+}
+
+/* Truncate Text */
+.ajr-text--truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Link Styles */
+.ajr-link {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.ajr-link:hover {
+  color: var(--color-primary-dark);
+  text-decoration-color: var(--color-primary-dark);
+}
+
+.ajr-link:active {
+  color: var(--color-primary-darker);
+}
+
+/* Blockquote */
+.ajr-blockquote {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-lg);
+  font-style: italic;
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-secondary);
+  border-left: 4px solid var(--color-primary);
+  padding-left: var(--space-6);
+  margin: var(--space-6) 0;
+}

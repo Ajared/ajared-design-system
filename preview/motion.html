@@ -1,0 +1,78 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Motion — specs</title><link rel="stylesheet" href="_card.css">
+<style>
+  .stack { display:flex; flex-direction:column; gap: 16px; }
+  .spec  { display:grid; grid-template-columns: 180px 1fr; gap: 16px; align-items:center; padding: 12px 0; border-bottom: 1px solid var(--color-ink-light); }
+  .spec:last-child { border-bottom: none; }
+  .spec__name { font-family: var(--font-primary); font-weight:700; font-size:15px; letter-spacing:-0.01em; }
+  .spec__meta { font-family: var(--font-mono); font-size:10px; letter-spacing:0.08em; color: var(--color-neutral-600); text-transform:uppercase; margin-top:4px; }
+  .demo { height: 48px; background: var(--color-neutral-100); position:relative; overflow:hidden; }
+  .dot  { position:absolute; top:50%; width: 24px; height: 24px; background: var(--color-primary-500); transform: translateY(-50%); left: 12px; }
+  .dot.heat { background: var(--color-heat-500, #a1665e); }
+  .dot.fade { opacity: 0; }
+
+  @keyframes slide-std { 0% {left:12px;} 100% {left: calc(100% - 36px);} }
+  @keyframes slide-spring { 0% {left:12px;} 60% {left: calc(100% - 24px);} 80% {left: calc(100% - 44px);} 100% {left: calc(100% - 36px);} }
+  @keyframes fade-in { from {opacity:0;} to {opacity:1;} }
+  @keyframes moire-pan { from { background-position: 0 0; } to { background-position: 80px 0; } }
+
+  .anim-std    { animation: slide-std 0.9s cubic-bezier(0.2,0,0,1) infinite alternate; }
+  .anim-spring { animation: slide-spring 1.2s cubic-bezier(0.34,1.56,0.64,1) infinite alternate; }
+  .anim-snap   { animation: slide-std 0.18s cubic-bezier(0.4,0,0.2,1) infinite alternate; }
+  .anim-fade   { animation: fade-in 1.4s ease-in-out infinite alternate; }
+
+  .moire {
+    height: 48px;
+    background-image: repeating-linear-gradient(45deg, var(--color-ink-dark) 0 1px, transparent 1px 6px),
+                      repeating-linear-gradient(-45deg, var(--color-ink-dark) 0 1px, transparent 1px 6px);
+    animation: moire-pan 8s linear infinite;
+    opacity: 0.7;
+  }
+</style></head>
+<body>
+<div class="card">
+  <div class="meta">MOTION · TIMINGS + EASING</div>
+  <div style="font-family:var(--font-primary); font-size:14px; line-height:1.5; color: var(--color-ink); max-width: 58ch;">
+    Motion at Ajared is restrained. Most things should feel like a page turning, not a slot machine. Use <span style="font-family:var(--font-mono); font-size:12px;">snap</span> for direct-manipulation; <span style="font-family:var(--font-mono); font-size:12px;">standard</span> for navigational transitions; <span style="font-family:var(--font-mono); font-size:12px;">spring</span> only for welcoming moments. The <span style="font-family:var(--font-mono); font-size:12px;">moiré</span> pattern is the one exception — it drifts continuously as a living backdrop.
+  </div>
+
+  <div class="stack" style="margin-top: 8px;">
+    <div class="spec">
+      <div>
+        <div class="spec__name">Snap</div>
+        <div class="spec__meta">180ms · cubic-bezier(0.4, 0, 0.2, 1)</div>
+      </div>
+      <div class="demo"><div class="dot anim-snap"></div></div>
+    </div>
+    <div class="spec">
+      <div>
+        <div class="spec__name">Standard</div>
+        <div class="spec__meta">900ms · cubic-bezier(0.2, 0, 0, 1)</div>
+      </div>
+      <div class="demo"><div class="dot anim-std"></div></div>
+    </div>
+    <div class="spec">
+      <div>
+        <div class="spec__name">Spring (welcome)</div>
+        <div class="spec__meta">1200ms · cubic-bezier(0.34, 1.56, 0.64, 1)</div>
+      </div>
+      <div class="demo"><div class="dot heat anim-spring"></div></div>
+    </div>
+    <div class="spec">
+      <div>
+        <div class="spec__name">Fade (ambient)</div>
+        <div class="spec__meta">1400ms · ease-in-out · loop</div>
+      </div>
+      <div class="demo"><div class="dot anim-fade"></div></div>
+    </div>
+    <div class="spec">
+      <div>
+        <div class="spec__name">Moiré drift</div>
+        <div class="spec__meta">8s · linear · infinite · backgrounds only</div>
+      </div>
+      <div class="moire"></div>
+    </div>
+  </div>
+
+  <div class="hex" style="margin-top:12px;">Reduce-motion: substitute all animations with 200ms opacity cross-fades. Honor <code style="font-family:var(--font-mono); font-size:11px;">prefers-reduced-motion</code>.</div>
+</div>
+</body></html>

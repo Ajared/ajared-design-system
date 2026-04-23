@@ -1,0 +1,19 @@
+/* Shared styles for design system preview cards.
+   Each card is ~700px wide and intentionally thin. */
+@import url('../colors_and_type.css');
+
+html, body { margin: 0; padding: 0; background: #fff; font-family: var(--font-primary); color: var(--color-ink-dark); }
+.card { padding: 20px 24px; display: flex; flex-direction: column; gap: 12px; }
+.card.tight { padding: 16px 20px; gap: 8px; }
+.row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.meta { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-ink); }
+.hex  { font-family: var(--font-mono); font-size: 10px; color: var(--color-neutral-600); text-transform: uppercase; }
+.swatch {
+  width: 68px; height: 68px; border-radius: 2px;
+  box-shadow: 0 10px 50px 0 rgb(0 0 0 / 0.15);
+  flex-shrink: 0;
+}
+.swatch-sm { width: 48px; height: 48px; }
+.swatch-xs { width: 36px; height: 36px; }
+.chip { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
+.ruler { position: relative; height: 8px; background-image: linear-gradient(to right, var(--color-ink-light) 1px, transparent 1px); background-size: 20px 100%; }

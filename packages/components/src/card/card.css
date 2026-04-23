@@ -1,0 +1,120 @@
+/* Card Component - ajaRed Design System */
+
+/* Base Card */
+.ajr-card {
+  background-color: var(--color-background-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  transition: all var(--transition-fast);
+}
+
+.ajr-card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+/* Card Variants */
+.ajr-card--flat {
+  box-shadow: none;
+  border: 1px solid var(--color-border-light);
+}
+
+.ajr-card--elevated {
+  box-shadow: var(--shadow-xl);
+}
+
+.ajr-card--elevated:hover {
+  box-shadow: var(--shadow-2xl);
+  transform: translateY(-2px);
+}
+
+/* Card Sections */
+.ajr-card-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.ajr-card-header {
+  padding: var(--space-6);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.ajr-card-header h3,
+.ajr-card-header h4 {
+  margin: 0;
+  font-family: var(--font-primary);
+  color: var(--color-text-primary);
+}
+
+.ajr-card-body {
+  padding: var(--space-6);
+}
+
+.ajr-card-body p {
+  margin: 0 0 var(--space-4) 0;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.ajr-card-body p:last-child {
+  margin-bottom: 0;
+}
+
+.ajr-card-footer {
+  padding: var(--space-6);
+  border-top: 1px solid var(--color-border-light);
+  background-color: var(--color-background-tertiary);
+}
+
+/* Card Sizes */
+.ajr-card--sm .ajr-card-header,
+.ajr-card--sm .ajr-card-body,
+.ajr-card--sm .ajr-card-footer {
+  padding: var(--space-4);
+}
+
+.ajr-card--lg .ajr-card-header,
+.ajr-card--lg .ajr-card-body,
+.ajr-card--lg .ajr-card-footer {
+  padding: var(--space-8);
+}
+
+/* Interactive Card */
+.ajr-card--interactive {
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.ajr-card--interactive:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+.ajr-card--interactive:active {
+  transform: translateY(-2px);
+}
+
+/* Horizontal Card */
+.ajr-card--horizontal {
+  display: flex;
+}
+
+.ajr-card--horizontal .ajr-card-image {
+  width: 40%;
+  object-fit: cover;
+}
+
+.ajr-card--horizontal .ajr-card-content {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .ajr-card--horizontal {
+    flex-direction: column;
+  }
+
+  .ajr-card--horizontal .ajr-card-image {
+    width: 100%;
+  }
+}

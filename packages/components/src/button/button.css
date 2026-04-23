@@ -1,0 +1,239 @@
+/* Button Component - ajaRed Design System */
+
+/* Base Button Styles */
+.ajr-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-semibold);
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  user-select: none;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.ajr-button:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.ajr-button:active {
+  transform: translateY(1px);
+}
+
+/* Sizes */
+.ajr-button--sm {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--font-size-sm);
+  min-height: 32px;
+}
+
+.ajr-button--md {
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--font-size-base);
+  min-height: 40px;
+}
+
+.ajr-button--lg {
+  padding: var(--space-4) var(--space-8);
+  font-size: var(--font-size-md);
+  min-height: 48px;
+}
+
+/* Primary Variant */
+.ajr-button--primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+
+.ajr-button--primary:hover:not(:disabled) {
+  background-color: var(--color-primary-dark);
+}
+
+.ajr-button--primary:active:not(:disabled) {
+  background-color: var(--color-primary-darker);
+}
+
+/* Secondary Variant */
+.ajr-button--secondary {
+  background-color: var(--color-accent-terracotta-default);
+  color: var(--color-text-inverse);
+}
+
+.ajr-button--secondary:hover:not(:disabled) {
+  background-color: var(--color-accent-terracotta-dark);
+}
+
+.ajr-button--secondary:active:not(:disabled) {
+  background-color: var(--color-accent-terracotta-dark);
+  filter: brightness(0.9);
+}
+
+/* Tertiary Variant (Outlined) */
+.ajr-button--tertiary {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.ajr-button--tertiary:hover:not(:disabled) {
+  background-color: var(--color-primary-lightest);
+  border-color: var(--color-primary-dark);
+  color: var(--color-primary-dark);
+}
+
+.ajr-button--tertiary:active:not(:disabled) {
+  background-color: var(--color-primary-lighter);
+}
+
+/* Ghost Variant (Text only) */
+.ajr-button--ghost {
+  background-color: transparent;
+  color: var(--color-primary);
+}
+
+.ajr-button--ghost:hover:not(:disabled) {
+  background-color: var(--color-primary-lightest);
+  color: var(--color-primary-dark);
+}
+
+.ajr-button--ghost:active:not(:disabled) {
+  background-color: var(--color-primary-lighter);
+}
+
+/* Danger Variant */
+.ajr-button--danger {
+  background-color: var(--color-semantic-error-default);
+  color: var(--color-text-inverse);
+}
+
+.ajr-button--danger:hover:not(:disabled) {
+  background-color: var(--color-semantic-error-default);
+  filter: brightness(0.9);
+}
+
+.ajr-button--danger:active:not(:disabled) {
+  filter: brightness(0.8);
+}
+
+/* Success Variant */
+.ajr-button--success {
+  background-color: var(--color-semantic-success-default);
+  color: var(--color-text-inverse);
+}
+
+.ajr-button--success:hover:not(:disabled) {
+  background-color: var(--color-semantic-success-default);
+  filter: brightness(0.9);
+}
+
+.ajr-button--success:active:not(:disabled) {
+  filter: brightness(0.8);
+}
+
+/* Disabled State */
+.ajr-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Loading State */
+.ajr-button--loading {
+  color: transparent;
+  pointer-events: none;
+  position: relative;
+}
+
+.ajr-button--loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 50%;
+  margin-left: -8px;
+  margin-top: -8px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: ajr-button-spin 0.6s linear infinite;
+}
+
+.ajr-button--primary.ajr-button--loading::after,
+.ajr-button--secondary.ajr-button--loading::after,
+.ajr-button--danger.ajr-button--loading::after,
+.ajr-button--success.ajr-button--loading::after {
+  border-color: var(--color-text-inverse);
+  border-top-color: transparent;
+}
+
+@keyframes ajr-button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Full Width */
+.ajr-button--full {
+  width: 100%;
+}
+
+/* Icon Only Button */
+.ajr-button--icon {
+  padding: var(--space-2);
+  min-width: 40px;
+}
+
+.ajr-button--icon.ajr-button--sm {
+  padding: var(--space-1);
+  min-width: 32px;
+  min-height: 32px;
+}
+
+.ajr-button--icon.ajr-button--lg {
+  padding: var(--space-3);
+  min-width: 48px;
+  min-height: 48px;
+}
+
+/* Button Group */
+.ajr-button-group {
+  display: inline-flex;
+  gap: var(--space-2);
+}
+
+.ajr-button-group--attached {
+  gap: 0;
+}
+
+.ajr-button-group--attached .ajr-button {
+  border-radius: 0;
+}
+
+.ajr-button-group--attached .ajr-button:first-child {
+  border-top-left-radius: var(--radius-md);
+  border-bottom-left-radius: var(--radius-md);
+}
+
+.ajr-button-group--attached .ajr-button:last-child {
+  border-top-right-radius: var(--radius-md);
+  border-bottom-right-radius: var(--radius-md);
+}
+
+.ajr-button-group--attached .ajr-button:not(:last-child) {
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Rounded Variant */
+.ajr-button--rounded {
+  border-radius: var(--radius-full);
+}

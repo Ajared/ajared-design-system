@@ -1,0 +1,128 @@
+/* Spinner Component - ajaRed Design System */
+
+/* Base Spinner */
+.ajr-spinner {
+  display: inline-block;
+  border-radius: 50%;
+  border-style: solid;
+  border-color: var(--color-primary);
+  border-top-color: transparent;
+  animation: ajr-spinner-rotate 0.6s linear infinite;
+}
+
+@keyframes ajr-spinner-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Sizes */
+.ajr-spinner--sm {
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+}
+
+.ajr-spinner--md {
+  width: 24px;
+  height: 24px;
+  border-width: 3px;
+}
+
+.ajr-spinner--lg {
+  width: 32px;
+  height: 32px;
+  border-width: 4px;
+}
+
+.ajr-spinner--xl {
+  width: 48px;
+  height: 48px;
+  border-width: 4px;
+}
+
+/* Color Variants */
+.ajr-spinner--primary {
+  border-color: var(--color-primary);
+  border-top-color: transparent;
+}
+
+.ajr-spinner--secondary {
+  border-color: var(--color-accent-terracotta-default);
+  border-top-color: transparent;
+}
+
+.ajr-spinner--white {
+  border-color: white;
+  border-top-color: transparent;
+}
+
+.ajr-spinner--gray {
+  border-color: var(--color-neutral-400);
+  border-top-color: transparent;
+}
+
+/* Dots Spinner */
+.ajr-spinner-dots {
+  display: inline-flex;
+  gap: var(--space-2);
+}
+
+.ajr-spinner-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  animation: ajr-spinner-dot-bounce 1.4s infinite ease-in-out both;
+}
+
+.ajr-spinner-dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.ajr-spinner-dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes ajr-spinner-dot-bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Spinner with Text */
+.ajr-spinner-container {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.ajr-spinner-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* Centered Spinner */
+.ajr-spinner-centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+/* Page Overlay Spinner */
+.ajr-spinner-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal);
+}

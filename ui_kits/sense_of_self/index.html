@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sense of Self — UI kit</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../../assets/favicon.png">
+<link rel="stylesheet" href="sos.css">
+<style>
+  body { background: #eee; min-height: 100vh; padding: 40px; }
+  .sos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+    gap: 40px;
+    max-width: 1900px;
+    margin: 0 auto;
+  }
+  .sos-slot { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .sos-slot__caption {
+    font-family: 'iA Writer Mono S', monospace;
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: #058c8c;
+  }
+  .sos-intro {
+    max-width: 900px; margin: 0 auto 40px; padding: 24px 32px;
+    background: #fff; border: 1px solid #058c8c; border-radius: 8px;
+  }
+  .sos-intro h1 {
+    margin: 0 0 8px; font-family: 'iA Writer Quattro S', serif;
+    font-weight: 700; font-size: 32px; letter-spacing: -0.03em; color: #023b3b;
+  }
+  .sos-intro p { margin: 0; color: #626262; font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.6; max-width: none; }
+</style>
+</head>
+<body>
+
+<div class="sos-intro">
+  <h1>Sense of Self — UI kit</h1>
+  <p>
+    All 11 primary screens of the Sense of Self app, as a live reference.
+    Click through the flow; each phone is an isolated, interactive instance.
+    Styled with the Ajared design system tokens (<code>colors_and_type.css</code>).
+  </p>
+</div>
+
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="ui.jsx"></script>
+<script type="text/babel" src="screens.jsx"></script>
+
+<script type="text/babel">
+/* A single phone that advances through its own local flow. */
+const FlowPhone = ({ caption, start='home' }) => {
+  const [screen, setScreen] = React.useState(start);
+  const [tab, setTab] = React.useState('home');
+  const [loading, setLoading] = React.useState(false);
+
+  const go = (s) => setScreen(s);
+  const back = () => setScreen('home');
+
+  let content = null, showTabs = false;
+
+  if (screen === 'landing')      content = <SoSLanding onStart={() => setScreen('signup')} />;
+  else if (screen === 'signup')  content = <SoSSignup loading={loading} onConnect={() => { setLoading(true); setTimeout(()=>{ setLoading(false); setScreen('home'); }, 1500); }} />;
+  else if (screen === 'login')   content = <SoSLogin onLogin={() => setScreen('home')} />;
+  else if (screen === 'tag')     content = <><SoSTag label="Onboarding" /><div style={{padding:'24px', textAlign:'center', color:'#626262'}}>A banner used between chapters of a flow — e.g. before the first insight set.</div></>;
+  else {
+    showTabs = true;
+    if (screen === 'home'    || tab === 'home')    content = <SoSHome go={go} />;
+    else if (screen === 'profile')  content = <SoSProfile  back={back} />;
+    else if (screen === 'habits')   content = <SoSHabits   back={back} />;
+    else if (screen === 'others')   content = <SoSOthers   back={back} />;
+    else if (screen === 'engaged')  content = <SoSEngaged  back={back} />;
+    else if (screen === 'patterns') content = <SoSPatterns back={back} />;
+    else if (screen === 'content')  content = <SoSContent  back={back} />;
+    // sync tab with detail screens under the "insights" tab
+  }
+
+  // Swap tab when user taps tab bar
+  const onSetTab = (t) => {
+    setTab(t);
+    if (t === 'home') setScreen('home');
+    if (t === 'insights') setScreen('profile');
+    if (t === 'account') setScreen('home'); // stub
+    if (t === 'search')  setScreen('home'); // stub
+  };
+
+  return (
+    <div className="sos-slot">
+      <SoSPhone>
+        {content}
+        {showTabs && <SoSTabs tab={tab} setTab={onSetTab} />}
+      </SoSPhone>
+      <div className="sos-slot__caption">{caption}</div>
+    </div>
+  );
+};
+
+const App = () => (
+  <div className="sos-grid">
+    <FlowPhone caption="01 · Landing"      start="landing" />
+    <FlowPhone caption="02 · Sign up"      start="signup" />
+    <FlowPhone caption="03 · Log in"       start="login" />
+    <FlowPhone caption="04 · Home"         start="home" />
+    <FlowPhone caption="05 · Profile Summary"  start="profile" />
+    <FlowPhone caption="06 · Habits"       start="habits" />
+    <FlowPhone caption="07 · How Others Engaged You"  start="others" />
+    <FlowPhone caption="08 · How You Engaged Others"  start="engaged" />
+    <FlowPhone caption="09 · Posting Patterns"        start="patterns" />
+    <FlowPhone caption="10 · Content Insights"        start="content" />
+    <FlowPhone caption="11 · Tag / section banner"    start="tag" />
+  </div>
+);
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
