@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Specification — ajaRED Design System</title>
+    <style>
+        /* iA Writer Quattro S Font Face */
+        @font-face {
+            font-family: 'iA Writer Quattro S';
+            src: url('../fonts/iAWriterQuattroS-Regular.woff2') format('woff2'),
+                 url('../fonts/iAWriterQuattroS-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'iA Writer Quattro S';
+            src: url('../fonts/iAWriterQuattroS-Italic.woff2') format('woff2'),
+                 url('../fonts/iAWriterQuattroS-Italic.woff') format('woff');
+            font-weight: 400;
+            font-style: italic;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'iA Writer Quattro S';
+            src: url('../fonts/iAWriterQuattroS-Bold.woff2') format('woff2'),
+                 url('../fonts/iAWriterQuattroS-Bold.woff') format('woff');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'iA Writer Quattro S';
+            src: url('../fonts/iAWriterQuattroS-BoldItalic.woff2') format('woff2'),
+                 url('../fonts/iAWriterQuattroS-BoldItalic.woff') format('woff');
+            font-weight: 700;
+            font-style: italic;
+            font-display: swap;
+        }
+
+        :root {
+            --color-bg: #F5F4EF;
+            --color-ink: #058c8c;
+            --grid-line: 1px solid var(--color-ink);
+            --font-primary: 'iA Writer Quattro S';
+            --font-secondary: 'Inter';
+            --font-accent: 'Acme';
+            --font-display: 'Metal';
+            --font-mono: 'Roboto Mono';
+            --spacing-unit: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            cursor: crosshair;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-ink);
+            font-family: var(--font-primary);
+            overflow-x: hidden;
+            width: 100vw;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-primary);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 0.9;
+        }
+
+        h1 {
+            font-size: clamp(4rem, 10vw, 9rem);
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.3;
+            max-width: 32ch;
+            font-weight: 400;
+        }
+
+        .label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            display: block;
+            font-family: var(--font-primary);
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            min-height: 100vh;
+            border-left: var(--grid-line);
+            border-right: var(--grid-line);
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .ruler-y {
+            width: 80px;
+            border-right: var(--grid-line);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px 0;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            text-align: right;
+            padding-right: 8px;
+            position: relative;
+            background-image: linear-gradient(to bottom, var(--color-ink) 1px, transparent 1px);
+            background-size: 100% 20px;
+        }
+
+        .ruler-x {
+            height: 40px;
+            width: 100%;
+            border-bottom: var(--grid-line);
+            display: flex;
+            align-items: flex-end;
+            background-image: linear-gradient(to right, var(--color-ink) 1px, transparent 1px);
+            background-size: 20px 100%;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            padding-bottom: 4px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: var(--color-bg);
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            border-bottom: var(--grid-line);
+        }
+
+        .header-cell {
+            padding: 2rem;
+            border-right: var(--grid-line);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 200px;
+        }
+        .header-cell:last-child { border-right: none; }
+
+        .spec-section {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            border-bottom: var(--grid-line);
+        }
+
+        .spec-sidebar {
+            padding: 2rem;
+            border-right: var(--grid-line);
+        }
+
+        .spec-canvas {
+            padding: 2rem;
+            position: relative;
+            background-image: radial-gradient(circle, var(--color-ink) 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+        }
+
+        .type-scale {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .type-row {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            align-items: baseline;
+            border-bottom: 1px solid rgba(5, 140, 140, 0.2);
+            padding-bottom: 1rem;
+        }
+
+        .swatch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 1px;
+            background: var(--color-ink);
+            border: var(--grid-line);
+        }
+
+        .swatch {
+            aspect-ratio: 1;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            line-height: 1.4;
+        }
+
+        .annotation {
+            position: absolute;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            border-top: 1px solid var(--color-ink);
+            padding-top: 4px;
+            pointer-events: none;
+        }
+
+        .dimension-line {
+            position: absolute;
+            height: 1px;
+            background: var(--color-ink);
+        }
+
+        .dimension-line::before, .dimension-line::after {
+            content: '';
+            position: absolute;
+            height: 10px;
+            width: 1px;
+            background: var(--color-ink);
+            top: -5px;
+        }
+
+        .dimension-line::after { right: 0; }
+
+        .spacing-blocks {
+            display: flex;
+            gap: 20px;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+
+        .block {
+            background: var(--color-ink);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-bg);
+            font-size: 10px;
+            font-family: var(--font-mono);
+            font-weight: 700;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 60px;
+            right: 20px;
+            z-index: 200;
+            padding: 12px 20px;
+            background: var(--color-ink);
+            color: var(--color-bg);
+            border: 2px solid var(--color-ink);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .theme-toggle:hover {
+            background: var(--color-bg);
+            color: var(--color-ink);
+        }
+
+        /* Terracotta theme */
+        body.theme-terracotta {
+            --color-ink: #a1665e;
+        }
+
+        body.theme-terracotta .type-row {
+            border-bottom: 1px solid rgba(161, 102, 94, 0.2);
+        }
+
+        .footer {
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-top: var(--grid-line);
+            gap: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            header { grid-template-columns: 1fr; }
+            .spec-section { grid-template-columns: 1fr; }
+            .spec-sidebar { border-right: none; border-bottom: var(--grid-line); }
+            .header-cell { border-right: none; border-bottom: var(--grid-line); }
+            .footer { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<button class="theme-toggle" onclick="toggleTheme()">
+    Switch Theme: Teal ⇄ Terracotta
+</button>
+
+<div class="grid-container">
+    <div class="ruler-y">
+        <span>0</span>
+        <span>100</span>
+        <span>200</span>
+        <span>300</span>
+        <span>400</span>
+        <span>500</span>
+        <span>600</span>
+        <span>700</span>
+        <span>800</span>
+        <span>900</span>
+    </div>
+
+    <div class="main-content">
+        <div class="ruler-x"></div>
+
+        <header>
+            <div class="header-cell">
+                <span class="label">Ref. No.</span>
+                <h2>AJARED-DS<br>TECHNICAL<br>SPEC</h2>
+            </div>
+            <div class="header-cell">
+                <span class="label">Classification</span>
+                <p>Design Instruments<br>Revision 1.0.0<br>Scale 1:1.0000</p>
+                <div style="margin-top:auto">
+                    <span class="label">Navigation</span>
+                    <p><a href="../index.html" style="color:inherit; text-decoration:none">← Return to Index</a></p>
+                </div>
+            </div>
+            <div class="header-cell">
+                <span class="label">Parameters</span>
+                <p>Grid: 20px Baseline</p>
+                <p>Units: 8pt System</p>
+                <p>Style: Modern Swiss</p>
+                <div style="margin-top: auto; font-size: 2rem; line-height: 1;">
+                    ⌖
+                </div>
+            </div>
+        </header>
+
+        <!-- Typography Instrument -->
+        <section class="spec-section">
+            <div class="spec-sidebar">
+                <span class="label">Instrument 01</span>
+                <h3>Typographic<br>System</h3>
+                <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">Primary: iA Writer Quattro S. Display: Acme/Metal. Secondary: Inter. Mono: Roboto.</p>
+            </div>
+            <div class="spec-canvas">
+                <div class="type-scale">
+                    <div class="type-row">
+                        <span class="label" style="opacity:0.5">5XL</span>
+                        <h1 style="font-size: 4rem;">Aa</h1>
+                    </div>
+                    <div class="type-row">
+                        <span class="label" style="opacity:0.5">3XL</span>
+                        <h2 style="font-size: 2.25rem; margin-bottom:0;">ajaRED Bold</h2>
+                    </div>
+                    <div class="type-row">
+                        <span class="label" style="opacity:0.5">XL</span>
+                        <p style="font-size: 1.5rem;">The quick brown fox</p>
+                    </div>
+                    <div class="type-row">
+                        <span class="label" style="opacity:0.5">BASE</span>
+                        <p>The quick brown fox jumps over the lazy dog. 1234567890</p>
+                    </div>
+                    <div class="type-row">
+                        <span class="label" style="opacity:0.5">MONO</span>
+                        <p style="font-family: var(--font-mono); font-size: 0.85rem;">SYSTEM_ACTIVE_TRUE</p>
+                    </div>
+                </div>
+
+                <div class="annotation" style="top: 20px; right: 20px; width: 150px;">
+                    KERNING: TIGHT<br>WEIGHT: 700
+                </div>
+            </div>
+        </section>
+
+        <!-- Color Instrument -->
+        <section class="spec-section">
+            <div class="spec-sidebar">
+                <span class="label">Instrument 02</span>
+                <h3>Chromatic<br>Palette</h3>
+                <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">Brand colors with terracotta warmth and teal energy.</p>
+            </div>
+            <div class="spec-canvas">
+                <div class="swatch-grid">
+                    <div class="swatch" style="background: #058c8c; color: #F5F4EF;">
+                        <span>#058c8c</span>
+                        <span>PRIMARY TEAL</span>
+                    </div>
+                    <div class="swatch" style="background: #046363; color: #F5F4EF;">
+                        <span>#046363</span>
+                        <span>TEAL DARK</span>
+                    </div>
+                    <div class="swatch" style="background: #8ccaca; color: #323232;">
+                        <span>#8ccaca</span>
+                        <span>TEAL LIGHT</span>
+                    </div>
+                    <div class="swatch" style="background: #e6f4f4; color: #323232;">
+                        <span>#e6f4f4</span>
+                        <span>TEAL LIGHTEST</span>
+                    </div>
+                    <div class="swatch" style="background: #a1665e; color: #F5F4EF;">
+                        <span>#a1665e</span>
+                        <span>TERRACOTTA</span>
+                    </div>
+                    <div class="swatch" style="background: #d09958; color: #323232;">
+                        <span>#d09958</span>
+                        <span>GOLD ACCENT</span>
+                    </div>
+                    <div class="swatch" style="background: #323232; color: #F5F4EF;">
+                        <span>#323232</span>
+                        <span>NEUTRAL 800</span>
+                    </div>
+                    <div class="swatch" style="background: #F5F4EF; color: #323232;">
+                        <span>#F5F4EF</span>
+                        <span>BACKGROUND</span>
+                    </div>
+                </div>
+                <div class="annotation" style="bottom: 20px; left: 20px;">
+                    ACCESSIBILITY: WCAG AA<br>CONTRAST RATIO: 4.5:1+
+                </div>
+            </div>
+        </section>
+
+        <!-- Spacing Instrument -->
+        <section class="spec-section">
+            <div class="spec-sidebar">
+                <span class="label">Instrument 03</span>
+                <h3>Spatial<br>Logic</h3>
+                <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">Base unit (x) = 4px. 8-point grid system for consistency.</p>
+            </div>
+            <div class="spec-canvas">
+                <div class="spacing-blocks">
+                    <div class="block" style="width: 16px; height: 16px;">4X</div>
+                    <div class="block" style="width: 32px; height: 32px;">8X</div>
+                    <div class="block" style="width: 48px; height: 48px;">12X</div>
+                    <div class="block" style="width: 64px; height: 64px;">16X</div>
+                    <div class="block" style="width: 96px; height: 96px;">24X</div>
+                </div>
+                <div class="annotation" style="bottom: 160px; left: 2rem;">
+                    8-POINT GRID SCALE: 4, 8, 12, 16, 24, 32, 48, 64, 96
+                </div>
+            </div>
+        </section>
+
+        <!-- Semantic Colors -->
+        <section class="spec-section">
+            <div class="spec-sidebar">
+                <span class="label">Instrument 04</span>
+                <h3>Semantic<br>System</h3>
+                <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">Functional colors for UI feedback and state.</p>
+            </div>
+            <div class="spec-canvas">
+                <div class="swatch-grid">
+                    <div class="swatch" style="background: #61b258; color: #F5F4EF;">
+                        <span>#61b258</span>
+                        <span>SUCCESS</span>
+                    </div>
+                    <div class="swatch" style="background: #d6b739; color: #323232;">
+                        <span>#d6b739</span>
+                        <span>WARNING</span>
+                    </div>
+                    <div class="swatch" style="background: #8c1305; color: #F5F4EF;">
+                        <span>#8c1305</span>
+                        <span>ERROR</span>
+                    </div>
+                    <div class="swatch" style="background: #71c5e6; color: #323232;">
+                        <span>#71c5e6</span>
+                        <span>INFO</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div>
+                <span class="label">Documentation</span>
+                <h2>Spec. v1.0.0</h2>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">Built with ❤️ by @chunnodu & claudecode for the ajaRED brand | Design System v1.0.0</p>
+            </div>
+            <div style="text-align: right; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <span class="label">Navigation</span>
+                    <p><a href="./getting-started.html" style="color: inherit; text-decoration: none;">Getting Started →</a></p>
+                    <p><a href="./tokens.html" style="color: inherit; text-decoration: none;">Design Tokens →</a></p>
+                    <p><a href="./components.html" style="color: inherit; text-decoration: none;">Components →</a></p>
+                </div>
+                <span class="label" style="margin-top: 2rem;">Technical Sheet — End of Line</span>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<script>
+    function toggleTheme() {
+        document.body.classList.toggle('theme-terracotta');
+    }
+</script>
+
+</body>
+</html>

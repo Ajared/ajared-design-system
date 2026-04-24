@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Tokens - ajaRED Design System</title>
+    <link rel="stylesheet" href="assets/ajared.css">
+    <style>
+        /* iA Writer Quattro S Font */
+        @font-face {
+            font-family: 'iA Writer Quattro S';
+            src: url('../fonts/iAWriterQuattroS-Regular.woff2') format('woff2'),
+                 url('../fonts/iAWriterQuattroS-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'iA Writer Quattro S';
+            src: url('../fonts/iAWriterQuattroS-Bold.woff2') format('woff2'),
+                 url('../fonts/iAWriterQuattroS-Bold.woff') format('woff');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'iA Writer Quattro S', var(--font-primary);
+            background-color: var(--color-background-secondary);
+        }
+
+        .header {
+            background: var(--color-background-primary);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: var(--z-sticky);
+        }
+
+        .nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-accent);
+            font-size: var(--font-size-xl);
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-6);
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-weight: var(--font-weight-medium);
+            transition: color var(--transition-fast);
+        }
+
+        .nav-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+        }
+
+        .page-header {
+            margin-bottom: var(--space-8);
+        }
+
+        .section {
+            background: var(--color-background-primary);
+            padding: var(--space-8);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            margin-bottom: var(--space-8);
+        }
+
+        .section h2 {
+            font-family: var(--font-primary);
+            font-size: var(--font-size-3xl);
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-6);
+            padding-bottom: var(--space-4);
+            border-bottom: 2px solid var(--color-border-light);
+        }
+
+        .section h3 {
+            font-family: var(--font-primary);
+            font-size: var(--font-size-xl);
+            color: var(--color-text-primary);
+            margin: var(--space-6) 0 var(--space-4) 0;
+        }
+
+        /* Color Swatches */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .color-swatch {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: transform var(--transition-fast);
+        }
+
+        .color-swatch:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .color-preview {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .color-info {
+            padding: var(--space-3);
+            background: var(--color-background-primary);
+        }
+
+        .color-name {
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-1);
+        }
+
+        .color-value {
+            font-family: var(--font-mono);
+            font-size: var(--font-size-sm);
+            color: var(--color-text-tertiary);
+        }
+
+        /* Typography Scale */
+        .type-sample {
+            padding: var(--space-4);
+            border-left: 3px solid var(--color-primary);
+            margin-bottom: var(--space-4);
+            background: var(--color-background-tertiary);
+            border-radius: var(--radius-sm);
+        }
+
+        .type-label {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-tertiary);
+            font-family: var(--font-mono);
+            margin-bottom: var(--space-2);
+        }
+
+        /* Spacing Scale */
+        .spacing-grid {
+            display: grid;
+            gap: var(--space-4);
+        }
+
+        .spacing-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+        }
+
+        .spacing-visual {
+            background: var(--color-primary);
+            height: 24px;
+        }
+
+        .spacing-label {
+            font-family: var(--font-mono);
+            font-size: var(--font-size-sm);
+            min-width: 100px;
+        }
+
+        /* Shadow Examples */
+        .shadow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .shadow-box {
+            height: 100px;
+            background: var(--color-background-primary);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="../index.html" class="logo">ajaRED</a>
+            <ul class="nav-links">
+                <li><a href="./getting-started.html">Get Started</a></li>
+                <li><a href="./tokens.html" style="color: var(--color-primary);">Design Tokens</a></li>
+                <li><a href="./components.html">Components</a></li>
+                <li><a href="./specification.html">Technical Spec</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="ajr-h1" style="margin-bottom: var(--space-3);">Design Tokens</h1>
+            <p class="ajr-body-lg ajr-text--secondary">The visual foundation of the ajaRED brand. 160+ tokens extracted from Figma.</p>
+        </div>
+
+        <!-- Colors -->
+        <section class="section">
+            <h2>Colors</h2>
+
+            <h3>Primary Colors</h3>
+            <div class="color-grid">
+                <div class="color-swatch">
+                    <div class="color-preview" style="background-color: var(--color-primary); color: white;">Aa</div>
+                    <div class="color-info">
+                        <div class="color-name">Primary</div>
+                        <div class="color-value">#058c8c</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background-color: var(--color-primary-dark); color: white;">Aa</div>
+                    <div class="color-info">
+                        <div class="color-name">Primary Dark</div>
+                        <div class="color-value">#046363</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background-color: var(--color-primary-light);">Aa</div>
+                    <div class="color-info">
+                        <div class="color-name">Primary Light</div>
+                        <div class="color-value">#8ccaca</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background-color: var(--color-primary-lightest);">Aa</div>
+                    <div class="color-info">
+                        <div class="color-name">Primary Lightest</div>
+                        <div class="color-value">#e6f4f4</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Accent Colors</h3>
+            <div class="color-grid">
+                <div class="color-swatch">
+                    <div class="color-preview" style="background-color: var(--color-accent-terracotta); color: white;">Aa</div>
+                    <div class="color-info">
+                        <div class="color-name">Terracotta</div>
+                        <div class="color-value">#a1665e</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background-color: var(--color-accent-gold); color: white;">Aa</div>
+                    <div class="color-info">
+                        <div class="color-name">Gold</div>
+                        <div class="color-value">#d09958</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background-color: var(--color-accent-orange); color: white;">Aa</div>
+                    <div class="color-info">
+                        <div class="color-name">Orange</div>
+                        <div class="color-value">#ec9a29</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background-color: var(--color-accent-purple); color: white;">Aa</div>
+                    <div class="color-info">
+                        <div class="color-name">Purple</div>
+                        <div class="color-value">#9747ff</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Semantic Colors</h3>
+            <div class="color-grid">
+                <div class="color-swatch">
+                    <div class="color-preview" style="background-color: var(--color-success); color: white;">Aa</div>
+                    <div class="color-info">
+                        <div class="color-name">Success</div>
+                        <div class="color-value">#61b258</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background-color: var(--color-warning);">Aa</div>
+                    <div class="color-info">
+                        <div class="color-name">Warning</div>
+                        <div class="color-value">#d6b739</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background-color: var(--color-error); color: white;">Aa</div>
+                    <div class="color-info">
+                        <div class="color-name">Error</div>
+                        <div class="color-value">#8c1305</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background-color: var(--color-info); color: white;">Aa</div>
+                    <div class="color-info">
+                        <div class="color-name">Info</div>
+                        <div class="color-value">#71c5e6</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Neutral Colors</h3>
+            <div class="color-grid">
+                <div class="color-swatch">
+                    <div class="color-preview" style="background-color: var(--color-neutral-black); color: white;">Aa</div>
+                    <div class="color-info">
+                        <div class="color-name">Black</div>
+                        <div class="color-value">#000000</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background-color: var(--color-neutral-800); color: white;">Aa</div>
+                    <div class="color-info">
+                        <div class="color-name">Gray 800</div>
+                        <div class="color-value">#323232</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background-color: var(--color-neutral-600); color: white;">Aa</div>
+                    <div class="color-info">
+                        <div class="color-name">Gray 600</div>
+                        <div class="color-value">#626262</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background-color: var(--color-neutral-400);">Aa</div>
+                    <div class="color-info">
+                        <div class="color-name">Gray 400</div>
+                        <div class="color-value">#939393</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background-color: var(--color-neutral-200);">Aa</div>
+                    <div class="color-info">
+                        <div class="color-name">Gray 200</div>
+                        <div class="color-value">#d9d9d9</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-preview" style="background-color: var(--color-neutral-50); border: 1px solid var(--color-border-light);">Aa</div>
+                    <div class="color-info">
+                        <div class="color-name">Gray 50</div>
+                        <div class="color-value">#f5f5f5</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Typography -->
+        <section class="section">
+            <h2>Typography</h2>
+
+            <h3>Font Families</h3>
+            <div style="display: grid; gap: var(--space-4);">
+                <div class="type-sample">
+                    <div class="type-label">Primary: iA Writer Quattro S</div>
+                    <div style="font-family: var(--font-primary); font-size: var(--font-size-2xl);">
+                        The quick brown fox jumps over the lazy dog
+                    </div>
+                </div>
+                <div class="type-sample">
+                    <div class="type-label">Secondary: Inter</div>
+                    <div style="font-family: var(--font-secondary); font-size: var(--font-size-2xl);">
+                        The quick brown fox jumps over the lazy dog
+                    </div>
+                </div>
+                <div class="type-sample">
+                    <div class="type-label">Accent: Acme</div>
+                    <div style="font-family: var(--font-accent); font-size: var(--font-size-2xl);">
+                        The quick brown fox jumps over the lazy dog
+                    </div>
+                </div>
+            </div>
+
+            <h3>Font Sizes</h3>
+            <div style="display: grid; gap: var(--space-2);">
+                <div class="type-sample">
+                    <div class="type-label">xs (8px)</div>
+                    <div style="font-size: var(--font-size-xs);">The quick brown fox</div>
+                </div>
+                <div class="type-sample">
+                    <div class="type-label">sm (12px)</div>
+                    <div style="font-size: var(--font-size-sm);">The quick brown fox</div>
+                </div>
+                <div class="type-sample">
+                    <div class="type-label">base (16px)</div>
+                    <div style="font-size: var(--font-size-base);">The quick brown fox</div>
+                </div>
+                <div class="type-sample">
+                    <div class="type-label">xl (24px)</div>
+                    <div style="font-size: var(--font-size-xl);">The quick brown fox</div>
+                </div>
+                <div class="type-sample">
+                    <div class="type-label">2xl (32px)</div>
+                    <div style="font-size: var(--font-size-2xl);">The quick brown fox</div>
+                </div>
+                <div class="type-sample">
+                    <div class="type-label">4xl (48px)</div>
+                    <div style="font-size: var(--font-size-4xl);">The quick brown fox</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Spacing -->
+        <section class="section">
+            <h2>Spacing Scale</h2>
+            <p class="ajr-body ajr-text--secondary" style="margin-bottom: var(--space-6);">8-point grid system for consistent spacing</p>
+
+            <div class="spacing-grid">
+                <div class="spacing-item">
+                    <div class="spacing-label">space-1 (4px)</div>
+                    <div class="spacing-visual" style="width: var(--space-1);"></div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">space-2 (8px)</div>
+                    <div class="spacing-visual" style="width: var(--space-2);"></div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">space-3 (12px)</div>
+                    <div class="spacing-visual" style="width: var(--space-3);"></div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">space-4 (16px)</div>
+                    <div class="spacing-visual" style="width: var(--space-4);"></div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">space-6 (24px)</div>
+                    <div class="spacing-visual" style="width: var(--space-6);"></div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">space-8 (32px)</div>
+                    <div class="spacing-visual" style="width: var(--space-8);"></div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">space-12 (48px)</div>
+                    <div class="spacing-visual" style="width: var(--space-12);"></div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-label">space-16 (64px)</div>
+                    <div class="spacing-visual" style="width: var(--space-16);"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Shadows -->
+        <section class="section">
+            <h2>Elevation (Shadows)</h2>
+
+            <div class="shadow-grid">
+                <div class="shadow-box" style="box-shadow: var(--shadow-sm);">shadow-sm</div>
+                <div class="shadow-box" style="box-shadow: var(--shadow-base);">shadow-base</div>
+                <div class="shadow-box" style="box-shadow: var(--shadow-md);">shadow-md</div>
+                <div class="shadow-box" style="box-shadow: var(--shadow-lg);">shadow-lg</div>
+                <div class="shadow-box" style="box-shadow: var(--shadow-xl);">shadow-xl</div>
+                <div class="shadow-box" style="box-shadow: var(--shadow-2xl);">shadow-2xl</div>
+            </div>
+        </section>
+
+        <!-- Border Radius -->
+        <section class="section">
+            <h2>Border Radius</h2>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: var(--space-6); align-items: end;">
+                <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-2);">
+                    <div style="width: 80px; height: 80px; border-radius: var(--radius-sm); background: var(--color-primary); display: flex; align-items: center; justify-content: center; color: white; font-weight: var(--font-weight-semibold);"></div>
+                    <span style="font-family: var(--font-mono); font-size: var(--font-size-sm); color: var(--color-text-secondary);">sm (2px)</span>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-2);">
+                    <div style="width: 90px; height: 90px; border-radius: var(--radius-base); background: var(--color-primary); display: flex; align-items: center; justify-content: center; color: white; font-weight: var(--font-weight-semibold);"></div>
+                    <span style="font-family: var(--font-mono); font-size: var(--font-size-sm); color: var(--color-text-secondary);">base (4px)</span>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-2);">
+                    <div style="width: 100px; height: 100px; border-radius: var(--radius-md); background: var(--color-primary); display: flex; align-items: center; justify-content: center; color: white; font-weight: var(--font-weight-semibold);"></div>
+                    <span style="font-family: var(--font-mono); font-size: var(--font-size-sm); color: var(--color-text-secondary);">md (6px)</span>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-2);">
+                    <div style="width: 110px; height: 110px; border-radius: var(--radius-lg); background: var(--color-primary); display: flex; align-items: center; justify-content: center; color: white; font-weight: var(--font-weight-semibold);"></div>
+                    <span style="font-family: var(--font-mono); font-size: var(--font-size-sm); color: var(--color-text-secondary);">lg (8px)</span>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-2);">
+                    <div style="width: 120px; height: 120px; border-radius: var(--radius-xl); background: var(--color-primary); display: flex; align-items: center; justify-content: center; color: white; font-weight: var(--font-weight-semibold);"></div>
+                    <span style="font-family: var(--font-mono); font-size: var(--font-size-sm); color: var(--color-text-secondary);">xl (12px)</span>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: var(--space-2);">
+                    <div style="width: 120px; height: 120px; border-radius: var(--radius-full); background: var(--color-primary); display: flex; align-items: center; justify-content: center; color: white; font-weight: var(--font-weight-semibold);"></div>
+                    <span style="font-family: var(--font-mono); font-size: var(--font-size-sm); color: var(--color-text-secondary);">full (circle)</span>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

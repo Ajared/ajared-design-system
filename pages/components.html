@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Components - ajaRED Design System</title>
+    <link rel="stylesheet" href="assets/ajared.css">
+    <style>
+        /* iA Writer Quattro S Font */
+        @font-face {
+            font-family: 'iA Writer Quattro S';
+            src: url('../fonts/iAWriterQuattroS-Regular.woff2') format('woff2'),
+                 url('../fonts/iAWriterQuattroS-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'iA Writer Quattro S';
+            src: url('../fonts/iAWriterQuattroS-Bold.woff2') format('woff2'),
+                 url('../fonts/iAWriterQuattroS-Bold.woff') format('woff');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'iA Writer Quattro S', var(--font-primary);
+            background-color: var(--color-background-secondary);
+        }
+
+        /* Header */
+        .header {
+            background: var(--color-background-primary);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: var(--z-sticky);
+        }
+
+        .nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--space-4) var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-accent);
+            font-size: var(--font-size-xl);
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-6);
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-weight: var(--font-weight-medium);
+            transition: color var(--transition-fast);
+        }
+
+        .nav-links a:hover {
+            color: var(--color-primary);
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+        }
+
+        .page-header {
+            margin-bottom: var(--space-8);
+        }
+
+        .page-header h1 {
+            font-family: var(--font-primary);
+            font-size: var(--font-size-4xl);
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-3);
+        }
+
+        .page-header p {
+            font-size: var(--font-size-lg);
+            color: var(--color-text-secondary);
+        }
+
+        /* Component Section */
+        .component-section {
+            background: var(--color-background-primary);
+            padding: var(--space-8);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            margin-bottom: var(--space-8);
+        }
+
+        .component-section h2 {
+            font-family: var(--font-primary);
+            font-size: var(--font-size-3xl);
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-2);
+            padding-bottom: var(--space-4);
+            border-bottom: 2px solid var(--color-border-light);
+        }
+
+        .component-section h3 {
+            font-family: var(--font-primary);
+            font-size: var(--font-size-xl);
+            color: var(--color-text-primary);
+            margin-top: var(--space-6);
+            margin-bottom: var(--space-4);
+        }
+
+        .component-demo {
+            padding: var(--space-6);
+            background: var(--color-background-tertiary);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-4);
+        }
+
+        .demo-grid {
+            display: flex;
+            gap: var(--space-4);
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .demo-label {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-tertiary);
+            font-family: var(--font-mono);
+            margin-bottom: var(--space-2);
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <a href="../index.html" class="logo">ajaRED</a>
+            <ul class="nav-links">
+                <li><a href="./getting-started.html">Get Started</a></li>
+                <li><a href="./tokens.html">Design Tokens</a></li>
+                <li><a href="./components.html" style="color: var(--color-primary);">Components</a></li>
+                <li><a href="./specification.html">Technical Spec</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="page-header">
+            <h1>Components</h1>
+            <p>Accessible, customizable components built with vanilla HTML/CSS/JS</p>
+        </div>
+
+        <!-- Typography Component -->
+        <section class="component-section" id="typography">
+            <h2>Typography</h2>
+
+            <h3>Headings</h3>
+            <div class="component-demo">
+                <h1 class="ajr-h1">Heading 1 (64px)</h1>
+                <h2 class="ajr-h2" style="margin-top: var(--space-4);">Heading 2 (48px)</h2>
+                <h3 class="ajr-h3" style="margin-top: var(--space-4);">Heading 3 (36px)</h3>
+                <h4 class="ajr-h4" style="margin-top: var(--space-4);">Heading 4 (32px)</h4>
+                <h5 class="ajr-h5" style="margin-top: var(--space-4);">Heading 5 (24px)</h5>
+                <h6 class="ajr-h6" style="margin-top: var(--space-4);">Heading 6 (20px)</h6>
+            </div>
+
+            <h3>Display Text</h3>
+            <div class="component-demo">
+                <div class="ajr-display">Creative Display Text</div>
+            </div>
+
+            <h3>Body Text</h3>
+            <div class="component-demo">
+                <p class="ajr-body-lg" style="margin-bottom: var(--space-3);">Large body text (18px) - Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p class="ajr-body" style="margin-bottom: var(--space-3);">Regular body text (16px) - Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p class="ajr-body-sm">Small body text (12px) - Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+
+            <h3>Utility Classes</h3>
+            <div class="component-demo">
+                <span class="demo-label">Text Colors</span>
+                <div style="display: flex; gap: var(--space-6); flex-wrap: wrap;">
+                    <span class="ajr-body ajr-text--primary">Primary</span>
+                    <span class="ajr-body ajr-text--secondary">Secondary</span>
+                    <span class="ajr-body ajr-text--tertiary">Tertiary</span>
+                    <span class="ajr-body ajr-text--brand">Brand</span>
+                    <span class="ajr-body ajr-text--accent">Accent</span>
+                </div>
+            </div>
+
+            <h3>Links</h3>
+            <div class="component-demo">
+                <a href="#" class="ajr-link">This is a link</a>
+            </div>
+
+            <h3>Code</h3>
+            <div class="component-demo">
+                <span class="demo-label">Inline Code</span>
+                <p class="ajr-body">This is <code class="ajr-code">inline code</code> within text.</p>
+
+                <span class="demo-label" style="margin-top: var(--space-4);">Code Block</span>
+                <pre class="ajr-code-block">function greet(name) {
+  return `Hello, ${name}!`;
+}
+
+console.log(greet('ajaRED'));</pre>
+            </div>
+        </section>
+
+        <!-- Button Component -->
+        <section class="component-section" id="button">
+            <h2>Button</h2>
+
+            <h3>Variants</h3>
+            <div class="component-demo">
+                <div class="demo-grid">
+                    <button class="ajr-button ajr-button--primary ajr-button--md">Primary</button>
+                    <button class="ajr-button ajr-button--secondary ajr-button--md">Secondary</button>
+                    <button class="ajr-button ajr-button--tertiary ajr-button--md">Tertiary</button>
+                    <button class="ajr-button ajr-button--ghost ajr-button--md">Ghost</button>
+                    <button class="ajr-button ajr-button--danger ajr-button--md">Danger</button>
+                    <button class="ajr-button ajr-button--success ajr-button--md">Success</button>
+                </div>
+            </div>
+
+            <h3>Sizes</h3>
+            <div class="component-demo">
+                <div class="demo-grid">
+                    <button class="ajr-button ajr-button--primary ajr-button--sm">Small</button>
+                    <button class="ajr-button ajr-button--primary ajr-button--md">Medium</button>
+                    <button class="ajr-button ajr-button--primary ajr-button--lg">Large</button>
+                </div>
+            </div>
+
+            <h3>States</h3>
+            <div class="component-demo">
+                <span class="demo-label">Disabled</span>
+                <div class="demo-grid" style="margin-bottom: var(--space-4);">
+                    <button class="ajr-button ajr-button--primary ajr-button--md" disabled>Disabled</button>
+                    <button class="ajr-button ajr-button--secondary ajr-button--md" disabled>Disabled</button>
+                    <button class="ajr-button ajr-button--tertiary ajr-button--md" disabled>Disabled</button>
+                </div>
+
+                <span class="demo-label">Loading</span>
+                <div class="demo-grid">
+                    <button class="ajr-button ajr-button--primary ajr-button--md ajr-button--loading">Loading</button>
+                    <button class="ajr-button ajr-button--secondary ajr-button--md ajr-button--loading">Loading</button>
+                    <button class="ajr-button ajr-button--tertiary ajr-button--md ajr-button--loading">Loading</button>
+                </div>
+            </div>
+
+            <h3>With Icons</h3>
+            <div class="component-demo">
+                <div class="demo-grid">
+                    <button class="ajr-button ajr-button--primary ajr-button--md">
+                        <span>⭐</span>
+                        <span>Star</span>
+                    </button>
+                    <button class="ajr-button ajr-button--secondary ajr-button--md">
+                        <span>Download</span>
+                        <span>⬇️</span>
+                    </button>
+                    <button class="ajr-button ajr-button--tertiary ajr-button--md">
+                        <span>🔍</span>
+                        <span>Search</span>
+                    </button>
+                </div>
+            </div>
+
+            <h3>Icon Only</h3>
+            <div class="component-demo">
+                <div class="demo-grid">
+                    <button class="ajr-button ajr-button--primary ajr-button--icon ajr-button--sm" aria-label="Star">⭐</button>
+                    <button class="ajr-button ajr-button--primary ajr-button--icon ajr-button--md" aria-label="Star">⭐</button>
+                    <button class="ajr-button ajr-button--primary ajr-button--icon ajr-button--lg" aria-label="Star">⭐</button>
+                </div>
+            </div>
+
+            <h3>Rounded</h3>
+            <div class="component-demo">
+                <div class="demo-grid">
+                    <button class="ajr-button ajr-button--primary ajr-button--md ajr-button--rounded">Rounded</button>
+                    <button class="ajr-button ajr-button--secondary ajr-button--md ajr-button--rounded">Rounded</button>
+                    <button class="ajr-button ajr-button--primary ajr-button--icon ajr-button--md ajr-button--rounded">⭐</button>
+                </div>
+            </div>
+
+            <h3>Full Width</h3>
+            <div class="component-demo">
+                <button class="ajr-button ajr-button--primary ajr-button--md ajr-button--full">Full Width Button</button>
+            </div>
+
+            <h3>Button Group</h3>
+            <div class="component-demo">
+                <span class="demo-label">Separated</span>
+                <div class="ajr-button-group" style="margin-bottom: var(--space-4);">
+                    <button class="ajr-button ajr-button--tertiary ajr-button--md">One</button>
+                    <button class="ajr-button ajr-button--tertiary ajr-button--md">Two</button>
+                    <button class="ajr-button ajr-button--tertiary ajr-button--md">Three</button>
+                </div>
+
+                <span class="demo-label">Attached</span>
+                <div class="ajr-button-group ajr-button-group--attached">
+                    <button class="ajr-button ajr-button--primary ajr-button--md">One</button>
+                    <button class="ajr-button ajr-button--primary ajr-button--md">Two</button>
+                    <button class="ajr-button ajr-button--primary ajr-button--md">Three</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Input Component -->
+        <section class="component-section" id="input">
+            <h2>Input</h2>
+
+            <h3>Text Input</h3>
+            <div class="component-demo">
+                <div class="ajr-input-group" style="max-width: 400px;">
+                    <label class="ajr-label">Email Address</label>
+                    <input type="email" class="ajr-input ajr-input--md" placeholder="Enter your email">
+                    <span class="ajr-helper-text">We'll never share your email</span>
+                </div>
+            </div>
+
+            <h3>Textarea</h3>
+            <div class="component-demo">
+                <div class="ajr-input-group" style="max-width: 400px;">
+                    <label class="ajr-label">Message</label>
+                    <textarea class="ajr-textarea" placeholder="Enter your message"></textarea>
+                </div>
+            </div>
+
+            <h3>Select</h3>
+            <div class="component-demo">
+                <div class="ajr-input-group" style="max-width: 400px;">
+                    <label class="ajr-label">Country</label>
+                    <select class="ajr-select ajr-select--md">
+                        <option>United States</option>
+                        <option>Canada</option>
+                        <option>Mexico</option>
+                        <option>United Kingdom</option>
+                    </select>
+                </div>
+            </div>
+
+            <h3>Checkbox & Radio</h3>
+            <div class="component-demo">
+                <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+                    <label class="ajr-checkbox">
+                        <input type="checkbox" checked>
+                        <span class="ajr-checkbox-mark"></span>
+                        <span>I agree to the terms and conditions</span>
+                    </label>
+                    <label class="ajr-checkbox">
+                        <input type="checkbox">
+                        <span class="ajr-checkbox-mark"></span>
+                        <span>Subscribe to newsletter</span>
+                    </label>
+
+                    <div style="margin-top: var(--space-2);"></div>
+
+                    <label class="ajr-radio">
+                        <input type="radio" name="plan" checked>
+                        <span class="ajr-radio-mark"></span>
+                        <span>Basic Plan</span>
+                    </label>
+                    <label class="ajr-radio">
+                        <input type="radio" name="plan">
+                        <span class="ajr-radio-mark"></span>
+                        <span>Pro Plan</span>
+                    </label>
+                </div>
+            </div>
+
+            <h3>Input States</h3>
+            <div class="component-demo">
+                <div style="display: flex; flex-direction: column; gap: var(--space-4); max-width: 400px;">
+                    <div class="ajr-input-group">
+                        <label class="ajr-label">Error State</label>
+                        <input type="text" class="ajr-input ajr-input--md ajr-input--error" value="invalid@email">
+                        <span class="ajr-helper-text ajr-helper-text--error">Please enter a valid email</span>
+                    </div>
+                    <div class="ajr-input-group">
+                        <label class="ajr-label">Success State</label>
+                        <input type="text" class="ajr-input ajr-input--md ajr-input--success" value="user@example.com">
+                        <span class="ajr-helper-text ajr-helper-text--success">Email is valid</span>
+                    </div>
+                    <div class="ajr-input-group">
+                        <label class="ajr-label">Disabled</label>
+                        <input type="text" class="ajr-input ajr-input--md" value="Disabled input" disabled>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Card Component -->
+        <section class="component-section" id="card">
+            <h2>Card</h2>
+
+            <h3>Basic Card</h3>
+            <div class="component-demo">
+                <div class="ajr-card" style="max-width: 400px;">
+                    <div class="ajr-card-header">
+                        <h3>Card Title</h3>
+                    </div>
+                    <div class="ajr-card-body">
+                        <p>This is a basic card with header, body, and footer sections. Cards are versatile containers for content.</p>
+                    </div>
+                    <div class="ajr-card-footer">
+                        <button class="ajr-button ajr-button--primary ajr-button--sm">Learn More</button>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Card Variants</h3>
+            <div class="component-demo">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4);">
+                    <div class="ajr-card">
+                        <div class="ajr-card-body">
+                            <h4 style="font-family: var(--font-primary); margin-bottom: var(--space-2);">Default</h4>
+                            <p style="margin: 0; font-size: var(--font-size-sm);">Standard shadow</p>
+                        </div>
+                    </div>
+                    <div class="ajr-card ajr-card--flat">
+                        <div class="ajr-card-body">
+                            <h4 style="font-family: var(--font-primary); margin-bottom: var(--space-2);">Flat</h4>
+                            <p style="margin: 0; font-size: var(--font-size-sm);">No shadow, bordered</p>
+                        </div>
+                    </div>
+                    <div class="ajr-card ajr-card--elevated">
+                        <div class="ajr-card-body">
+                            <h4 style="font-family: var(--font-primary); margin-bottom: var(--space-2);">Elevated</h4>
+                            <p style="margin: 0; font-size: var(--font-size-sm);">Higher shadow</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alert Component -->
+        <section class="component-section" id="alert">
+            <h2>Alert</h2>
+
+            <h3>Alert Types</h3>
+            <div class="component-demo">
+                <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+                    <div class="ajr-alert ajr-alert--success">
+                        <span class="ajr-alert-icon">✓</span>
+                        <div class="ajr-alert-content">
+                            <div class="ajr-alert-title">Success!</div>
+                            <div class="ajr-alert-message">Your changes have been saved successfully.</div>
+                        </div>
+                        <button class="ajr-alert-close" aria-label="Close">×</button>
+                    </div>
+
+                    <div class="ajr-alert ajr-alert--warning">
+                        <span class="ajr-alert-icon">⚠</span>
+                        <div class="ajr-alert-content">
+                            <div class="ajr-alert-title">Warning</div>
+                            <div class="ajr-alert-message">Please review your information before proceeding.</div>
+                        </div>
+                        <button class="ajr-alert-close" aria-label="Close">×</button>
+                    </div>
+
+                    <div class="ajr-alert ajr-alert--error">
+                        <span class="ajr-alert-icon">✕</span>
+                        <div class="ajr-alert-content">
+                            <div class="ajr-alert-title">Error</div>
+                            <div class="ajr-alert-message">Something went wrong. Please try again.</div>
+                        </div>
+                        <button class="ajr-alert-close" aria-label="Close">×</button>
+                    </div>
+
+                    <div class="ajr-alert ajr-alert--info">
+                        <span class="ajr-alert-icon">ℹ</span>
+                        <div class="ajr-alert-content">
+                            <div class="ajr-alert-title">Info</div>
+                            <div class="ajr-alert-message">Here's some helpful information for you.</div>
+                        </div>
+                        <button class="ajr-alert-close" aria-label="Close">×</button>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Filled Variant</h3>
+            <div class="component-demo">
+                <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+                    <div class="ajr-alert ajr-alert--success ajr-alert--filled">
+                        <span class="ajr-alert-icon">✓</span>
+                        <div class="ajr-alert-content">
+                            <div class="ajr-alert-message">Success filled alert</div>
+                        </div>
+                    </div>
+                    <div class="ajr-alert ajr-alert--error ajr-alert--filled">
+                        <span class="ajr-alert-icon">✕</span>
+                        <div class="ajr-alert-content">
+                            <div class="ajr-alert-message">Error filled alert</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Badge Component -->
+        <section class="component-section" id="badge">
+            <h2>Badge</h2>
+
+            <h3>Badge Variants</h3>
+            <div class="component-demo">
+                <div class="demo-grid">
+                    <span class="ajr-badge ajr-badge--default ajr-badge--md">Default</span>
+                    <span class="ajr-badge ajr-badge--primary ajr-badge--md">Primary</span>
+                    <span class="ajr-badge ajr-badge--secondary ajr-badge--md">Secondary</span>
+                    <span class="ajr-badge ajr-badge--success ajr-badge--md">Success</span>
+                    <span class="ajr-badge ajr-badge--warning ajr-badge--md">Warning</span>
+                    <span class="ajr-badge ajr-badge--error ajr-badge--md">Error</span>
+                    <span class="ajr-badge ajr-badge--info ajr-badge--md">Info</span>
+                </div>
+            </div>
+
+            <h3>Badge Sizes</h3>
+            <div class="component-demo">
+                <div class="demo-grid">
+                    <span class="ajr-badge ajr-badge--primary ajr-badge--sm">Small</span>
+                    <span class="ajr-badge ajr-badge--primary ajr-badge--md">Medium</span>
+                    <span class="ajr-badge ajr-badge--primary ajr-badge--lg">Large</span>
+                </div>
+            </div>
+
+            <h3>Outlined Badges</h3>
+            <div class="component-demo">
+                <div class="demo-grid">
+                    <span class="ajr-badge ajr-badge--primary ajr-badge--outlined ajr-badge--md">Primary</span>
+                    <span class="ajr-badge ajr-badge--success ajr-badge--outlined ajr-badge--md">Success</span>
+                    <span class="ajr-badge ajr-badge--error ajr-badge--outlined ajr-badge--md">Error</span>
+                </div>
+            </div>
+
+            <h3>Dot Badges</h3>
+            <div class="component-demo">
+                <div style="display: flex; gap: var(--space-4); align-items: center;">
+                    <div style="position: relative; display: inline-block;">
+                        <span>Notifications</span>
+                        <span class="ajr-badge ajr-badge--error ajr-badge--dot" style="position: absolute; top: -4px; right: -8px;"></span>
+                    </div>
+                    <div style="position: relative; display: inline-block;">
+                        <span>Messages</span>
+                        <span class="ajr-badge ajr-badge--primary ajr-badge--dot" style="position: absolute; top: -4px; right: -8px;"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Spinner Component -->
+        <section class="component-section" id="spinner">
+            <h2>Spinner</h2>
+
+            <h3>Spinner Sizes</h3>
+            <div class="component-demo">
+                <div class="demo-grid">
+                    <div class="ajr-spinner ajr-spinner--sm"></div>
+                    <div class="ajr-spinner ajr-spinner--md"></div>
+                    <div class="ajr-spinner ajr-spinner--lg"></div>
+                    <div class="ajr-spinner ajr-spinner--xl"></div>
+                </div>
+            </div>
+
+            <h3>Spinner Colors</h3>
+            <div class="component-demo">
+                <div class="demo-grid">
+                    <div class="ajr-spinner ajr-spinner--primary ajr-spinner--md"></div>
+                    <div class="ajr-spinner ajr-spinner--secondary ajr-spinner--md"></div>
+                    <div class="ajr-spinner ajr-spinner--gray ajr-spinner--md"></div>
+                </div>
+            </div>
+
+            <h3>Dots Spinner</h3>
+            <div class="component-demo">
+                <div class="ajr-spinner-dots">
+                    <div class="ajr-spinner-dot"></div>
+                    <div class="ajr-spinner-dot"></div>
+                    <div class="ajr-spinner-dot"></div>
+                </div>
+            </div>
+
+            <h3>With Text</h3>
+            <div class="component-demo">
+                <div class="ajr-spinner-container">
+                    <div class="ajr-spinner ajr-spinner--primary ajr-spinner--lg"></div>
+                    <span class="ajr-spinner-text">Loading...</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal Note -->
+        <section class="component-section">
+            <h2>Modal</h2>
+            <p class="ajr-body ajr-text--secondary" style="margin-bottom: var(--space-4);">Modal component requires JavaScript for functionality. View the source code for implementation details.</p>
+            <div class="component-demo">
+                <p class="ajr-body">Modal preview:</p>
+                <div class="ajr-modal" style="position: relative; max-width: 500px; transform: scale(1);">
+                    <div class="ajr-modal-header">
+                        <h3 class="ajr-modal-title">Modal Title</h3>
+                        <button class="ajr-modal-close">×</button>
+                    </div>
+                    <div class="ajr-modal-body">
+                        <p>This is the modal body content. Modals are useful for focused interactions and confirmations.</p>
+                    </div>
+                    <div class="ajr-modal-footer">
+                        <button class="ajr-button ajr-button--ghost ajr-button--md">Cancel</button>
+                        <button class="ajr-button ajr-button--primary ajr-button--md">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
