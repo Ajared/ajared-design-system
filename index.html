@@ -6,6 +6,11 @@
   <title>ajaRed Design System</title>
   <link rel="icon" href="assets/favicon.png">
   <link rel="stylesheet" href="colors_and_type.css">
+  <link rel="stylesheet" href="packages/components/src/button/button.css">
+  <link rel="stylesheet" href="packages/components/src/badge/badge.css">
+  <link rel="stylesheet" href="packages/components/src/alert/alert.css">
+  <link rel="stylesheet" href="packages/components/src/input/input.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -28,23 +33,13 @@
       background: var(--color-bg);
       overflow: hidden;
     }
-    .ruler-col {
-      width: 80px; flex-shrink: 0;
-      border-right: var(--grid-line);
-    }
-    .ruler-track {
-      flex: 1;
-      display: flex; align-items: center;
-    }
+    .ruler-col { width: 80px; flex-shrink: 0; border-right: var(--grid-line); }
+    .ruler-track { flex: 1; display: flex; align-items: center; }
     .ruler-ticks {
       width: 100%; height: 100%;
       background-image:
-        repeating-linear-gradient(to right,
-          var(--color-ink-light) 0, var(--color-ink-light) 1px,
-          transparent 1px, transparent 20px),
-        repeating-linear-gradient(to right,
-          var(--color-ink) 0, var(--color-ink) 1px,
-          transparent 1px, transparent 100px);
+        repeating-linear-gradient(to right, var(--color-ink-light) 0, var(--color-ink-light) 1px, transparent 1px, transparent 20px),
+        repeating-linear-gradient(to right, var(--color-ink) 0, var(--color-ink) 1px, transparent 1px, transparent 100px);
       background-size: 20px 8px, 100px 12px;
       background-repeat: repeat-x;
       background-position: 0 bottom, 0 bottom;
@@ -74,9 +69,7 @@
       padding: 2rem 2.5rem 1.75rem;
       display: flex; flex-direction: column; gap: 0.75rem;
     }
-    .wordmark {
-      display: flex; align-items: center; gap: 0.75rem;
-    }
+    .wordmark { display: flex; align-items: center; gap: 0.75rem; }
     .wordmark img { height: 28px; width: auto; }
     .wordmark span {
       font-family: var(--font-primary);
@@ -93,13 +86,8 @@
       color: var(--color-ink-darkest);
     }
     header h1 span { color: var(--color-terra); }
-    .header-meta {
-      display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;
-      margin-top: 0.25rem;
-    }
-    .meta-item {
-      display: flex; flex-direction: column; gap: 0.15rem;
-    }
+    .header-meta { display: flex; gap: 2rem; align-items: center; flex-wrap: wrap; margin-top: 0.25rem; }
+    .meta-item { display: flex; flex-direction: column; gap: 0.15rem; }
     .meta-label {
       font-family: var(--font-mono);
       font-size: 0.58rem;
@@ -107,38 +95,19 @@
       letter-spacing: 0.1em;
       color: var(--color-ink);
     }
-    .meta-value {
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--color-ink-darkest);
-    }
+    .meta-value { font-size: 0.82rem; font-weight: 700; color: var(--color-ink-darkest); }
 
     /* ── MAIN GRID ── */
-    main {
-      display: grid;
-      grid-template-columns: 80px 1fr;
-      max-width: 1600px;
-    }
-    .side-rule {
-      border-right: var(--grid-line);
-      position: relative;
-    }
-    .tick-labels {
-      position: absolute; top: 0; right: 0;
-      display: flex; flex-direction: column;
-    }
+    main { display: grid; grid-template-columns: 80px 1fr; max-width: 1600px; }
+    .side-rule { border-right: var(--grid-line); position: relative; }
+    .tick-labels { position: absolute; top: 0; right: 0; display: flex; flex-direction: column; }
     .tick {
       height: 100px;
       display: flex; align-items: flex-start; justify-content: flex-end;
       padding-right: 6px; padding-top: 2px;
       border-bottom: 1px solid var(--color-ink-light);
     }
-    .tick span {
-      font-family: var(--font-mono);
-      font-size: 0.5rem;
-      color: var(--color-ink-light);
-      letter-spacing: 0.04em;
-    }
+    .tick span { font-family: var(--font-mono); font-size: 0.5rem; color: var(--color-ink-light); letter-spacing: 0.04em; }
     .tick.major span { color: var(--color-terra); }
     .content { padding: 2.5rem; }
 
@@ -150,104 +119,111 @@
       text-transform: uppercase;
       letter-spacing: 0.12em;
       color: var(--color-ink);
-      margin-bottom: 1rem;
       padding-bottom: 0.5rem;
       border-bottom: var(--grid-line);
     }
 
-    /* ── CARD GRID ── */
-    .card-grid {
+    /* ── ACCORDION ── */
+    .accordion-item { border-bottom: var(--grid-line); }
+    .accordion-header {
+      width: 100%;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1px;
-      border: var(--grid-line);
-    }
-    .card-link {
-      display: flex; flex-direction: column; gap: 0.5rem;
-      padding: 1.25rem 1.5rem;
+      grid-template-columns: 160px 1fr 1.25rem;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 0.85rem 0;
+      background: none;
       border: none;
-      text-decoration: none;
+      cursor: crosshair;
+      text-align: left;
       color: var(--color-ink-darkest);
-      background: var(--color-bg);
-      transition: background 0.25s ease, color 0.25s ease;
-      position: relative;
     }
-    .card-link::after {
-      content: '→';
-      position: absolute;
-      bottom: 1.25rem; right: 1.5rem;
-      font-size: 0.85rem;
-      color: var(--color-terra);
-      transition: transform 0.25s ease;
-    }
-    .card-link:hover {
-      background: var(--color-ink-darkest);
-      color: #fff;
-    }
-    .card-link:hover::after { transform: translateX(6px); }
-    .card-link:hover .card-tag { color: rgba(255,255,255,0.5); }
-    .card-tag {
+    .accordion-header:hover .acc-name { color: var(--color-terra); }
+    .acc-tag {
       font-family: var(--font-mono);
       font-size: 0.58rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color: var(--color-ink);
-      transition: color 0.25s ease;
     }
-    .card-name {
+    .acc-name {
       font-size: 0.88rem;
       font-weight: 700;
       letter-spacing: -0.01em;
-      line-height: 1.2;
+      transition: color 0.15s ease;
     }
-
-    /* ── KIT CARDS (larger) ── */
-    .kit-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1px;
-      border: var(--grid-line);
-    }
-    .kit-link {
-      display: flex; flex-direction: column; justify-content: space-between;
-      padding: 1.75rem 2rem;
-      text-decoration: none;
-      color: var(--color-ink-darkest);
-      background: var(--color-bg);
-      transition: background 0.25s ease, color 0.25s ease;
-      min-height: 160px;
-    }
-    .kit-link:hover { background: var(--color-ink-darkest); color: #fff; }
-    .kit-link:hover .kit-tag { color: rgba(255,255,255,0.5); }
-    .kit-link:hover .kit-arrow { transform: translateX(6px); color: #fff; }
-    .kit-top { display: flex; flex-direction: column; gap: 0.4rem; }
-    .kit-tag {
+    .acc-toggle {
       font-family: var(--font-mono);
-      font-size: 0.58rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--color-ink);
-      transition: color 0.25s ease;
+      font-size: 1rem;
+      color: var(--color-terra);
+      text-align: right;
     }
-    .kit-name {
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
+    .accordion-panel { display: none; }
+    .accordion-panel.open {
+      display: block;
+      animation: fadeUp 150ms ease both;
     }
-    .kit-desc {
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(3px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .panel-inner { padding: 0.75rem 0 1.5rem; }
+    .panel-inner iframe { width: 100%; border: var(--grid-line); display: block; }
+    .panel-desc {
       font-size: 0.76rem;
       color: var(--color-ink-dark);
       line-height: 1.5;
-      margin-top: 0.25rem;
-      transition: color 0.25s ease;
+      margin-bottom: 0.75rem;
+      max-width: none;
     }
-    .kit-link:hover .kit-desc { color: rgba(255,255,255,0.7); }
-    .kit-arrow {
-      font-size: 0.85rem;
-      color: var(--color-terra);
-      transition: transform 0.25s ease, color 0.25s ease;
-      align-self: flex-end;
-    }
+
+    /* ── PREVIEW CARD UTILITIES (from preview/_card.css, without html/body reset) ── */
+    .card { padding: 20px 24px; display: flex; flex-direction: column; gap: 12px; }
+    .card.tight { padding: 16px 20px; gap: 8px; }
+    .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .meta { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-ink); }
+    .hex  { font-family: var(--font-mono); font-size: 10px; color: var(--color-neutral-600, #626262); text-transform: uppercase; }
+    .swatch { width: 68px; height: 68px; border-radius: 2px; box-shadow: 0 10px 50px 0 rgb(0 0 0 / 0.15); flex-shrink: 0; }
+    .swatch-sm { width: 48px; height: 48px; }
+    .swatch-xs { width: 36px; height: 36px; }
+    .chip { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
+    .preview-ruler { position: relative; height: 8px; background-image: linear-gradient(to right, var(--color-ink-light) 1px, transparent 1px); background-size: 20px 100%; }
+
+    /* ── CHARTS PALETTE STYLES ── */
+    .legend { display: grid; grid-template-columns: 1fr auto; gap: 16px 8px; align-items: center; margin-top: 4px; }
+    .bar { height: 8px; border-radius: 2px; min-width: 60px; }
+    .chart-title { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: #058c8c; margin-bottom: 10px; }
+    .chart-sub { font-family: var(--font-mono); font-size: 10px; color: #626262; }
+    .heat { display: grid; grid-template-columns: repeat(9, 1fr); gap: 3px; }
+    .heat div { height: 20px; border-radius: 2px; }
+
+    /* ── MOTION PREVIEW STYLES ── */
+    .stack { display: flex; flex-direction: column; gap: 16px; }
+    .spec { display: grid; grid-template-columns: 180px 1fr; gap: 16px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--color-ink-light); }
+    .spec:last-child { border-bottom: none; }
+    .spec__name { font-family: var(--font-primary); font-weight: 700; font-size: 15px; letter-spacing: -0.01em; }
+    .spec__meta { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; color: #626262; text-transform: uppercase; margin-top: 4px; }
+    .demo { height: 48px; background: #eeeeee; position: relative; overflow: hidden; }
+    .dot { position: absolute; top: 50%; width: 24px; height: 24px; background: #058c8c; transform: translateY(-50%); left: 12px; }
+    .dot.heat { background: #a1665e; }
+    .moire-anim { height: 48px; background-image: repeating-linear-gradient(45deg, #046363 0 1px, transparent 1px 6px), repeating-linear-gradient(-45deg, #046363 0 1px, transparent 1px 6px); animation: moire-pan 8s linear infinite; opacity: 0.7; }
+    @keyframes slide-std    { 0% { left: 12px; } 100% { left: calc(100% - 36px); } }
+    @keyframes slide-spring { 0% { left: 12px; } 60% { left: calc(100% - 24px); } 80% { left: calc(100% - 44px); } 100% { left: calc(100% - 36px); } }
+    @keyframes fade-in      { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes moire-pan    { from { background-position: 0 0; } to { background-position: 80px 0; } }
+    .anim-snap   { animation: slide-std    0.18s cubic-bezier(0.4,  0,    0.2, 1)    infinite alternate; }
+    .anim-std    { animation: slide-std    0.9s  cubic-bezier(0.2,  0,    0,   1)    infinite alternate; }
+    .anim-spring { animation: slide-spring 1.2s  cubic-bezier(0.34, 1.56, 0.64, 1)  infinite alternate; }
+    .anim-fade   { animation: fade-in      1.4s  ease-in-out                         infinite alternate; }
+
+    /* ── ICONS LIBRARY STYLES ── */
+    .igroup { border-top: 1px solid #e2e2e2; padding-top: 12px; margin-top: 8px; }
+    .igroup:first-of-type { border-top: none; padding-top: 0; }
+    .g-title { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: #058c8c; margin-bottom: 10px; }
+    .g-sub { font-size: 11px; color: #626262; margin-bottom: 12px; }
+    .icons { display: grid; grid-template-columns: repeat(10, 1fr); gap: 12px 6px; }
+    .ic { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 9px; color: #626262; text-align: center; }
+    .ic .material-symbols-outlined { font-size: 22px; color: #141414; }
 
     /* ── FOOTER ── */
     footer {
@@ -257,21 +233,9 @@
       flex-wrap: wrap; gap: 1rem;
       max-width: 1600px;
     }
-    footer a {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--color-ink);
-      text-decoration: none;
-    }
+    footer a { font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-ink); text-decoration: none; }
     footer a:hover { color: var(--color-terra); }
-    footer span {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      color: var(--color-neutral-400);
-      letter-spacing: 0.06em;
-    }
+    footer span { font-family: var(--font-mono); font-size: 0.65rem; color: var(--color-neutral-400, #939393); letter-spacing: 0.06em; }
   </style>
 </head>
 <body>
@@ -293,22 +257,10 @@
     </div>
     <h1>ajaRed Design <span>System.</span></h1>
     <div class="header-meta">
-      <div class="meta-item">
-        <span class="meta-label">Version</span>
-        <span class="meta-value">1.0</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-label">Stack</span>
-        <span class="meta-value">Vanilla CSS / JSX</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-label">Prefix</span>
-        <span class="meta-value">ajr-</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-label">Fonts</span>
-        <span class="meta-value">iA Writer Quattro S + Mono S</span>
-      </div>
+      <div class="meta-item"><span class="meta-label">Version</span><span class="meta-value">1.0</span></div>
+      <div class="meta-item"><span class="meta-label">Stack</span><span class="meta-value">Vanilla CSS / JSX</span></div>
+      <div class="meta-item"><span class="meta-label">Prefix</span><span class="meta-value">ajr-</span></div>
+      <div class="meta-item"><span class="meta-label">Fonts</span><span class="meta-value">iA Writer Quattro S + Mono S</span></div>
     </div>
   </div>
 </header>
@@ -327,189 +279,792 @@
       <div class="tick"><span>800</span></div>
       <div class="tick"><span>900</span></div>
       <div class="tick major"><span>1000</span></div>
+      <div class="tick"><span>1100</span></div>
+      <div class="tick"><span>1200</span></div>
+      <div class="tick"><span>1300</span></div>
+      <div class="tick"><span>1400</span></div>
+      <div class="tick major"><span>1500</span></div>
+      <div class="tick"><span>1600</span></div>
+      <div class="tick"><span>1700</span></div>
+      <div class="tick"><span>1800</span></div>
+      <div class="tick"><span>1900</span></div>
+      <div class="tick major"><span>2000</span></div>
     </div>
   </div>
 
   <div class="content">
 
-    <!-- REFERENCE -->
+    <!-- 00 — DESIGN REFERENCE -->
     <div class="section">
       <div class="section-label">00 — Design Reference</div>
-      <div class="kit-grid">
-        <a class="kit-link" href="reference.html">
-          <div class="kit-top">
-            <span class="kit-tag">All tokens · All components</span>
-            <span class="kit-name">Full Reference</span>
-            <span class="kit-desc">Every color, token, type specimen, spacing value, motion curve, and component on one page — no clicking required.</span>
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">All tokens · All components</span>
+          <span class="acc-name">Full Reference</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <p class="panel-desc">Every color, token, type specimen, spacing value, motion curve, and component on one page — no clicking required.</p>
+            <iframe src="reference.html" height="860" loading="lazy"></iframe>
           </div>
-          <span class="kit-arrow">→</span>
-        </a>
+        </div>
       </div>
     </div>
 
-    <!-- UI KITS -->
+    <!-- 01 — UI KITS -->
     <div class="section">
       <div class="section-label">01 — UI Kits</div>
-      <div class="kit-grid">
-        <a class="kit-link" href="ui_kits/website/index.html">
-          <div class="kit-top">
-            <span class="kit-tag">Marketing</span>
-            <span class="kit-name">Website Kit</span>
-            <span class="kit-desc">Editorial marketing surface. Header, hero, offer cards, capability blocks, contact, footer — ajared.ca in React.</span>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Marketing</span>
+          <span class="acc-name">Website Kit</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <p class="panel-desc">Editorial marketing surface. Header, hero, offer cards, capability blocks, contact, footer — ajared.ca in React.</p>
+            <iframe src="ui_kits/website/index.html" height="680" loading="lazy"></iframe>
           </div>
-          <span class="kit-arrow">→</span>
-        </a>
-        <a class="kit-link" href="ui_kits/app/index.html">
-          <div class="kit-top">
-            <span class="kit-tag">Mobile App</span>
-            <span class="kit-name">Family Tree Kit</span>
-            <span class="kit-desc">Mobile shell for the Family Tree app. Splash, login, tree view, invites, account — iOS-like frames.</span>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Mobile App</span>
+          <span class="acc-name">Family Tree Kit</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <p class="panel-desc">Mobile shell for the Family Tree app. Splash, login, tree view, invites, account — iOS-like frames.</p>
+            <iframe src="ui_kits/app/index.html" height="680" loading="lazy"></iframe>
           </div>
-          <span class="kit-arrow">→</span>
-        </a>
-        <a class="kit-link" href="ui_kits/sos/index.html">
-          <div class="kit-top">
-            <span class="kit-tag">Mobile App</span>
-            <span class="kit-name">Sense of Self Kit</span>
-            <span class="kit-desc">Identity reflection companion. Onboarding, today, reflect, prompts, library, profile screens.</span>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Mobile App</span>
+          <span class="acc-name">Sense of Self Kit</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <p class="panel-desc">Identity reflection companion. Onboarding, today, reflect, prompts, library, profile screens.</p>
+            <iframe src="ui_kits/sos/index.html" height="680" loading="lazy"></iframe>
           </div>
-          <span class="kit-arrow">→</span>
-        </a>
+        </div>
       </div>
     </div>
 
-    <!-- FOUNDATIONS -->
+    <!-- 02 — COLOR -->
     <div class="section">
       <div class="section-label">02 — Color</div>
-      <div class="card-grid">
-        <a class="card-link" href="preview/color-primary-teal.html">
-          <span class="card-tag">Primary</span>
-          <span class="card-name">Teal Scale</span>
-        </a>
-        <a class="card-link" href="preview/color-accents.html">
-          <span class="card-tag">Accents</span>
-          <span class="card-name">Terracotta + Extended</span>
-        </a>
-        <a class="card-link" href="preview/color-neutrals.html">
-          <span class="card-tag">Neutrals</span>
-          <span class="card-name">Neutral Scale</span>
-        </a>
-        <a class="card-link" href="preview/color-semantic.html">
-          <span class="card-tag">Semantic</span>
-          <span class="card-name">Success / Warning / Error</span>
-        </a>
-        <a class="card-link" href="preview/charts-palette.html">
-          <span class="card-tag">Data Viz</span>
-          <span class="card-name">Charts Palette</span>
-        </a>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Primary</span>
+          <span class="acc-name">Teal Scale</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="card">
+              <div class="row">
+                <div class="chip"><div class="swatch" style="background:#058c8c"></div><span class="meta">Teal · Primary</span><span class="hex">#058C8C</span></div>
+                <div class="chip"><div class="swatch" style="background:#046363"></div><span class="meta">Ink Dark</span><span class="hex">#046363</span></div>
+                <div class="chip"><div class="swatch" style="background:#023b3b"></div><span class="meta">Ink Darkest</span><span class="hex">#023B3B</span></div>
+                <div class="chip"><div class="swatch" style="background:#8ccaca"></div><span class="meta">Light</span><span class="hex">#8CCACA</span></div>
+                <div class="chip"><div class="swatch" style="background:#b2dbdb"></div><span class="meta">Lighter</span><span class="hex">#B2DBDB</span></div>
+                <div class="chip"><div class="swatch" style="background:#e6f4f4;border:1px solid #e2e2e2"></div><span class="meta">Lightest</span><span class="hex">#E6F4F4</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Accents</span>
+          <span class="acc-name">Terracotta + Extended</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="card">
+              <div class="row">
+                <div class="chip"><div class="swatch" style="background:#a1665e"></div><span class="meta">Terracotta</span><span class="hex">#A1665E</span></div>
+                <div class="chip"><div class="swatch" style="background:#935d56"></div><span class="meta">Terra Dark</span><span class="hex">#935D56</span></div>
+                <div class="chip"><div class="swatch" style="background:#d4b9b5"></div><span class="meta">Terra Light</span><span class="hex">#D4B9B5</span></div>
+                <div class="chip"><div class="swatch" style="background:#d09958"></div><span class="meta">Gold</span><span class="hex">#D09958</span></div>
+                <div class="chip"><div class="swatch" style="background:#ec9a29"></div><span class="meta">Orange</span><span class="hex">#EC9A29</span></div>
+                <div class="chip"><div class="swatch" style="background:#9747ff"></div><span class="meta">Purple</span><span class="hex">#9747FF</span></div>
+                <div class="chip"><div class="swatch" style="background:#138c05"></div><span class="meta">Green</span><span class="hex">#138C05</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Neutrals</span>
+          <span class="acc-name">Neutral Scale</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="card">
+              <div class="row" style="gap:8px">
+                <div class="chip"><div class="swatch-sm swatch" style="background:#000"></div><span class="hex">#000</span></div>
+                <div class="chip"><div class="swatch-sm swatch" style="background:#141414"></div><span class="hex">900</span></div>
+                <div class="chip"><div class="swatch-sm swatch" style="background:#323232"></div><span class="hex">800</span></div>
+                <div class="chip"><div class="swatch-sm swatch" style="background:#434343"></div><span class="hex">700</span></div>
+                <div class="chip"><div class="swatch-sm swatch" style="background:#626262"></div><span class="hex">600</span></div>
+                <div class="chip"><div class="swatch-sm swatch" style="background:#717171"></div><span class="hex">500</span></div>
+                <div class="chip"><div class="swatch-sm swatch" style="background:#939393"></div><span class="hex">400</span></div>
+                <div class="chip"><div class="swatch-sm swatch" style="background:#b6b6b6"></div><span class="hex">300</span></div>
+                <div class="chip"><div class="swatch-sm swatch" style="background:#d9d9d9"></div><span class="hex">200</span></div>
+                <div class="chip"><div class="swatch-sm swatch" style="background:#eeeeee"></div><span class="hex">100</span></div>
+                <div class="chip"><div class="swatch-sm swatch" style="background:#f5f5f5;border:1px solid #e2e2e2"></div><span class="hex">50</span></div>
+                <div class="chip"><div class="swatch-sm swatch" style="background:#fff;border:1px solid #e2e2e2"></div><span class="hex">WHT</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Semantic</span>
+          <span class="acc-name">Success / Warning / Error</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="card">
+              <div class="row">
+                <div class="chip"><div class="swatch" style="background:#61b258"></div><span class="meta">Success</span><span class="hex">#61B258</span></div>
+                <div class="chip"><div class="swatch" style="background:#d6b739"></div><span class="meta">Warning</span><span class="hex">#D6B739</span></div>
+                <div class="chip"><div class="swatch" style="background:#8c1305"></div><span class="meta">Error</span><span class="hex">#8C1305</span></div>
+                <div class="chip"><div class="swatch" style="background:#71c5e6"></div><span class="meta">Info</span><span class="hex">#71C5E6</span></div>
+              </div>
+              <div class="row" style="margin-top:4px">
+                <div class="chip"><div class="swatch-sm swatch" style="background:#e7f3f4"></div><span class="hex">#E7F3F4 success-lt</span></div>
+                <div class="chip"><div class="swatch-sm swatch" style="background:#f7ebc6"></div><span class="hex">#F7EBC6 warn-lt</span></div>
+                <div class="chip"><div class="swatch-sm swatch" style="background:#ffa18a"></div><span class="hex">#FFA18A error-lt</span></div>
+                <div class="chip"><div class="swatch-sm swatch" style="background:#eaf6fb"></div><span class="hex">#EAF6FB info-lt</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Data Viz</span>
+          <span class="acc-name">Charts Palette</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="card">
+              <div class="chart-title">Categorical — series</div>
+              <div class="row" style="gap:8px">
+                <div class="chip"><div class="swatch-xs swatch" style="background:#058c8c"></div><span class="hex">#058C8C</span></div>
+                <div class="chip"><div class="swatch-xs swatch" style="background:#a1665e"></div><span class="hex">#A1665E</span></div>
+                <div class="chip"><div class="swatch-xs swatch" style="background:#d09958"></div><span class="hex">#D09958</span></div>
+                <div class="chip"><div class="swatch-xs swatch" style="background:#9747ff"></div><span class="hex">#9747FF</span></div>
+                <div class="chip"><div class="swatch-xs swatch" style="background:#138c05"></div><span class="hex">#138C05</span></div>
+                <div class="chip"><div class="swatch-xs swatch" style="background:#023b3b"></div><span class="hex">#023B3B</span></div>
+              </div>
+              <div class="chart-title" style="margin-top:16px">Sentiment — positive / neutral / negative</div>
+              <div class="legend">
+                <div class="bar" style="background:#61b258"></div><span class="chart-sub">Positive · #61B258</span>
+                <div class="bar" style="background:#939393"></div><span class="chart-sub">Neutral · #939393</span>
+                <div class="bar" style="background:#ec9a29"></div><span class="chart-sub">Negative · #EC9A29</span>
+              </div>
+              <div class="chart-title" style="margin-top:16px">Sequential heatmap — teal ramp</div>
+              <div class="heat">
+                <div style="background:#e6f4f4"></div><div style="background:#cdebeb"></div><div style="background:#b2dbdb"></div>
+                <div style="background:#86dbdb"></div><div style="background:#5dc2c2"></div><div style="background:#2ca5a5"></div>
+                <div style="background:#058c8c"></div><div style="background:#046363"></div><div style="background:#023b3b"></div>
+              </div>
+              <div class="chart-title" style="margin-top:16px">Diverging — terra / teal</div>
+              <div class="heat">
+                <div style="background:#a1665e"></div><div style="background:#b98b84"></div><div style="background:#d4b9b5"></div>
+                <div style="background:#e8dbd9"></div><div style="background:#f7f8f7"></div><div style="background:#d9eaea"></div>
+                <div style="background:#b2dbdb"></div><div style="background:#5dc2c2"></div><div style="background:#058c8c"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
+    <!-- 03 — TYPOGRAPHY -->
     <div class="section">
       <div class="section-label">03 — Typography</div>
-      <div class="card-grid">
-        <a class="card-link" href="preview/type-display.html">
-          <span class="card-tag">Display</span>
-          <span class="card-name">Hero & Display</span>
-        </a>
-        <a class="card-link" href="preview/type-headings.html">
-          <span class="card-tag">Headings</span>
-          <span class="card-name">H1 – H6</span>
-        </a>
-        <a class="card-link" href="preview/type-body.html">
-          <span class="card-tag">Body</span>
-          <span class="card-name">Body & Prose</span>
-        </a>
-        <a class="card-link" href="preview/type-mono-labels.html">
-          <span class="card-tag">Mono</span>
-          <span class="card-name">Labels & Coordinates</span>
-        </a>
-        <a class="card-link" href="preview/voice-sample.html">
-          <span class="card-tag">Voice</span>
-          <span class="card-name">Tone & Copy</span>
-        </a>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Display</span>
+          <span class="acc-name">Hero &amp; Display</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="card">
+              <div style="font-family:var(--font-primary);font-weight:700;font-size:56px;letter-spacing:-0.04em;line-height:0.9;color:#023b3b">Get AI working<br><span style="color:#a1665e">today.</span></div>
+              <div class="meta">iA Writer Quattro S · Bold 700 · -0.04em · line-height 0.9</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Headings</span>
+          <span class="acc-name">H1 – H6</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="card" style="gap:6px">
+              <div style="font-family:var(--font-primary);font-weight:700;letter-spacing:-0.04em;line-height:0.95;color:#023b3b">
+                <div style="font-size:48px">Heading 1 · Bold 48/57</div>
+                <div style="font-size:36px">Heading 2 · Bold 36/43</div>
+                <div style="font-size:30px">Heading 3 · Bold 30/36</div>
+                <div style="font-size:24px">Heading 4 · Bold 24/28</div>
+                <div style="font-size:20px">Heading 5 · Bold 20/24</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Body</span>
+          <span class="acc-name">Body &amp; Prose</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="card">
+              <p style="font-size:18px;line-height:1.5;color:#046363;max-width:none;margin:0">We go past proofs of concepts to AI products that actually work for you. <em>Really</em> useful, now.</p>
+              <p style="font-size:16px;line-height:1.5;color:#323232;max-width:none;margin:0">Body 2 · 16/24 · Regular. Figure out what's actually going on before anyone starts building.</p>
+              <p style="font-size:14px;line-height:1.5;color:#626262;max-width:none;margin:0">Body 3 · 14/21 · Regular. Most assumptions are wrong — we design lean experiments that expose which ones to kill early.</p>
+              <p style="font-size:12px;line-height:1.5;color:#717171;max-width:none;margin:0">Body 4 · 12/18 · Regular. Secondary metadata, captions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Mono</span>
+          <span class="acc-name">Labels &amp; Coordinates</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="card">
+              <span class="meta">COORDINATES · LABEL · ALL CAPS</span>
+              <span style="font-family:var(--font-mono);font-size:13px;color:#058c8c">43.6332° N, 79.4141° W</span>
+              <span style="font-family:var(--font-mono);font-size:11px;color:#a1665e;letter-spacing:0.06em">01 · ADVISORY · TRACK NUMBER</span>
+              <div class="preview-ruler"></div>
+              <span class="hex">iA Writer Mono S · letter-spacing 0.05–0.08em</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Voice</span>
+          <span class="acc-name">Tone &amp; Copy</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="card" style="padding:20px">
+              <blockquote style="font-family:var(--font-primary);font-size:18px;line-height:1.4;color:#023b3b;margin:0;max-width:none">"Early failure is cheap. Late failure is not."</blockquote>
+              <p style="font-size:13px;color:#046363;margin:0;max-width:none">Direct, editorial, quietly confident. <em>We</em> / <em>you</em>. Short declaratives, then one sentence that does the work.</p>
+              <span class="meta">VOICE · No emoji · British-leaning spelling · Em dashes</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
+    <!-- 04 — LAYOUT & MOTION -->
     <div class="section">
-      <div class="section-label">04 — Layout & Motion</div>
-      <div class="card-grid">
-        <a class="card-link" href="preview/spacing-scale.html">
-          <span class="card-tag">Spacing</span>
-          <span class="card-name">8-pt Scale</span>
-        </a>
-        <a class="card-link" href="preview/grid-ruler.html">
-          <span class="card-tag">Grid</span>
-          <span class="card-name">Ruler & Grid</span>
-        </a>
-        <a class="card-link" href="preview/radii.html">
-          <span class="card-tag">Radii</span>
-          <span class="card-name">Border Radius</span>
-        </a>
-        <a class="card-link" href="preview/shadows.html">
-          <span class="card-tag">Shadows</span>
-          <span class="card-name">Elevation Scale</span>
-        </a>
-        <a class="card-link" href="preview/motion.html">
-          <span class="card-tag">Motion</span>
-          <span class="card-name">Timing & Easing</span>
-        </a>
+      <div class="section-label">04 — Layout &amp; Motion</div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Spacing</span>
+          <span class="acc-name">8-pt Scale</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="card">
+              <div class="row" style="align-items:flex-end;gap:16px">
+                <div style="width:4px;height:24px;background:#058c8c"></div>
+                <div style="width:8px;height:24px;background:#058c8c"></div>
+                <div style="width:12px;height:24px;background:#058c8c"></div>
+                <div style="width:16px;height:24px;background:#058c8c"></div>
+                <div style="width:20px;height:24px;background:#058c8c"></div>
+                <div style="width:24px;height:24px;background:#058c8c"></div>
+                <div style="width:32px;height:24px;background:#058c8c"></div>
+                <div style="width:40px;height:24px;background:#058c8c"></div>
+                <div style="width:48px;height:24px;background:#058c8c"></div>
+                <div style="width:64px;height:24px;background:#058c8c"></div>
+              </div>
+              <div class="row" style="font-family:var(--font-mono);font-size:10px;color:#626262;gap:16px">
+                <span style="width:4px">4</span><span style="width:8px">8</span><span style="width:12px">12</span><span style="width:16px">16</span><span style="width:20px">20</span><span style="width:24px">24</span><span style="width:32px">32</span><span style="width:40px">40</span><span style="width:48px">48</span><span style="width:64px">64</span>
+              </div>
+              <span class="meta">8-POINT GRID · space-1 → space-16</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Grid</span>
+          <span class="acc-name">Ruler &amp; Grid</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="card" style="padding:0;flex-direction:row;gap:0">
+              <div style="width:60px;padding:12px 8px;font-family:var(--font-mono);font-size:10px;color:#8ccaca;text-align:right;background-image:linear-gradient(to bottom,#8ccaca 1px,transparent 1px);background-size:100% 20px;border-right:1px solid #058c8c">
+                <div style="color:#a1665e">0</div><div>100</div><div>200</div><div>300</div><div>400</div><div style="color:#a1665e">500</div><div>600</div>
+              </div>
+              <div style="flex:1;padding:16px 20px">
+                <span class="meta" style="color:#a1665e">INFORMATION ARCHITECTURE</span>
+                <div style="font-family:var(--font-primary);font-weight:700;font-size:20px;letter-spacing:-0.02em;color:#023b3b;margin-top:4px">Ruler · Grid · Coordinates</div>
+                <p style="font-size:12px;line-height:1.5;margin:8px 0 0 0;max-width:none">Ruler marginalia · 80px gutter · 20px minor / 100px major ticks · 500px is terracotta.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Radii</span>
+          <span class="acc-name">Border Radius</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="card">
+              <div class="row" style="gap:20px;align-items:flex-end">
+                <div class="chip"><div style="width:56px;height:40px;background:#058c8c;border-radius:0"></div><span class="hex">none 0</span></div>
+                <div class="chip"><div style="width:56px;height:40px;background:#058c8c;border-radius:2px"></div><span class="hex">sm 2</span></div>
+                <div class="chip"><div style="width:56px;height:40px;background:#058c8c;border-radius:4px"></div><span class="hex">base 4</span></div>
+                <div class="chip"><div style="width:56px;height:40px;background:#058c8c;border-radius:8px"></div><span class="hex">lg 8</span></div>
+                <div class="chip"><div style="width:56px;height:40px;background:#058c8c;border-radius:12px"></div><span class="hex">xl 12</span></div>
+                <div class="chip"><div style="width:56px;height:40px;background:#058c8c;border-radius:16px"></div><span class="hex">2xl 16</span></div>
+                <div class="chip"><div style="width:56px;height:40px;background:#058c8c;border-radius:9999px"></div><span class="hex">full pill</span></div>
+              </div>
+              <span class="meta">DEFAULT · 2px (marketing) · Mobile CTA pills use full</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Shadows</span>
+          <span class="acc-name">Elevation Scale</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="card" style="background:#fafafa">
+              <div class="row" style="gap:24px">
+                <div class="chip"><div style="width:80px;height:60px;background:#fff;box-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05)"></div><span class="hex">sm</span></div>
+                <div class="chip"><div style="width:80px;height:60px;background:#fff;box-shadow:0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)"></div><span class="hex">base</span></div>
+                <div class="chip"><div style="width:80px;height:60px;background:#fff;box-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)"></div><span class="hex">md</span></div>
+                <div class="chip"><div style="width:80px;height:60px;background:#fff;box-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1)"></div><span class="hex">lg</span></div>
+                <div class="chip"><div style="width:80px;height:60px;background:#fff;box-shadow:0 10px 50px 0 rgb(0 0 0 / 0.15)"></div><span class="hex">swatch ★</span></div>
+              </div>
+              <span class="meta">ELEVATION · most surfaces are flat; shadow is editorial</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Motion</span>
+          <span class="acc-name">Timing &amp; Easing</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="card">
+              <div class="meta">MOTION · TIMINGS + EASING</div>
+              <div style="font-family:var(--font-primary);font-size:14px;line-height:1.5;color:var(--color-ink);max-width:58ch">
+                Motion at Ajared is restrained. Most things should feel like a page turning, not a slot machine. Use <span style="font-family:var(--font-mono);font-size:12px">snap</span> for direct-manipulation; <span style="font-family:var(--font-mono);font-size:12px">standard</span> for navigational transitions; <span style="font-family:var(--font-mono);font-size:12px">spring</span> only for welcoming moments.
+              </div>
+              <div class="stack" style="margin-top:8px">
+                <div class="spec">
+                  <div><div class="spec__name">Snap</div><div class="spec__meta">180ms · cubic-bezier(0.4, 0, 0.2, 1)</div></div>
+                  <div class="demo"><div class="dot anim-snap"></div></div>
+                </div>
+                <div class="spec">
+                  <div><div class="spec__name">Standard</div><div class="spec__meta">900ms · cubic-bezier(0.2, 0, 0, 1)</div></div>
+                  <div class="demo"><div class="dot anim-std"></div></div>
+                </div>
+                <div class="spec">
+                  <div><div class="spec__name">Spring (welcome)</div><div class="spec__meta">1200ms · cubic-bezier(0.34, 1.56, 0.64, 1)</div></div>
+                  <div class="demo"><div class="dot heat anim-spring"></div></div>
+                </div>
+                <div class="spec">
+                  <div><div class="spec__name">Fade (ambient)</div><div class="spec__meta">1400ms · ease-in-out · loop</div></div>
+                  <div class="demo"><div class="dot anim-fade"></div></div>
+                </div>
+                <div class="spec">
+                  <div><div class="spec__name">Moiré drift</div><div class="spec__meta">8s · linear · infinite · backgrounds only</div></div>
+                  <div class="moire-anim"></div>
+                </div>
+              </div>
+              <div class="hex" style="margin-top:12px">Reduce-motion: substitute all animations with 200ms opacity cross-fades. Honor <code style="font-family:var(--font-mono);font-size:11px">prefers-reduced-motion</code>.</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
+    <!-- 05 — COMPONENTS -->
     <div class="section">
       <div class="section-label">05 — Components</div>
-      <div class="card-grid">
-        <a class="card-link" href="preview/buttons-marketing.html">
-          <span class="card-tag">Buttons</span>
-          <span class="card-name">Marketing Buttons</span>
-        </a>
-        <a class="card-link" href="preview/buttons-app.html">
-          <span class="card-tag">Buttons</span>
-          <span class="card-name">App Buttons</span>
-        </a>
-        <a class="card-link" href="preview/inputs.html">
-          <span class="card-tag">Inputs</span>
-          <span class="card-name">Form Inputs</span>
-        </a>
-        <a class="card-link" href="preview/card-offer.html">
-          <span class="card-tag">Card</span>
-          <span class="card-name">Offer Card</span>
-        </a>
-        <a class="card-link" href="preview/badges.html">
-          <span class="card-tag">Badge</span>
-          <span class="card-name">Badges</span>
-        </a>
-        <a class="card-link" href="preview/alerts.html">
-          <span class="card-tag">Alert</span>
-          <span class="card-name">Alerts</span>
-        </a>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Buttons</span>
+          <span class="acc-name">Marketing Buttons</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="card">
+              <div class="row" style="gap:12px;align-items:center;flex-wrap:wrap">
+                <button style="padding:14px 26px;border:2px solid #a1665e;background:transparent;color:#a1665e;font-family:var(--font-primary);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:0.05em;border-radius:2px;cursor:crosshair">PRIMARY</button>
+                <button style="padding:14px 26px;border:2px solid #a1665e;background:#a1665e;color:#fff;font-family:var(--font-primary);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:0.05em;border-radius:2px;cursor:crosshair">HOVER</button>
+                <button style="padding:14px 26px;border:none;background:#058c8c;color:#fff;font-family:var(--font-primary);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:0.03em;border-radius:2px;cursor:crosshair">SUBMIT (INK)</button>
+                <a href="#" style="display:inline-flex;align-items:baseline;gap:8px;color:#a1665e;font-weight:700;border-bottom:2px solid #a1665e">Learn more <span>→</span></a>
+              </div>
+              <span class="meta">MARKETING BUTTONS · 2px radius · all-caps</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Buttons</span>
+          <span class="acc-name">App Buttons</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="card">
+              <div class="row" style="gap:8px">
+                <button class="ajr-button ajr-button--primary ajr-button--md">Primary</button>
+                <button class="ajr-button ajr-button--secondary ajr-button--md">Secondary</button>
+                <button class="ajr-button ajr-button--tertiary ajr-button--md">Tertiary</button>
+                <button class="ajr-button ajr-button--danger ajr-button--md">Danger</button>
+              </div>
+              <div class="row" style="gap:8px">
+                <button class="ajr-button ajr-button--primary ajr-button--sm">SM</button>
+                <button class="ajr-button ajr-button--primary ajr-button--md">MD</button>
+                <button class="ajr-button ajr-button--primary ajr-button--lg">LG</button>
+                <button class="ajr-button ajr-button--primary ajr-button--md" disabled>Disabled</button>
+              </div>
+              <span class="meta">APP BUTTONS · from @ajared/design-system · .ajr-button</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Inputs</span>
+          <span class="acc-name">Form Inputs</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="card">
+              <div class="ajr-input-group" style="margin:0">
+                <label class="ajr-input-label">Email address</label>
+                <input type="email" class="ajr-input" placeholder="your@email.com">
+                <span class="ajr-input-helper">We'll never share your email.</span>
+              </div>
+              <div class="ajr-input-group" style="margin:0">
+                <label class="ajr-input-label">Username</label>
+                <input type="text" class="ajr-input ajr-input--error" value="ab">
+                <span class="ajr-input-helper ajr-input-helper--error">At least 3 characters.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Card</span>
+          <span class="acc-name">Offer Card</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="card" style="padding:0">
+              <a href="#" style="display:block;padding:24px;border:1px solid #058c8c;border-radius:2px;background:#fff;color:inherit;min-height:180px;position:relative;transition:background .3s,color .3s" onmouseover="this.style.background='#058c8c';this.style.color='#fff'" onmouseout="this.style.background='#fff';this.style.color='inherit'">
+                <div style="font-family:var(--font-mono);font-size:11px;color:#a1665e;letter-spacing:0.08em">01 · ADVISORY</div>
+                <h3 style="font-family:var(--font-primary);font-size:22px;margin:12px 0 8px 0;letter-spacing:-0.02em;line-height:1">Talk to a Human about AI</h3>
+                <p style="font-size:13px;line-height:1.5;max-width:none;margin:0">Not a chatbot or a vendor pitch. A 30-minute conversation with an AI practitioner.</p>
+                <div style="position:absolute;bottom:20px;right:24px;width:32px;height:1px;background:#a1665e">
+                  <span style="position:absolute;right:0;top:-4px;width:8px;height:8px;border-top:1px solid #a1665e;border-right:1px solid #a1665e;transform:rotate(45deg)"></span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Badge</span>
+          <span class="acc-name">Badges</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="card">
+              <div class="row" style="gap:6px">
+                <span class="ajr-badge ajr-badge--primary ajr-badge--md">Primary</span>
+                <span class="ajr-badge ajr-badge--secondary ajr-badge--md">Secondary</span>
+                <span class="ajr-badge ajr-badge--success ajr-badge--md">Success</span>
+                <span class="ajr-badge ajr-badge--warning ajr-badge--md">Warning</span>
+                <span class="ajr-badge ajr-badge--error ajr-badge--md">Error</span>
+                <span class="ajr-badge ajr-badge--info ajr-badge--md">Info</span>
+              </div>
+              <div class="row" style="gap:6px">
+                <span class="ajr-badge ajr-badge--primary ajr-badge--outlined ajr-badge--md">Outlined</span>
+                <span class="ajr-badge ajr-badge--error ajr-badge--outlined ajr-badge--md">Outlined</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Alert</span>
+          <span class="acc-name">Alerts</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="card" style="gap:8px">
+              <div class="ajr-alert ajr-alert--success"><div class="ajr-alert-content"><strong>Success.</strong> Your changes have been saved.</div></div>
+              <div class="ajr-alert ajr-alert--warning"><div class="ajr-alert-content"><strong>Heads up.</strong> Double-check this before shipping.</div></div>
+              <div class="ajr-alert ajr-alert--error"><div class="ajr-alert-content"><strong>Error.</strong> Please check your input.</div></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
+    <!-- 06 — BRAND -->
     <div class="section">
       <div class="section-label">06 — Brand</div>
-      <div class="card-grid">
-        <a class="card-link" href="preview/brand-logo.html">
-          <span class="card-tag">Brand</span>
-          <span class="card-name">Logo</span>
-        </a>
-        <a class="card-link" href="preview/brand-header.html">
-          <span class="card-tag">Brand</span>
-          <span class="card-name">Site Header</span>
-        </a>
-        <a class="card-link" href="preview/icons.html">
-          <span class="card-tag">Icons</span>
-          <span class="card-name">Icon Primitives</span>
-        </a>
-        <a class="card-link" href="preview/icons-glyphs.html">
-          <span class="card-tag">Icons</span>
-          <span class="card-name">Glyphs</span>
-        </a>
-        <a class="card-link" href="preview/icons-library.html">
-          <span class="card-tag">Icons</span>
-          <span class="card-name">Material Symbols</span>
-        </a>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Brand</span>
+          <span class="acc-name">Logo</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="card" style="padding:20px">
+              <img src="assets/logo.png" alt="Ajared Logo" style="height:72px;width:auto;display:block">
+              <div style="font-family:var(--font-primary);font-weight:700;font-size:22px;letter-spacing:-0.02em;color:#023b3b">Ajared <span style="color:#a1665e">Research Inc.</span></div>
+              <span class="meta">PRIMARY MARK · ajaRed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Brand</span>
+          <span class="acc-name">Site Header</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="card" style="padding:0">
+              <div style="position:relative;background:#058c8c;color:#fff;padding:20px 24px">
+                <div style="font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.08em;opacity:0.9">COMPANY</div>
+                <div style="font-family:var(--font-primary);font-weight:700;font-size:36px;line-height:1;margin-top:4px">ajaRed</div>
+              </div>
+              <div style="padding:16px 24px;display:flex;gap:24px;align-items:center">
+                <div style="width:80px">
+                  <div style="height:40px;background:#058c8c;border-radius:2px"></div>
+                  <div style="font-family:var(--font-mono);font-size:9px;margin-top:4px;color:#626262">#058C8C</div>
+                </div>
+                <div style="width:80px">
+                  <div style="height:40px;background:#a1665e;border-radius:2px"></div>
+                  <div style="font-family:var(--font-mono);font-size:9px;margin-top:4px;color:#626262">#A1665E</div>
+                </div>
+                <div style="flex:1;font-family:var(--font-mono);font-size:10px;color:#058c8c;text-transform:uppercase;letter-spacing:0.08em">
+                  Header / band usage · iA Writer Quattro S Bold 36
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Icons</span>
+          <span class="acc-name">Icon Primitives</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="card">
+              <div class="row" style="gap:16px;color:#323232">
+                <span class="material-symbols-outlined">arrow_back_ios</span>
+                <span class="material-symbols-outlined">keyboard_arrow_right</span>
+                <span class="material-symbols-outlined">notifications_none</span>
+                <span class="material-symbols-outlined">person</span>
+                <span class="material-symbols-outlined">share</span>
+                <span class="material-symbols-outlined">close</span>
+                <span class="material-symbols-outlined">done</span>
+                <span class="material-symbols-outlined">search</span>
+                <span class="material-symbols-outlined">filter_list</span>
+                <span class="material-symbols-outlined">error_outline</span>
+                <span class="material-symbols-outlined">warning_amber</span>
+                <span class="material-symbols-outlined">check_box</span>
+              </div>
+              <span class="meta">MATERIAL SYMBOLS OUTLINED · used in mobile apps · CDN</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Icons</span>
+          <span class="acc-name">Glyphs</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="card" style="padding:16px 20px;gap:8px">
+              <div class="row" style="gap:16px">
+                <div style="display:flex;align-items:center;gap:6px">
+                  <div style="position:relative;width:40px;height:1px;background:#a1665e"><span style="position:absolute;right:0;top:-5px;width:10px;height:10px;border-top:1px solid #a1665e;border-right:1px solid #a1665e;transform:rotate(45deg)"></span></div>
+                  <span class="hex">arrow</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:6px">
+                  <span style="width:10px;height:10px;background:#a1665e;border-radius:50%;display:inline-block"></span>
+                  <span class="hex">status dot</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:6px"><span style="font-size:18px;color:#058c8c">+</span><span class="hex">open</span></div>
+                <div style="display:flex;align-items:center;gap:6px"><span style="font-size:18px;color:#058c8c;transform:rotate(45deg);display:inline-block">+</span><span class="hex">close</span></div>
+                <div style="display:flex;align-items:center;gap:6px"><span style="color:#a1665e">›</span><span class="hex">chevron</span></div>
+                <div style="display:flex;align-items:center;gap:6px"><span style="color:#a1665e">↗</span><span class="hex">external</span></div>
+                <div style="display:flex;align-items:center;gap:6px"><span style="color:#058c8c">✓</span><span class="hex">check</span></div>
+              </div>
+              <span class="meta">GLYPH PRIMITIVES · used on marketing surfaces</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggle(this)">
+          <span class="acc-tag">Icons</span>
+          <span class="acc-name">Material Symbols</span>
+          <span class="acc-toggle">+</span>
+        </button>
+        <div class="accordion-panel">
+          <div class="panel-inner">
+            <div class="card">
+              <div class="igroup">
+                <div class="g-title">Navigation · Chrome</div>
+                <div class="g-sub">System nav used across all app screens. Material Symbols Outlined, 24px default, weight 400.</div>
+                <div class="icons">
+                  <div class="ic"><span class="material-symbols-outlined">arrow_back_ios</span>back</div>
+                  <div class="ic"><span class="material-symbols-outlined">arrow_forward_ios</span>forward</div>
+                  <div class="ic"><span class="material-symbols-outlined">close</span>close</div>
+                  <div class="ic"><span class="material-symbols-outlined">menu</span>menu</div>
+                  <div class="ic"><span class="material-symbols-outlined">search</span>search</div>
+                  <div class="ic"><span class="material-symbols-outlined">ios_share</span>share</div>
+                  <div class="ic"><span class="material-symbols-outlined">more_horiz</span>more</div>
+                  <div class="ic"><span class="material-symbols-outlined">tune</span>filter</div>
+                  <div class="ic"><span class="material-symbols-outlined">notifications</span>notify</div>
+                  <div class="ic"><span class="material-symbols-outlined">settings</span>settings</div>
+                </div>
+              </div>
+              <div class="igroup">
+                <div class="g-title">Sense of Self · Metrics &amp; engagement</div>
+                <div class="icons">
+                  <div class="ic"><span class="material-symbols-outlined">favorite</span>like</div>
+                  <div class="ic"><span class="material-symbols-outlined">repeat</span>retweet</div>
+                  <div class="ic"><span class="material-symbols-outlined">chat_bubble_outline</span>reply</div>
+                  <div class="ic"><span class="material-symbols-outlined">alternate_email</span>mention</div>
+                  <div class="ic"><span class="material-symbols-outlined">bookmark</span>save</div>
+                  <div class="ic"><span class="material-symbols-outlined">visibility</span>views</div>
+                  <div class="ic"><span class="material-symbols-outlined">trending_up</span>trend</div>
+                  <div class="ic"><span class="material-symbols-outlined">mood</span>positive</div>
+                  <div class="ic"><span class="material-symbols-outlined">sentiment_neutral</span>neutral</div>
+                  <div class="ic"><span class="material-symbols-outlined">mood_bad</span>negative</div>
+                </div>
+              </div>
+              <div class="igroup">
+                <div class="g-title">Family Tree · Relationships</div>
+                <div class="icons">
+                  <div class="ic"><span class="material-symbols-outlined">person</span>person</div>
+                  <div class="ic"><span class="material-symbols-outlined">group</span>group</div>
+                  <div class="ic"><span class="material-symbols-outlined">family_restroom</span>family</div>
+                  <div class="ic"><span class="material-symbols-outlined">person_add</span>invite</div>
+                  <div class="ic"><span class="material-symbols-outlined">mail</span>mail</div>
+                  <div class="ic"><span class="material-symbols-outlined">verified</span>verified</div>
+                  <div class="ic"><span class="material-symbols-outlined">park</span>tree</div>
+                  <div class="ic"><span class="material-symbols-outlined">home</span>home</div>
+                  <div class="ic"><span class="material-symbols-outlined">account_circle</span>account</div>
+                  <div class="ic"><span class="material-symbols-outlined">logout</span>logout</div>
+                </div>
+              </div>
+              <div class="igroup">
+                <div class="g-title">Status · feedback</div>
+                <div class="icons">
+                  <div class="ic"><span class="material-symbols-outlined" style="color:#61b258">check_circle</span>success</div>
+                  <div class="ic"><span class="material-symbols-outlined" style="color:#d6b739">warning</span>warning</div>
+                  <div class="ic"><span class="material-symbols-outlined" style="color:#8c1305">error</span>error</div>
+                  <div class="ic"><span class="material-symbols-outlined" style="color:#71c5e6">info</span>info</div>
+                  <div class="ic"><span class="material-symbols-outlined">sync</span>loading</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -520,6 +1075,15 @@
   <a href="https://ajared.ca">ajared.ca ↗</a>
   <span>Ajared Research Inc. · Applied AI for Enterprises · Toronto 43.6332° N, 79.4141° W</span>
 </footer>
+
+<script>
+  function toggle(btn) {
+    const panel = btn.nextElementSibling;
+    const open = !panel.classList.contains('open');
+    panel.classList.toggle('open', open);
+    btn.querySelector('.acc-toggle').textContent = open ? '×' : '+';
+  }
+</script>
 
 </body>
 </html>
