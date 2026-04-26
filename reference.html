@@ -364,6 +364,36 @@
       line-height: 1.6;
     }
 
+    /* ── NAV ── */
+    nav {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      border-bottom: var(--grid-line);
+      max-width: 1600px;
+    }
+    .nav-rule { border-right: var(--grid-line); }
+    .nav-links {
+      display: flex;
+      align-items: stretch;
+    }
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-ink);
+      text-decoration: none;
+      padding: 0.6rem 1.25rem;
+      border-right: var(--grid-line);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.15s ease, background 0.15s ease;
+    }
+    .nav-links a:hover { color: var(--color-terra); background: var(--color-primary-lightest, #e6f4f4); }
+    .nav-links a.active { color: var(--color-ink-darkest); font-weight: 700; }
+    .nav-num { color: var(--color-ink-light); }
+
     /* ── FOOTER ── */
     footer {
       border-top: 2px solid var(--color-terra);
@@ -404,7 +434,7 @@
   <div class="header-body">
     <div class="wordmark">
       <img src="assets/logo.png" alt="Ajared Research Inc.">
-      <span>Ajared Research Inc.</span>
+      <a href="index.html" style="text-decoration:none;color:inherit;font-weight:700;">Ajared Research Inc.</a>
     </div>
     <h1>Design <span>Reference.</span></h1>
     <div class="header-meta">
@@ -427,6 +457,16 @@
     </div>
   </div>
 </header>
+
+<nav>
+  <div class="nav-rule"></div>
+  <div class="nav-links">
+    <a href="index.html"><span class="nav-num">← /</span> Index</a>
+    <a href="reference.html" class="active"><span class="nav-num">01 /</span> Full Reference</a>
+    <a href="pages/components.html"><span class="nav-num">02 /</span> Component Library</a>
+    <a href="pages/specification.html"><span class="nav-num">03 /</span> Technical Spec</a>
+  </div>
+</nav>
 
 <main>
   <div class="side-rule">

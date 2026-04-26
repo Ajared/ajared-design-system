@@ -312,6 +312,73 @@
             .header-cell { border-right: none; border-bottom: var(--grid-line); }
             .footer { grid-template-columns: 1fr; }
         }
+    
+    /* ── SHARED PAGE HEADER ── */
+    * { box-sizing: border-box; }
+    body { background: #fff; cursor: crosshair; }
+    .pg-ruler {
+      position: sticky; top: 0; z-index: 100;
+      height: 20px; border-bottom: 1px solid #058c8c;
+      display: flex; align-items: stretch;
+      background: #fff; overflow: hidden;
+    }
+    .pg-ruler-col { width: 80px; flex-shrink: 0; border-right: 1px solid #058c8c; }
+    .pg-ruler-ticks {
+      flex: 1; height: 100%;
+      background-image:
+        repeating-linear-gradient(to right, rgba(5,140,140,0.35) 0, rgba(5,140,140,0.35) 1px, transparent 1px, transparent 20px),
+        repeating-linear-gradient(to right, #058c8c 0, #058c8c 1px, transparent 1px, transparent 100px);
+      background-size: 20px 8px, 100px 12px;
+      background-repeat: repeat-x;
+      background-position: 0 bottom, 0 bottom;
+    }
+    .pg-header {
+      display: grid; grid-template-columns: 80px 1fr;
+      border-bottom: 1px solid #058c8c;
+    }
+    .pg-header-rule {
+      border-right: 1px solid #058c8c;
+      padding: 1.5rem 1.25rem;
+      display: flex; flex-direction: column; justify-content: flex-end; gap: 0.25rem;
+    }
+    .pg-coord {
+      font-family: 'iA Writer Mono S', monospace;
+      font-size: 0.55rem; color: #046363;
+      text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap;
+    }
+    .pg-header-body { padding: 1.5rem 2.5rem 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .pg-wordmark { display: flex; align-items: center; gap: 0.75rem; }
+    .pg-wordmark img { height: 22px; width: auto; }
+    .pg-wordmark a {
+      font-family: 'iA Writer Quattro S', serif; font-size: 0.7rem; font-weight: 700;
+      letter-spacing: -0.01em; color: #023b3b; text-decoration: none;
+    }
+    .pg-wordmark a:hover { color: #a1665e; }
+    .pg-h1 {
+      font-family: 'iA Writer Quattro S', serif;
+      font-size: clamp(1.75rem, 3vw, 2.75rem); font-weight: 700;
+      letter-spacing: -0.04em; line-height: 0.9; color: #023b3b;
+    }
+    .pg-h1 span { color: #a1665e; }
+    .pg-subtitle { font-family: 'iA Writer Quattro S', serif; font-size: 0.76rem; color: #046363; line-height: 1.5; margin-top: 0.2rem; }
+    .pg-nav {
+      display: grid; grid-template-columns: 80px 1fr;
+      border-bottom: 1px solid #058c8c;
+    }
+    .pg-nav-rule { border-right: 1px solid #058c8c; }
+    .pg-nav-links { display: flex; align-items: stretch; }
+    .pg-nav-links a {
+      font-family: 'iA Writer Mono S', monospace; font-size: 0.6rem;
+      text-transform: uppercase; letter-spacing: 0.1em; color: #046363;
+      text-decoration: none; padding: 0.6rem 1.25rem;
+      border-right: 1px solid #058c8c;
+      display: flex; align-items: center; gap: 0.4rem;
+      transition: color 0.15s ease, background 0.15s ease; cursor: crosshair;
+    }
+    .pg-nav-links a:hover { color: #a1665e; background: #e6f4f4; }
+    .pg-nav-links a.active { color: #023b3b; font-weight: 700; }
+    .pg-nav-num { color: rgba(5,140,140,0.4); }
+
     </style>
 </head>
 <body>
